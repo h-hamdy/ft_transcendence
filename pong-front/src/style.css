@@ -1,3 +1,67 @@
 @import 'tailwindcss/base';
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';
+
+.gap-05 {
+    gap: 0.5rem;
+}
+
+.gap-1 {
+    gap: 1rem;
+}
+
+.gap-2 {
+    gap: 2rem;
+}
+
+.paddingLeft-40 {
+    padding-left: 40px;
+}
+
+.paddingLeft-10 {
+    padding-left: 10px;
+}
+
+.z {
+    z-index: 9999;
+}
+
+.left-5 {
+    left: 2rem;
+}
+
+.color-gray {
+    background-color: #1B1D21;
+    color: #1B1D21;
+}
+
+.p-1 {
+    padding-top: 10px;
+}
+
+.bbc {
+    object-fit: cover;
+}
+
+.bba {
+    width: 100vw;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.zz {
+    z-index: 100;
+}
+
+@media (max-width: 640px) {
+    .mobile-bg {
+        background-color: #F4F5F7;
+    }
+}
+
+@media (min-width: 0px) {
+    .mobile-display {
+        display: none;
+    }
+}
