@@ -7,5 +7,7 @@ module.exports = {
       'xs': '640px',
     },
   },
-  plugins: [],
+  plugins: [
+    require('tailwindcss-background-images'),
+  ],
 }

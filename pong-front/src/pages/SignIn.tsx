@@ -49,10 +49,6 @@ export function SignIn() {
                         </div>
                     </div>
                     </div>
-
-                    <div className="">
-
-                    </div>
                 </div>
                 <div className="h-full flex justify-center items-center">
                 <div className="border hidden sm:block drop-shadow-sm bg-gray-100 border-white-800 shadow-lg rounded-[40px] w-96 h-[350px]">
