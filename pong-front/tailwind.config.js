@@ -2,7 +2,15 @@
 module.exports = {
   content: ["./src/**/*.{html,js,jsx,ts,tsx}"],
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        'poppins': ['Poppins', 'sans'],
+        'rubik-moonrocks': ['Rubik Moonrocks', 'sans'],
+      },
+      borderRadius: {
+        'custom': '30px',
+      },
+    },
     screens: {
       'xs': '640px',
     },

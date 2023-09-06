@@ -2,6 +2,9 @@ import { NavBar } from "../components/Home/NavBar/NavBar";
 import { Start } from "../components/Home/Start/Start"
 import { GameCard } from "../components/Home/GameCard/GameCard";
 import { Friends } from "../components/Home/Friends/friends";
+import { StartEnjoying } from "../components/Home/Start/StartEnjoying";
+import { LeaderBoard } from "../components/Home/Learders/LeaderBoard";
+import { LiveMatch } from "../components/Home/Live/LiveMatch";
 
 export function Home() {
     return (
@@ -19,6 +22,15 @@ export function Home() {
                 </div>
                 <div>
                     <Friends/>
+                </div>
+                <div>
+                    <StartEnjoying/>
+                </div>
+                <div>
+                    <LeaderBoard/>
+                </div>
+                <div>
+                    <LiveMatch/>
                 </div>
             </div>
         </>
