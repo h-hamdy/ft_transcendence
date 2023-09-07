@@ -63,6 +63,13 @@
     width: 100%;
 }
 
+.rounded-custom {
+    border-radius: 33px;
+}
+
+.rounded-custom-img {
+    border-radius: 33px 33px 0px 0px;
+}
 
 .path {
     background-image: url("./src/assets/Start.png");
@@ -75,7 +82,6 @@
 .shadow {
     filter: drop-shadow(25 25px 25px rgba(82, 54, 255, 0.05));
 }
-
 
 @media (max-width: 640px) {
     .mobile-bg {

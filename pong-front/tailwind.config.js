@@ -7,9 +7,6 @@ module.exports = {
         'poppins': ['Poppins', 'sans'],
         'rubik-moonrocks': ['Rubik Moonrocks', 'sans'],
       },
-      borderRadius: {
-        'custom': '30px',
-      },
     },
     screens: {
       'xs': '640px',

@@ -1,5 +1,5 @@
 import arrow from "/src/assets/Arrrow.svg"
-import img from "/src/assets/img4.png"
+import { LiveGame } from "./LiveGame"
 
 export function LiveMatch () {
     return (
@@ -14,14 +14,13 @@ export function LiveMatch () {
                     <img src={arrow}></img>
                 </div>
             </button>
-        </div>
-            <div className="flex flex-col items-center justify-center p-10">
-                <div className="flex flex-col bg-white drop-shadow-xl border rounded-custom h-[390px] w-full">
-                    <div className="">
-                        <img src={img} className="w-full"></img>
-                    </div>
-                </div>
+            <div className="w-full">
+                <LiveGame gametype="7 GAME TO WIN" watching="7.2k" imgPath="src/assets/img4.png"/>
+                <LiveGame gametype="5 GAME TO WIN" watching="6.2k" imgPath="src/assets/img5.png"/>
+                <LiveGame gametype="1 GAME TO WIN" watching="3.1k" imgPath="src/assets/img6.png"/>
+                <LiveGame gametype="3 GAME TO WIN" watching="1.3k" imgPath="src/assets/img7.png"/>
             </div>
+        </div>
         </>
     )
 }

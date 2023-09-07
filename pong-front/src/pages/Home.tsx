@@ -5,6 +5,7 @@ import { Friends } from "../components/Home/Friends/friends";
 import { StartEnjoying } from "../components/Home/Start/StartEnjoying";
 import { LeaderBoard } from "../components/Home/Learders/LeaderBoard";
 import { LiveMatch } from "../components/Home/Live/LiveMatch";
+import { LatestMatches } from "../components/Home/LTSMatches/LatestMatches";
 
 export function Home() {
     return (
@@ -32,6 +33,10 @@ export function Home() {
                 <div>
                     <LiveMatch/>
                 </div>
+                <div>
+                    <LatestMatches/>
+                </div>
+                <div className="flex justify-center items-center text-blue-900 font-poppins text-sm font-semibold leading-normal tracking-wider pb-5">1337 Future Is Loading</div>
             </div>
         </>
     )

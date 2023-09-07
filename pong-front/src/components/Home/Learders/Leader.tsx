@@ -10,7 +10,7 @@ export function Leader ( {Profile, rank, name, win, Losses}: Props ) {
     return (
         <>
             <div className="flex flex-col pt-10">
-                <div className="flex items-center pb-7">
+                <div className="flex items-center pb-7 gap-1">
                     <button>
                         <img src={Profile} className="rounded-full w-[46px] h-[46px]"></img>
                     </button>
@@ -20,7 +20,7 @@ export function Leader ( {Profile, rank, name, win, Losses}: Props ) {
                     <div className="text-gray-400 text-center font-poppins font-semibold text-xs font-normal leading-5">
                         {name}
                     </div>
-                    <div className="flex">
+                    <div className="flex gap-1">
                         <div className="flex flex-col">
                             <div className="text-[#14D1A4] text-base font-bold">Win</div>
                             <div className="text-[#FF5473] text-base font-bold">Losses</div>
