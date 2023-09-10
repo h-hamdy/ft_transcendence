@@ -4,8 +4,8 @@ import { FriendStatus } from "./FriendsStatus"
 export function Friends () {
     return (
         <>
-             <div className="pt-10 pl-10 inline-block">
-                <div className="flex flex-col border bg-[#FFF] drop-shadow-2xl rounded-2xl h-[270px]">
+             <div className="pt-10 pl-10">
+                <div className="flex flex-col border bg-[#FFF] drop-shadow-2xl rounded-custom-b h-[270px] scrollable-div-hor">
                     <div className="pl-28 pt-10 pb-6">
                         <div className="text-blue-900 font-poppins text-2xl font-semibold leading-normal tracking-wider">Friends</div>
                     </div>
@@ -22,6 +22,9 @@ export function Friends () {
                             <FriendStatus avatar="/src/assets/hkhalil.jpg" name="hkhalil" time="enligne"/>
                             <FriendStatus avatar="/src/assets/ahamdy.jpg" name="ahdmdy" time="14m ago"/>
                             <FriendStatus avatar="/src/assets/hhamdy.jpg" name="ahdmdy" time="14m ago"/>
+                            <FriendStatus avatar="/src/assets/hhamdy.jpg" name="ahdmdy" time="14m ago"/>
+                            <FriendStatus avatar="/src/assets/hkhalil.jpg" name="hkhalil" time="enligne"/>
+                            <FriendStatus avatar="/src/assets/hkhalil.jpg" name="hkhalil" time="enligne"/>
                         </div>
                     </div>
                 </div>

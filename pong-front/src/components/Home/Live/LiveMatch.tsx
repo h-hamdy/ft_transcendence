@@ -5,7 +5,7 @@ export function LiveMatch () {
     return (
         <>
         <div className="flex flex-col justify-center items-center">
-            <div className="pt-12 text-blue-900 font-poppins text-2xl font-semibold leading-normal tracking-wider pb-10">Live Matches</div>
+            <div className="text-blue-900 font-poppins text-2xl font-semibold leading-normal tracking-wider pb-10">Live Matches</div>
             <button className="border bg-gray-100 w-3/5 h-[48px] rounded-xl flex justify-center items-center">
                 <div className="mr-auto pl-10 font-normal text-[#808191]">
                     Popular

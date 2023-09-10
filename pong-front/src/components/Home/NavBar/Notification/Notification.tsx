@@ -1,9 +1,13 @@
 import notif from "../../../../assets/bell.png"
 
-export function Notification () {
+interface Props {
+    clicked: () => void;
+}
+
+export function Notification ({clicked}: Props) {
     return (
         <>
-            <button>
+            <button onClick={clicked}>
                 <img src={notif} alt="burger button"></img>
             </button>
         </>

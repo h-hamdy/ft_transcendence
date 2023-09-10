@@ -4,7 +4,7 @@ export function Start () {
     return (
         <>
             <div className="pt-20 flex items-center justify-center px-10">
-                <div className="path p-14 bg-cover bg-no-repeat bg-center rounded-lg w-full h-[500px] flex-col justify-center items-center">
+                <div className="path p-14 bg-cover bg-no-repeat bg-center rounded-custom w-full h-[500px] flex-col justify-center items-center">
                     <div className="flex flex-col items-center pb-10 text-white Montserrat text-3xl font-extrabold pt-56">
                         <h1>Welcome To</h1>
                         <h1>Cyberponk</h1>

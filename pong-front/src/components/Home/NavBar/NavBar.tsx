@@ -1,9 +1,15 @@
-import { Burger } from "./burger"
+import React from "react";
+import { Burger } from "./Burger/burger"
 import { Notification } from "./Notification/Notification"
 import { Avatar } from "./Avatar"
+import { Notif } from "../../../pages/notif";
+
 
 export function NavBar() {
+  const [showNotif, setShowNotif] = React.useState<boolean>(false);
+
   return (
+    <>
     <div>
       <nav>
         <div className="border h-24">
@@ -11,7 +17,7 @@ export function NavBar() {
             <Burger />
             <div className="flex items-center">
               <div className="pr-16">
-                <Notification />
+                <Notification clicked={() => setShowNotif(!showNotif)} />
               </div>
               <div className="pr-5">
                 <Avatar/>
@@ -21,5 +27,7 @@ export function NavBar() {
         </div>
       </nav>
     </div>
+    { showNotif && <Notif />}
+    </>
   );
 }

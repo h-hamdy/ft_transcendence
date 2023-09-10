@@ -1,9 +1,9 @@
-import burger from "../../../assets/burger.png"
+import burger from "/src/assets/burger.png"
 
 export function Burger () {
     return (
         <>
-            <button>
+            <button onClick={() => (console.log("clicked!"))}>
                 <img src={burger} alt="burger button"></img>
             </button>
         </>

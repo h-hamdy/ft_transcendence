@@ -10,11 +10,11 @@ import { LatestMatches } from "../components/Home/LTSMatches/LatestMatches";
 export function Home() {
     return (
         <>
-            <div>
+            <div className="bg-gray-100 w-screen">
                 <NavBar/>
                 <Start/>
                 <h1 className="flex items-center justify-center pt-10 text-[#353E6C] text-xl font-bold">Start Game</h1>
-                <div>
+                <div className="w-full h-[600px] scrollable-div-ver">
                     <GameCard TableType="Astro Table" GameType="3 Win Game" Views="13.9k playing" imgPath="./src/assets/3_win_game.png"/>
                     <GameCard TableType="Sky Table" GameType="7 Win Game" Views="13.9k playing" imgPath="./src/assets/7_win_game.png"/>
                     <GameCard TableType="Sky Table" GameType="1 Win Game" Views="13.9k playing" imgPath="./src/assets/1_win_game.png"/>
