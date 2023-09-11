@@ -10,8 +10,9 @@ import { LatestMatches } from "../components/Home/LTSMatches/LatestMatches";
 export function Home() {
     return (
         <>
-            <div className="bg-gray-100 w-screen">
+            <div className="w-screen">
                 <NavBar/>
+                <div className="pt-[140px]">
                 <Start/>
                 <h1 className="flex items-center justify-center pt-10 text-[#353E6C] text-xl font-bold">Start Game</h1>
                 <div className="w-full h-[600px] scrollable-div-ver">
@@ -37,6 +38,7 @@ export function Home() {
                     <LatestMatches/>
                 </div>
                 <div className="flex justify-center items-center text-blue-900 font-poppins text-sm font-semibold leading-normal tracking-wider pb-5">1337 Future Is Loading</div>
+                </div>
             </div>
         </>
     )

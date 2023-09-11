@@ -1,9 +1,13 @@
 import burger from "/src/assets/burger.png"
 
-export function Burger () {
+interface Props {
+    clicked: () => void;
+}
+
+export function Burger ({clicked}: Props) {
     return (
         <>
-            <button onClick={() => (console.log("clicked!"))}>
+            <button onClick={clicked}>
                 <img src={burger} alt="burger button"></img>
             </button>
         </>

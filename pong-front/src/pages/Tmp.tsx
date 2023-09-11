@@ -1,5 +1,3 @@
-import React from 'react'
-import { NavBar } from "../components/Home/NavBar/NavBar"
 import { StartGaming } from "../components/Home/Start/StartGaming"
 import home from "/src/assets/Home.svg"
 import profile from "/src/assets/Profile.svg"
@@ -13,13 +11,11 @@ import arrow from "/src/assets/small-down.svg"
 import chat from "/src/assets/Chat.svg"
 import setting from "/src/assets/Setting.svg"
 import start from "/src/assets/Start.png"
-import { Notif } from "./notif"
 
 export function Brb () {
     return (
         <>
-        <div className="w-full h-screen">
-            <NavBar/>
+        <div className="pt-[60px] w-full h-screen notif-container">
             <div className="flex flex-col pt-20">
                 <div className="pr-8 pl-8">
                     <button className="flex items-center pl-8 bg-[#6C5DD3] w-full h-[56px] rounded-2xl">
@@ -48,7 +44,7 @@ export function Brb () {
             </div>
 
 
-            <div className="flex flex-col pt-40 pl-16">
+            <div className="flex flex-col pt-10 pl-16">
                 <div className="text-[#808191] text-sm pb-8">Friends</div>
 
                 <button className="flex items-center">

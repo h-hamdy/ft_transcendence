@@ -636,10 +636,23 @@ video {
   background: white;
   position: fixed;
   width: 100%;
-  height: 100vh;
+  height: 100%;
+  overflow: auto;
   top: 0;
   left: 0;
   z-index: 99;
+}
+
+.nav-container {
+  position: fixed;
+  width: 100%;
+  /* z-index: 999; */
+  background: white;
+  margin-bottom: 50px;
+}
+
+.friend {
+  overflow-block: 99;
 }
 
 @media (max-width: 640px) {
