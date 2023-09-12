@@ -20,7 +20,7 @@ export function NavBar() {
             <Burger clicked={() => setShowBurger(!showBurger)}/>
             <div className="flex items-center">
               <div className="pr-16">
-                <Notification clicked={() => setShowNotif(!showNotif)}/>
+                <Notification clicked={() => setShowNotif(!showNotif)} msgnum="5"/>
               </div>
               <div className="pr-5">
                 <Avatar/>

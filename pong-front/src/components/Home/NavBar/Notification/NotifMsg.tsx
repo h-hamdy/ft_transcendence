@@ -2,7 +2,8 @@ interface Props {
     profile: string,
     name: string,
     requestType: string,
-    time: string;
+    time: string,
+    // msgnum: string
 }
 
 export function NotifMsg ( {profile, name, requestType, time}: Props ) {

@@ -21,8 +21,8 @@ export function Add () {
                             </button>
                         </div>
                         <div className="pr-8 pl-8 pb-2">
-                            <form className="flex items-center border border-[#6C5DD3] rounded-xl w-full h-[56px]">
-                                <input  className="border-none rounded-xl w-full h-full pr-3 pl-3" placeholder="Username"></input>
+                            <form className="flex items-center border border-4 border-[#6C5DD3] rounded-xl w-full h-[56px]">
+                                <input  className="rounded-xl w-full h-full pr-3 pl-3" placeholder="Username"></input>
                             </form>
                             <div className="absolute pt-[10px]">
                                 <div className="border bg-[#E9DCE5] rounded-xl w-[200px] h-[39px] flex gap-1 items-center justify-center">
