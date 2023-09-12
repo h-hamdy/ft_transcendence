@@ -2,7 +2,7 @@ import React from "react";
 import { Burger } from "./Burger/burger"
 import { Notification } from "./Notification/Notification"
 import { Avatar } from "./Avatar"
-import { Notif } from "../../../pages/notif";
+import { Notif } from "./Notification/notif";
 import { Brb } from "../../../pages/Tmp";
 import { Home } from "../../../pages/Home";
 
@@ -20,7 +20,7 @@ export function NavBar() {
             <Burger clicked={() => setShowBurger(!showBurger)}/>
             <div className="flex items-center">
               <div className="pr-16">
-                <Notification clicked={() => setShowNotif(!showNotif)} />
+                <Notification clicked={() => setShowNotif(!showNotif)}/>
               </div>
               <div className="pr-5">
                 <Avatar/>

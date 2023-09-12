@@ -1,4 +1,4 @@
-import notif from "../../../../assets/bell.png"
+import notif from "/src/assets/bell.png"
 
 interface Props {
     clicked: () => void;

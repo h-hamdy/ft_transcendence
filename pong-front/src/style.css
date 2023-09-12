@@ -534,6 +534,7 @@ video {
   --tw-backdrop-sepia:  ;
 }
 
+
 .gap-05 {
   gap: 0.5rem;
 }
@@ -589,6 +590,10 @@ video {
 
 .zz {
   z-index: 100;
+}
+
+.zz1 {
+  z-index: 103;
 }
 
 .line-break {
