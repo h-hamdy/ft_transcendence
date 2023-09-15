@@ -7,9 +7,9 @@ interface Props {
 export function PlayerNum ( {Number}: Props ) {
     return (
         <>
-            <div className="flex gap-3 absolute right-5 pt-4">
-                <img src={BlueDot}></img>
-                <div className="text-[#808191] text-sm font-normal">{Number} player</div>
+            <div className="flex gap-3 flex justify-center items-center absolute right-5 pt-4 lg:pr-10">
+                <img src={BlueDot} className="lg:w-[20px] lg:h-[20px]"></img>
+                <div className="text-[#808191] text-sm lg:text-2xl font-normal">{Number} player</div>
             </div>
         </>
     )

@@ -10,19 +10,19 @@ export function Friends () {
 
     return (
         <>
-             <div className="pt-10 pl-10">
-                <div className="flex flex-col border bg-[#FFF] drop-shadow-2xl rounded-custom-b h-[270px] scrollable-div-hor">
+             <div className="pt-10 pl-10 lg:pl-0 lg:flex lg:items-center lg:justify-center">
+                <div className="flex flex-col border bg-[#FFF] drop-shadow-2xl rounded-custom lg:rounded-custom h-[270px] lg:h-[350px] lg:w-11/12 scrollable-div-hor">
                     <div className="pl-28 pt-10 pb-6">
-                        <div className="text-blue-900 font-poppins text-2xl font-semibold leading-normal tracking-wider">Friends</div>
+                        <div className="text-blue-900 font-poppins text-2xl font-semibold leading-normal tracking-wider lg:text-4xl">Friends</div>
                     </div>
                     <div className="flex">
-                        <div className="flex flex-col pl-10 pt-2">
-                            <button onClick={() => SetInvite(!invite)} className="border border-[#6C5DD3] bg-[#6C5DD3] rounded-full w-[72px] h-[72px]">
+                        <div className="flex flex-col items-center justify-center pl-10 pb-6">
+                            <button onClick={() => SetInvite(!invite)} className="flex items-center justify-center border border-[#6C5DD3] bg-[#6C5DD3] rounded-full w-[72px] h-[72px] lg:w-[90px] lg:h-[90px]">
                                 <div>
-                                    <img src={Plus}></img>
+                                    <img src={Plus} className="lg:w-[90px] lg:h-[90px]"></img>
                                 </div>
                             </button>
-                            <div className="pt-2 pl-3">
+                            <div className="pt-2 pl-3 lg:text-2xl">
                                 Add Yours
                             </div>
                         </div>

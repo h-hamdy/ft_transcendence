@@ -4,7 +4,7 @@ export function Avatar () {
     return (
         <>
             <button>
-                <img src={avatar} className="rounded-full" width="40px" height="40px" alt="profile"></img>
+                <img src={avatar} className="rounded-full w-[50px] h-[50px] lg:w-[80px] lg:h-[80px]" alt="profile"></img>
             </button>
         </>
     )

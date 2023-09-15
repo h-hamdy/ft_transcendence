@@ -622,7 +622,7 @@ video {
 }
 
 .shadow {
-  filter: drop-shadow(25 25px 25px rgba(82, 54, 255, 0.05));
+  filter: drop-shadow(25 25px 25px rgba(82, 54, 255, 0.10));
 }
 
 .scrollable-div-ver{
@@ -631,8 +631,27 @@ video {
   overflow: auto;
 }
 
+.scrollable-div-ver1{
+  height: 400px;
+  /* Adjust the height as needed */
+  overflow: auto;
+}
+
+.scrollable-div-ver2{
+	height: 700px;
+	/* Adjust the height as needed */
+	overflow: auto;
+  }
+  
+  .scrollable-div-ver3{
+	height: 850px;
+	/* Adjust the height as needed */
+	overflow: auto;
+  }
+  
+
+
 .scrollable-div-hor {
-  /* width: 342px; */
   overflow-y: hidden;
   overflow-x: auto;
 }
@@ -664,10 +683,17 @@ video {
   .mobile-bg {
     background-color: #F4F5F7;
   }
+  .mobile-nav-bar {
+	display: none;
+  }
+  .notif-display {
+	display: block;
+  }
 }
 
 @media (min-width: 0px) {
   .mobile-display {
     display: none;
   }
+
 }

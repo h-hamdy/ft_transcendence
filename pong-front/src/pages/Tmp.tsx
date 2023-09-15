@@ -14,10 +14,13 @@ import { BrChat } from "../components/Home/NavBar/Burger/BrChat"
 import { BrSettings } from "../components/Home/NavBar/Burger/BrSettings"
 import { BrStart } from "../components/Home/NavBar/Burger/BrStart"
 
+
+import { MBburger } from "../components/Home/NavBar/Burger/MBburger"
+
 export function Brb () {
     return (
         <>
-        <div className="pt-[60px] w-full h-screen notif-container">
+        <div className="pt-[60px] w-full h-screen notif-container md:hidden">
             <div className="flex flex-col pt-20">
                 <BrHome/>
                 <BrProfile/>
@@ -53,7 +56,10 @@ export function Brb () {
 
             <BrStart/>
         </div>
-    
+		<div className="fixed bg-white zz sm:hidden md:block mobile-nav-bar mobile-nav-bar">
+			<MBburger/>
+		</div>
+		<BrStart/>
         </>
     )
 }
