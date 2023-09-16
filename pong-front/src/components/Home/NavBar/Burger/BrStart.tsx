@@ -7,7 +7,7 @@ import start from "/src/assets/Start.png"
 export function BrStart () {
     return (
         <>
-            <div className="p-8">
+            <div className="p-8 md:hidden">
                     <div style={{backgroundImage:`url(${start})`}} className="bg-cover drop-shadow-xl bg-no-repeat bg-center rounded-custom w-full h-[350px]">
                     <div className="flex flex-col pl-10 pt-16">
                         <div className="flex flex-col text-white text-3xl font-bold">

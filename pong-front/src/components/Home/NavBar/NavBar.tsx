@@ -15,7 +15,7 @@ export function NavBar() {
     <>
     <div className="nav-container zz">
       <nav>
-        <div className="border h-24 lg:h-44">
+        <div className="border h-24 sm:h-28">
           <div className="flex justify-between items-center h-full px-7">
             <Burger clicked={() => setShowBurger(!showBurger)}/>
             <div className="flex items-center">

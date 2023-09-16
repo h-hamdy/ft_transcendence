@@ -637,18 +637,24 @@ video {
   overflow: auto;
 }
 
+
 .scrollable-div-ver2{
 	height: 700px;
 	/* Adjust the height as needed */
 	overflow: auto;
   }
   
-  .scrollable-div-ver3{
+.scrollable-div-ver3{
 	height: 850px;
 	/* Adjust the height as needed */
 	overflow: auto;
-  }
+}
   
+.scrollable-div-ver4{
+	height: 900px;
+	/* Adjust the height as needed */
+	overflow: auto;
+}
 
 
 .scrollable-div-hor {
@@ -679,6 +685,15 @@ video {
   overflow-block: 99;
 }
 
+::-webkit-scrollbar {
+	display: none; /* Safari and Chrome */
+  }
+  
+  /* Hide both vertical and horizontal scrollbars */
+  ::-webkit-scrollbar-track {
+	display: none; /* Safari and Chrome */
+  }
+
 @media (max-width: 640px) {
   .mobile-bg {
     background-color: #F4F5F7;
@@ -689,11 +704,23 @@ video {
   .notif-display {
 	display: block;
   }
+
+}
+
+@media (min-width: 0px) and  (max-width: 1024px) {
+	.Dk-display {
+		display: none;
+	}
+
+	.scrollable-div-ver0{
+		height: 350px;
+		/* Adjust the height as needed */
+		overflow: auto;
+	  }
 }
 
 @media (min-width: 0px) {
   .mobile-display {
     display: none;
   }
-
 }

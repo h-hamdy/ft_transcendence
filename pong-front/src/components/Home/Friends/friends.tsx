@@ -1,8 +1,8 @@
 import Plus from "/src/assets/Add_Friend.svg"
 import { FriendStatus } from "./FriendsStatus"
 import React from "react"
-import { AddFriend } from "./AddFriend";
-import { Add } from "../../../pages/add";
+import { AddFriend } from "./AddFriend"
+import { Add } from "../../../pages/add"
 
 export function Friends () {
 

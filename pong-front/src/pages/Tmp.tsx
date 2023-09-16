@@ -20,7 +20,7 @@ import { MBburger } from "../components/Home/NavBar/Burger/MBburger"
 export function Brb () {
     return (
         <>
-        <div className="pt-[60px] w-full h-screen notif-container md:hidden">
+        <div className="pt-[60px] w-full h-screen notif-container lg:hidden">
             <div className="flex flex-col pt-20">
                 <BrHome/>
                 <BrProfile/>
@@ -56,7 +56,7 @@ export function Brb () {
 
             <BrStart/>
         </div>
-		<div className="fixed bg-white zz sm:hidden md:block mobile-nav-bar mobile-nav-bar">
+		<div className="fixed bg-white zz sm:hidden lg:block mobile-nav-bar mobile-nav-bar">
 			<MBburger/>
 		</div>
 		<BrStart/>

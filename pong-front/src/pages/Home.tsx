@@ -23,7 +23,7 @@ export function Home() {
                     <GameCard TableType="Simple Table" GameType="Bot Game" Views="0 playing" imgPath="./src/assets/Bot_Img.png"/>
                 </div>
 				<div className="lg:flex lg:justify-center gap-9 lg:h-[1000px] lg:pr-20 lg:pl-32">
-					<div className="lg:flex-col items-center justify-center lg:w-4/12">
+					<div className="lg:flex-col items-center justify-center lg:w-6/12">
 						<div>
 							<Friends/>
 						</div>
@@ -31,10 +31,13 @@ export function Home() {
 							<StartEnjoying/>
 						</div>
 					</div>
-					<div className="lg:w-4/12">
+					<div className="lg:w-6/12">
 						<LeaderBoard/>
 					</div>
-					<div className=" lg:w-4/12">
+				</div>
+				<div className="flex items-center justify-center">
+
+					<div className="flex items-center justify-center bg-black lg:w-9/12">
 						<LatestMatches/>
 					</div>
 				</div>
