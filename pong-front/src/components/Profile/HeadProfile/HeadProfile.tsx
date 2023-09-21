@@ -1,6 +1,8 @@
 import { Enline } from "../../Home/Friends/status/Enline"
 import check from "/src/assets/check.svg"
 import friend from "/src/assets/Friendly.png"
+import play from "/src/assets/Game.svg"
+import plusFriend from "/src/assets/PersonPlusFill.svg"
 
 interface Props {
 	profile: string,
@@ -35,8 +37,11 @@ export function HeadProfile ( {profile, name, friendNum}: Props ) {
 					<button className="flex justify-center items-center border rounded-xl bg-[#6C5DD3] border-[#6C5DD3] h-[45px] w-[100px] pr-">
 							<div className="text-white font-semibold lg:text-sm">Message</div>
 					</button>
-						<button className="flex items-center justify-center border border-[#E4E4E47F] bg-[#E4E4E47F] w-[50px] h-[45px] shadow rounded-lg">
-							<img src={friend} width="30px" height="30px"/>
+						<button className="flex items-center justify-center border border-[#6C5DD3] bg-[#6C5DD3] w-[50px] h-[45px] shadow rounded-xl">
+							<img src={plusFriend}></img>
+						</button>
+						<button className="flex items-center justify-center pb-[4px] border border-[#6C5DD3] bg-[#6C5DD3] w-[50px] h-[45px] shadow rounded-xl">
+							<img src={play}></img>
 						</button>
 					</div>
 				</div>

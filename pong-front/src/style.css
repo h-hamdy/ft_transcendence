@@ -692,8 +692,19 @@ video {
 }
 
 .scrollable-div-hor {
-  overflow-y: hidden;
-  overflow-x: auto;
+  overflow: auto;
+  width: 97.5%;
+}
+
+.scrollable-div-hor1 {
+  overflow: auto;
+  width: 630px;
+}
+
+.scrollable-div-ver7 {
+  height: 610px;
+  /* Adjust the height as needed */
+  overflow: auto;
 }
 
 .notif-container {

@@ -14,6 +14,10 @@ export function LeaderBoard () {
                     <Leader Profile="/src/assets/hkhalil.jpg" rank="#3" name="hassan" win="18" Losses="6"/>
                     <Leader Profile="/src/assets/hhamdy.jpg" rank="#4" name="Saad" win="17" Losses="9"/>
                     <Leader Profile="/src/assets/ahamdy.jpg" rank="#5" name="Lmadam" win="2" Losses="10"/>
+                    <Leader Profile="/src/assets/ahamdy.jpg" rank="#5" name="Lmadam" win="2" Losses="10"/>
+                    <Leader Profile="/src/assets/ahamdy.jpg" rank="#5" name="Lmadam" win="2" Losses="10"/>
+                    <Leader Profile="/src/assets/ahamdy.jpg" rank="#5" name="Lmadam" win="2" Losses="10"/>
+                    <Leader Profile="/src/assets/ahamdy.jpg" rank="#5" name="Lmadam" win="2" Losses="10"/>
                 </div>
                 <div className="flex pb-8 pr-10 pl-10 lg:p-0 lg-pt-6 lg:pb-8">
                     <SeeMore/>

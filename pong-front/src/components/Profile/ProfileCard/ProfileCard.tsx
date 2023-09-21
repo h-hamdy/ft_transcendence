@@ -43,7 +43,7 @@ export function ProfileCard ( {profile, name, winNum, LoseNum, achivNum}: Props 
 				</div>
 			</div>
 			</div>
-		</div>
+			</div>
 		</>
 	)
 }
