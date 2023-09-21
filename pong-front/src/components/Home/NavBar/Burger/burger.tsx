@@ -7,7 +7,7 @@ interface Props {
 export function Burger ({clicked}: Props) {
     return (
         <>
-            <button onClick={clicked}>
+            <button onClick={clicked} className="lg:hidden">
                 <img src={burger} alt="burger button"></img>
             </button>
         </>

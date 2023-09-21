@@ -4,8 +4,8 @@ import { NotifRoom } from "./NotifRoom"
 export function DkNotif () {
 	return (
 		<>
-			<div className="fixed bg-white right-60 top-28 zz border shadow-xl rounded-custom w-[900px] h-[850px] scrollable-div-ver3 Dk-display">
-			<div className="text-[#11142D] text-3xl font-medium p-10">Recent Notification</div>
+			<div className="fixed bg-white right-56 top-10 zz border shadow-xl rounded-custom w-[550px] h-[450px] scrollable-div-ver5 Dk-display">
+			<div className="text-[#11142D] text-md font-medium pt-10 pl-10 ">Recent Notification</div>
                 <NotifMsg profile="/src/assets/hhamdy.jpg" name="Saad Mney" requestType="Request a 1 game to win" time="12h"/>
                 <NotifMsg profile="/src/assets/hhamdy.jpg" name="Hassan d3if" requestType="Request a 1 game to win" time="12h"/>
                 <NotifMsg profile="/src/assets/hhamdy.jpg" name="Houssam nadi" requestType="Request a 1 game to win" time="12h"/>

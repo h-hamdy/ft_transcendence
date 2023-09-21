@@ -563,6 +563,15 @@ video {
   z-index: 9999;
 }
 
+.above-all {
+	position: absolute; /* Position the div absolutely */
+	top: 0; /* Place it at the top of the viewport */
+	left: 0; /* Place it at the left of the viewport */
+	width: 100%; /* Make it as wide as the viewport */
+	height: 100%; /* Make it as tall as the viewport */
+	z-index: 9999; /* Set a high z-index value to place it above other content */
+  }
+
 .left-5 {
   left: 2rem;
 }
@@ -621,18 +630,32 @@ video {
   background-image: url("./src/assets/Starting.png");
 }
 
+.path2 {
+	background-image: url("./src/assets/ProfileWive.png");
+  }
+
+.state1 {
+	background-image: url("./src/assets/state1.svg");
+}
+
+.state2 {
+	background-image: url("./src/assets/state2.svg");
+}
+
+.state3 {
+	background-image: url("./src/assets/state3.svg");
+}
+
+.state4 {
+	background-image: url("./src/assets/state4.svg");
+}
+
 .shadow {
   filter: drop-shadow(25 25px 25px rgba(82, 54, 255, 0.10));
 }
 
 .scrollable-div-ver{
   height: 600px;
-  /* Adjust the height as needed */
-  overflow: auto;
-}
-
-.scrollable-div-ver1{
-  height: 400px;
   /* Adjust the height as needed */
   overflow: auto;
 }
@@ -651,11 +674,22 @@ video {
 }
   
 .scrollable-div-ver4{
-	height: 900px;
+	height: 730px;
 	/* Adjust the height as needed */
 	overflow: auto;
 }
 
+.scrollable-div-ver5{
+	height: 400px;
+	/* Adjust the height as needed */
+	overflow: auto;
+}
+
+.scrollable-div-ver6{
+	height: 200px;
+	/* Adjust the height as needed */
+	overflow: auto;
+}
 
 .scrollable-div-hor {
   overflow-y: hidden;
@@ -685,14 +719,14 @@ video {
   overflow-block: 99;
 }
 
-::-webkit-scrollbar {
-	display: none; /* Safari and Chrome */
+.original-stroke {
+	stroke: #808191; /* Original stroke color */
   }
   
-  /* Hide both vertical and horizontal scrollbars */
-  ::-webkit-scrollbar-track {
-	display: none; /* Safari and Chrome */
+  .white-stroke {
+	stroke: #FFFFFF; /* White stroke color */
   }
+
 
 @media (max-width: 640px) {
   .mobile-bg {
@@ -707,6 +741,26 @@ video {
 
 }
 
+.centered-component {
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	z-index: 9999; /* To place it above other components */
+	/* Additional styling for your centered component */
+  }
+
+.blur-background {
+	position: fixed;
+	top: 0;
+	left: 0;
+	height: 100vh;
+	width: 100%;
+	z-index: 999;
+	backdrop-filter: blur(6px);
+}
+  
+
 @media (min-width: 0px) and  (max-width: 1024px) {
 	.Dk-display {
 		display: none;
@@ -717,6 +771,18 @@ video {
 		/* Adjust the height as needed */
 		overflow: auto;
 	  }
+
+	  .scrollable-div-ver1{
+		height: 400px;
+		/* Adjust the height as needed */
+		overflow: auto;
+	  }
+
+	  .scrollable-div-ver2{
+	height: 700px;
+	/* Adjust the height as needed */
+	overflow: auto;
+  }
 }
 
 @media (min-width: 0px) {
