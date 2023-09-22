@@ -1,6 +1,6 @@
 import rmv from "/src/assets/remove.svg"
 import rec from "/src/assets/rectangle.svg"
-import done from "/src/assets/done.svg"
+// import done from "/src/assets/done.svg"
 import React from "react"
 
 export function Add () {
@@ -22,7 +22,7 @@ export function Add () {
                         </div>
                         <div className="pr-8 pl-8 pb-2">
                             <form className="flex items-center border border-4 border-[#6C5DD3] rounded-xl w-full h-[56px] lg:w-full lg:h-[50px]">
-                                <input  className="rounded-xl w-full h-full pr-3 pl-3 lg:text-sm lg:pl-5" placeholder="Username"></input>
+                                <input  className="rounded-xl w-full h-full pr-3 pl-3 lg:text-md lg:pl-5 focus:outline-none text-[#888EFF]" placeholder="Username"></input>
                             </form>
                             <div className="absolute pt-[10px] lg:pt-[20px]">
                                 <div className="border bg-[#E9DCE5] rounded-xl w-[170px] h-[25px]  flex gap-1 items-center justify-center">

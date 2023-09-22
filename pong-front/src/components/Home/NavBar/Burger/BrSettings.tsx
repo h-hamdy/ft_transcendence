@@ -1,4 +1,11 @@
-import setting from "/src/assets/Setting.svg"
+// import setting from "/src/assets/Setting.svg"
+import React from "react";
+import { DkSettings } from "../../../settings/DkSettings";
+// import { MbSettings } from "../../../settings/MbSettings";
+// import { Link, Navigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
+import { MbSettings } from "../../../settings/MbSettings";
+
 
 interface Props {
 	buttonColors: { [key: string]: string }
@@ -7,11 +14,12 @@ interface Props {
 }
 
 export function BrSettings ( {buttonColors, strokeColor, handleClick}: Props ) {
+	const [settings, SetSettings] = React.useState(false);
+
     return (
         <>
 		<div className="pr-8">
-
-            <button onClick={() => handleClick('button6', 'img6')} style={{ backgroundColor: buttonColors.button6 }} className="flex gap-5 pl-8 items-center bg-[#6C5DD3] w-full h-[56px] rounded-2xl">
+            <button  onClick={() => {handleClick('button6', 'img6'); SetSettings(!settings)}} style={{ backgroundColor: buttonColors.button6 }} className="flex gap-5 pl-8 items-center bg-[#6C5DD3] w-full h-[56px] rounded-2xl">
                 <div>
 				<svg width="20" height="22" viewBox="0 0 20 22" fill="none" xmlns="http://www.w3.org/2000/svg">
 					<g id="Setting">
@@ -23,6 +31,8 @@ export function BrSettings ( {buttonColors, strokeColor, handleClick}: Props ) {
                 <div className={`pl-4 text-[${strokeColor.img6}] font-semibold text-base`}>Settings</div>
             </button>
 		</div>
+		{ settings && <DkSettings/> }
+		{ settings && <MbSettings/>}
         </>
     )
 }

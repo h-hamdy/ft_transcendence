@@ -1,7 +1,7 @@
-import { StartGaming } from "../../Start/StartGaming";
+// import { StartGaming } from "../../Start/StartGaming";
 
 import arrow from "/src/assets/small-down.svg";
-import start from "/src/assets/Start.png";
+// import start from "/src/assets/Start.png";
 
 import { BrHome } from "./BrHome";
 import { BrGame } from "./BrGame";

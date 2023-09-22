@@ -634,6 +634,10 @@ video {
 	background-image: url("./src/assets/ProfileWive.png");
   }
 
+  .path3 {
+	background-image: url("./src/assets/qrcode.svg");
+  }
+
 .state1 {
 	background-image: url("./src/assets/state1.svg");
 }
@@ -691,6 +695,12 @@ video {
 	overflow: auto;
 }
 
+.scrollable-div-ver7{
+	height: 500px;
+	/* Adjust the height as needed */
+	overflow: auto;
+}
+
 .scrollable-div-hor {
   overflow: auto;
   width: 97.5%;
@@ -701,8 +711,13 @@ video {
   width: 630px;
 }
 
+.scrollable-div-hor2 {
+	overflow: auto;
+	width: 730px;
+  }
+
 .scrollable-div-ver7 {
-  height: 610px;
+  height: 500px;
   /* Adjust the height as needed */
   overflow: auto;
 }
@@ -750,6 +765,15 @@ video {
 	display: block;
   }
 
+  .game-mobile {
+	display: flex;
+	flex-direction: column;
+	gap: 30px;
+  }
+}
+
+.z-max {
+	z-index: 10000;
 }
 
 .centered-component {

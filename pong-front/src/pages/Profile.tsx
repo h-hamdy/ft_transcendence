@@ -12,8 +12,6 @@ export function Profile () {
 		<>
 			<div>
 				<NavBar/>
-				{/* <div className="pr-20 pl-20"> */}
-
 				<HeadProfile profile="/src/assets/hkhalil.jpg" name="Saad Mny" friendNum="10"/>
 				<div className="md:flex md:flex-row md:justify-center md:justify-around  md:w-full lg:pl-28">
 					<div>
@@ -27,7 +25,7 @@ export function Profile () {
 				<div className="xl:hidden">
 					<States res1="18" res2="24" res3="6" res4="66"/>
 				</div>
-				<div className="sm:pt-10 lg:pl-52 lg:pr-32">
+				<div className="sm:pt-10 lg:pl-36">
 					<StartEnjoying/>
 				</div>
 				<div className="md:flex md:flex-row md:justify-around md:pt-10 md:w-full lg:pl-28">
@@ -39,7 +37,6 @@ export function Profile () {
 					</div>
 				</div>
 				</div>
-			{/* </div> */}
 		</>
 	)
 }

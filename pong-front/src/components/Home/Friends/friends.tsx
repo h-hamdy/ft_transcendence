@@ -1,7 +1,7 @@
 import Plus from "/src/assets/Add_Friend.svg"
 import { FriendStatus } from "./FriendsStatus"
 import React from "react"
-import { AddFriend } from "./AddFriend"
+// import { AddFriend } from "./AddFriend"
 import { Add } from "../NavBar/Notification/add"
 
 export function Friends () {
@@ -10,8 +10,8 @@ export function Friends () {
 
     return (
         <>
-             <div className="pt-10 lg:pt-0 pl-10 lg:pl-0 lg:flex lg:items-center lg:justify-center">
-                <div className="flex flex-col border bg-[#FFF] drop-shadow-md rounded-custom lg:rounded-custom h-[270px] lg:h-[280px] scrollable-div-hor">
+             <div className="pt-10 pr-6 lg:pr-0 lg:pt-0 pl-10 lg:pl-0 lg:flex lg:items-center lg:justify-center">
+                <div className="flex flex-col border bg-[#FFF] drop-shadow-md rounded-custom lg:rounded-custom h-[270px] lg:h-[280px] scrollable-div-hor lg:scrollable-div-hor2">
                     <div className="pl-10 pt-10 pb-6">
                         <div className="text-blue-900 font-poppins text-2xl font-semibold leading-normal tracking-wider lg:text-2xl">Friends</div>
                     </div>

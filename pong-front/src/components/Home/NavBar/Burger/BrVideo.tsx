@@ -1,4 +1,5 @@
 import video from "/src/assets/video.svg"
+// import { Link } from "react-router-dom"
 
 interface Props {
 	buttonColors: { [key: string]: string }

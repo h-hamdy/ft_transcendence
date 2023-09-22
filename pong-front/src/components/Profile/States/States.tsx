@@ -10,8 +10,8 @@ interface Props {
 export function States ( {res1, res2, res3, res4}: Props ) {
 	return (
 		<>
-			<div className="flex flex-col gap-6 justify-center items-center lg:pl-32 ">
-				<div className="text-[#353E6C] font-bold text-lg p-10 md:p-0 pb-0">States</div>
+			<div className="flex flex-col gap-6 justify-center items-center lg:pl-28 ">
+				<div className="text-[#353E6C] font-bold text-lg p-10 md:p-0 pb-0 xl:pr-[450px]">States</div>
 				<div className="lg:flex lg:flex-row lg:justify-around">
 
 				<div className="md:flex md:flex-row md:gap-6 md:pb-5 xl:pl-44">

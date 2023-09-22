@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom"
+
 interface Props {
 	buttonColors: { [key: string]: string }
 	strokeColor: { [key: string]: string }
@@ -8,6 +10,8 @@ export function BrHome ( {buttonColors, strokeColor, handleClick}: Props ) {
     return (
         <>
             <div className="pr-8 pl-8">
+			<Link to="/home">
+
                     <button onClick={() => handleClick('button1', 'img1')} style={{ backgroundColor: buttonColors.button1 }} className="flex items-center pl-8 bg-[#6C5DD3] w-full h-[56px] rounded-2xl">
 				<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
 					<g id="House">
@@ -17,6 +21,7 @@ export function BrHome ( {buttonColors, strokeColor, handleClick}: Props ) {
 				</svg>
                         <div className={`pl-8 text-[${strokeColor.img1}] font-semibold text-base`}>Home</div>
                     </button>
+			</Link>
                 </div>
         </>
     )
