@@ -5,7 +5,6 @@ import { Playing } from "./status/Playing"
 
 interface Props {
     avatar: string,
-    // status: string,
     name: string,
     time: string;
 }

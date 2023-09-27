@@ -598,7 +598,7 @@ video {
 }
 
 .zz {
-  z-index: 100;
+  z-index: 100000;
 }
 
 .zz1 {
@@ -701,6 +701,12 @@ video {
 	overflow: auto;
 }
 
+.scrollable-div-ver8{
+	height: 600px;
+	/* Adjust the height as needed */
+	overflow: auto;
+}
+
 .scrollable-div-hor {
   overflow: auto;
   width: 97.5%;
@@ -722,6 +728,18 @@ video {
   overflow: auto;
 }
 
+.scrollable-div-ver9 {
+	height: 250px;
+	/* Adjust the height as needed */
+	overflow: auto;
+  }
+
+  .scrollable-div-ver10 {
+	height: 470px;
+	/* Adjust the height as needed */
+	overflow: auto;
+  }
+
 .notif-container {
   background: white;
   position: fixed;
@@ -739,6 +757,21 @@ video {
   /* z-index: 999; */
   background: white;
   margin-bottom: 50px;
+}
+
+.message-bubble {
+    display: inline-block;
+    /* width: 100%; Make it fit the full width of the container */
+    min-width: 0px;
+	max-width: 250px;
+	height: auto;
+	min-height: 40px;
+    padding: 10px;
+    border: 1px solid #f2f2f2;
+    background-color: #f2f2f2;
+    border-radius: 8px 16px 16px 16px;
+    margin: 5px 0;
+    word-wrap: break-word;
 }
 
 .friend {
@@ -794,7 +827,21 @@ video {
 	z-index: 999;
 	backdrop-filter: blur(6px);
 }
+
   
+
+.fixed-button {
+    position: fixed;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #007bff;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
 
 @media (min-width: 0px) and  (max-width: 1024px) {
 	.Dk-display {

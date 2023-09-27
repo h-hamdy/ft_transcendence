@@ -56,7 +56,7 @@ export function MBburger () {
 
 	return (
 		<>
-		<div className="h-screen w-[112px] flex justify-center">
+		<div className="h-screen border w-[112px] flex justify-center">
 
 			<div className="flex flex-col gap-3 items-center pt-4">
 				<img src={logo} className="w-[90px] h-[90px] pb-8"></img>

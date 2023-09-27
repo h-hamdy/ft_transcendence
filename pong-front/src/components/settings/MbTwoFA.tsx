@@ -1,29 +1,28 @@
 import React from "react";
 import rmv from "/src/assets/remove.svg"
 import { useState } from "react";
-import { DkSettings } from "./DkSettings";
 import pic from "/src/assets/hhamdy.jpg"
 import group from "/src/assets/Group.svg"
 import mobile from "/src/assets/mobiledow.svg"
-// import qr from "/src/assets/qrcode.svg"
+import qr from "/src/assets/qrcode.svg"
+import { MbSettings } from "./MbSettings";
 
 interface Props {
 	activeButton: number;
 }
 
-export function TwoFa ( {activeButton}: Props ) {
-    const [remove, SetRemove] = React.useState(false);
+export function MbTwoFA ( {activeButton}: Props ) {
+	const [remove, SetRemove] = React.useState(false);
 	const [profile, setProfile] = useState(false);
-
 
 	return (
 		<>
-		{
-			remove ? null : (
-				profile ? <DkSettings/> : (
-					<div className="blur-background z mobile-nav-bar">
-					<div className="centered-component pt-16">
-						<div className="w-[600px] h-[720px] bg-white shadow-2xl rounded-custom">
+			{
+				remove ? null : (
+					profile ? <MbSettings/> : (
+						<div className="blur-background z bg-white">
+					<div className="centered-component pt-28">
+						{/* <div className="w-full h-[720px] bg-white shadow-2xl rounded-custom"> */}
 
 							<div className="flex-col">
 								<div className="flex justify-between">
@@ -34,7 +33,7 @@ export function TwoFa ( {activeButton}: Props ) {
 										</button>
 									</div>
 								</div>
-								<div className="flex items-center justify-around gap-10 pt-5 p-10">
+								<div className="flex items-center justify-around gap-10 pt-5 p-10 pt-0">
 									<button onClick={() => setProfile(!profile)} className={`flex items-center justify-center border  border-[2px] w-[120px] h-[35px] rounded-xl ${activeButton === 1 ? "bg-[#6C5DD3] border-[#6C5DD3]" : "bg-white border-[#FF754C]"}`}>
 										<div className={`${activeButton === 1 ? "text-white" : "text-black"} font-semibold`}>Your Profile</div>
 									</button> 
@@ -43,8 +42,8 @@ export function TwoFa ( {activeButton}: Props ) {
 									</button>
 								</div>
 							<div className="scrollable-div-ver7">
-								<div className="flex items-center justify-around">
-									<div className="flex flex-col gap-[6px] items-center">
+								{/* <div className="flex-col items-center justify-center"> */}
+									<div className="flex flex-col justify-center gap-[6px] items-center">
 										<div className="text-[#11142D] text-xl font-semibold">Setup 2FA</div>
 										<div>
 											<img src={pic} className="w-[80px] h-[80px] rounded-full"></img>
@@ -58,8 +57,8 @@ export function TwoFa ( {activeButton}: Props ) {
 										</button>
 
 									</div>
-									<div className="flex-col items-center">
-										<div className="flex flex-col items-center pt-5 border border-[3px] border-[#BACCFD] rounded-custom w-[240px] h-[257px]">
+									<div className="flex flex-col justify-center gap-[6px] items-center pt-5">
+									<div className="flex flex-col items-center pt-5 border border-[3px] border-[#BACCFD] rounded-custom w-[240px] h-[257px]">
 											<div className="text-[#BACCFD]">Install Google Auth</div>
 											<div className="pt-5">
 												<img src={group}></img>
@@ -68,8 +67,8 @@ export function TwoFa ( {activeButton}: Props ) {
 												<img src={mobile}></img>
 											</div>
 										</div>
+
 									</div>
-								</div>
 								<div className="relative flex flex-col items-center justify-center pt-5">
 								<button className="flex items-center justify-center border rounded-xl bg-[#BACCFD] w-[220px] h-[220px]">
 									<div className="flex flex-col items-center justify-center w-[150px] h-[150px]">
@@ -81,7 +80,7 @@ export function TwoFa ( {activeButton}: Props ) {
 									</div>
 								</button>
 								</div>
-								<div className="flex flex-col justify-center items-center pt-5 pb-10">
+								<div className="flex flex-col justify-center items-center pt-5 pb-14">
 										<div className="flex flex-col items-center pt-5 border border-[3px] border-[#BACCFD] rounded-custom w-[240px] h-[257px] pt-5">
 											<div className="text-[#888EFF] font-bold pb-16">Verify your device</div>
 											<div className="text-[#888EFF] font-light pb-1">Enter your code</div>
@@ -102,10 +101,11 @@ export function TwoFa ( {activeButton}: Props ) {
 						</div>
 
 					</div>
-				</div>
+				// </div>
+					)
+						
 				)
-			)
-		}
+			}
 		</>
 	)
 }

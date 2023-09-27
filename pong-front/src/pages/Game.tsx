@@ -7,7 +7,7 @@ export function Game () {
 	return (
 		<>
 			<NavBar/>
-			<div className="">
+			<div className="pl-8">
 			<div className="pt-32 lg:pl-28 pl-10 pb-10">
 				<GameTitle/>
 			</div>

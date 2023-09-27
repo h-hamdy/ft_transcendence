@@ -12,7 +12,7 @@ export function Add () {
 			<div className="blur-background">
 
             <div className="centered-component">
-                <div className="border bg-white rounded-custom w-[316px] h-[330px] lg:w-[350px] lg:h-[300px]">	
+                <div className="border bg-white rounded-custom w-[316px] h-[330px] lg:w-[350px] lg:h-[300px]">
                     <div className="flex flex-col">
                         <div className="flex justify-between items-center p-8">
                             <div className="text-[#11142D] font-medium lg:text-md">Send invite to a friend</div>

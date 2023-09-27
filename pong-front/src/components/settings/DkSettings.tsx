@@ -22,7 +22,7 @@ export function DkSettings () {
 			remove ? null : (
 				twoFA ? <TwoFa activeButton={activeButton}/> : (
 					<div className="blur-background z mobile-nav-bar">
-					<div className="centered-component">
+					<div className="centered-component pt-28">
 					<div className="flex w-[480px] h-[600px] bg-white shadow-2xl rounded-custom">
 						<div className="flex flex-col">
 						<div className="flex justify-between">
@@ -81,6 +81,7 @@ export function DkSettings () {
 					</div>
 				</div>
 			</div>
+
 				)
 
 			)

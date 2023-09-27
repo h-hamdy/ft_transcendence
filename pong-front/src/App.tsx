@@ -3,7 +3,7 @@ import { SignIn } from "./pages/SignIn"
 import { Home } from "./pages/Home"
 import { Profile } from "./pages/Profile"
 import { Game } from "./pages/Game"
-import { MbSettings } from "./components/settings/MbSettings"
+import { Chat } from "./pages/Chat"
 import "./style.css"
 
 function App() {
@@ -15,7 +15,7 @@ function App() {
           <Route path="/Home" element={<Home/>}/>
           <Route path="/Profile" element={<Profile/>}/>
 		  <Route path="Game" element={<Game/>}/>
-		  <Route path="Settings" element={<MbSettings/>}/>
+		  <Route path="Chat" element={<Chat/>}/>
         </Routes>
     </BrowserRouter>
   )

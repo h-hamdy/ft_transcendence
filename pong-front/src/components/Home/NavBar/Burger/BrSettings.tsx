@@ -1,9 +1,5 @@
-// import setting from "/src/assets/Setting.svg"
 import React from "react";
 import { DkSettings } from "../../../settings/DkSettings";
-// import { MbSettings } from "../../../settings/MbSettings";
-// import { Link, Navigate } from "react-router-dom";
-// import { useNavigate } from "react-router-dom";
 import { MbSettings } from "../../../settings/MbSettings";
 
 

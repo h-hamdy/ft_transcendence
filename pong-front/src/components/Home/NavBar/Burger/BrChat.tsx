@@ -1,3 +1,7 @@
+import React from "react";
+import { MbChat } from "../../../Chat/MbChat";
+import { Link } from "react-router-dom";
+
 interface Props {
     msgnum: string
 	buttonColors: { [key: string]: string }
@@ -6,9 +10,11 @@ interface Props {
 }
 
 export function BrChat ( {msgnum, buttonColors, strokeColor, handleClick}: Props ) {
+
     return (
         <>
 		<div className="pr-8">
+			<Link to="/Chat">
                 <button onClick={() => handleClick('button5', 'img5')} style={{ backgroundColor: buttonColors.button5 }} className="flex w-full h-[56px] pl-8  items-center rounded-2xl">
                     <div>
 					<svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -28,7 +34,9 @@ export function BrChat ( {msgnum, buttonColors, strokeColor, handleClick}: Props
                         </div>  
                     </div>
                 </button>
+			</Link>
 		</div>
+		{/* { chat && <MbChat/>} */}
         </>
     )
 }

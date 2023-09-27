@@ -1,18 +1,29 @@
 import rmv from "/src/assets/remove.svg"
 import avatar from "/src/assets/ahamdy.jpg"
-import React from "react";
-
+import React, { useState } from "react";
+import { TwoFa } from "./TwoFA";
+import { MbTwoFA } from "./MbTwoFA";
 export function MbSettings () {
 
     const [remove, SetRemove] = React.useState(false);
+	const [activeButton, setActiveButton] = useState(1);
+	const [twoFA, setTwoFa] = useState(false);
+
+	const handleButtonClick = (buttonId: number) => {
+		if (buttonId === 2)
+			setTwoFa(!twoFA);
+		setActiveButton(buttonId);
+	  };
 	
 
 	return (
 		<>
 		{
 			remove ? null : (
-				<>
-				<div className="sm:hidden">
+				twoFA ? <MbTwoFA activeButton={activeButton}/> : (
+				<div className="blur-background z bg-white sm:hidden">
+				<div className="centered-component pt-16">
+				
 
 				<div className="flex items-center justify-between pr-10">
 					<div className="text-[#11142D] font-semibold text-lg p-10">Account Settings</div>
@@ -20,13 +31,13 @@ export function MbSettings () {
                         <img src={rmv}></img>
                     </button>
 				</div>
-				<div className="flex items-center justify-around gap-10 pt-10 p-10">
-					<button className="flex items-center justify-center border bg-[#6C5DD3] border-[#6C5DD3] w-[120px] h-[35px] rounded-xl">
-						<div className="text-white font-semibold">Your Profile</div>
-					</button>
-					<button className="flex items-center justify-center border bg-[#6C5DD3] border-[#6C5DD3] w-[100px] h-[35px] rounded-xl">
-						<div className="text-white font-semibold">2FA</div>
-					</button>
+				<div className="flex items-center justify-around gap-10 pt-10 p-10 pt-0">
+				<button onClick={() => handleButtonClick(1)} className={`flex items-center justify-center border  border-[2px] w-[120px] h-[35px] rounded-xl ${activeButton === 1 ? "bg-[#6C5DD3] border-[#6C5DD3]" : "bg-white border-[#FF754C]"}`}>
+					<div className={`${activeButton === 1 ? "text-white" : "text-black"} font-semibold`}>Your Profile</div>
+				</button> 
+				<button onClick={() => {handleButtonClick(2) }} className={`flex ${activeButton === 2 ? "bg-[#6C5DD3] border-[#6C5DD3]" : "bg-white border-[#FF754C]"} items-center justify-center border border-[2px] w-[100px] h-[35px] rounded-xl`}>
+					<div className={`font-semibold ${activeButton === 2 ? "text-white" : "text-balck"}`}>2FA</div>
+				</button>
 				</div>
 				<div className="pt- pl-5 pr-5">
 					<div className="flex flex-col gap-1">
@@ -54,15 +65,19 @@ export function MbSettings () {
 					<div className="text-[#808191]">Your Full Name</div>
 					<div className="flex flex-col gap-9">
 					<form className="flex  justify-center items-center rounded-xl h-[70px] w-[200px]">
-						<input className="rounded-xl w-full h-full border bg-gray-100 border-[3px]  pr-3 pl-3 focus:border-[#6C5DD3] focus:outline-none"></input>
+						<input className="rounded-xl w-full h-full border bg-gray-100 border-[3px]  pr-3 pl-3 focus:border-[#6C5DD3] focus:outline-none text-[#888EFF] text-center"></input>
 					</form>
+					<div className="pb-10">
+
 					<button className="flex justify-center items-center border rounded-xl bg-[#6C5DD3] border-[#6C5DD3] h-[50px] w-[120px]">
 						<div className="text-white font-semibold text-sm">Update Profile</div>
 					</button>
 					</div>
+					</div>
+				</div>
 				</div>
 			</div>
-				</>
+				)
 			)
 		}
 	</>
