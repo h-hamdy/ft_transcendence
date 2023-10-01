@@ -1,5 +1,6 @@
 import { Enline } from "../Home/Friends/status/Enline"
 import { Chatconv } from "./Chatconv";
+import { DkChatConv } from "./DkChatConv";
 import avatar from "/src/assets/hkhalil.jpg"
 
 interface Props {
@@ -29,6 +30,7 @@ export function Chatprofile ( { isClicked, onClick }: Props ) {
 				</div>
 				</button>
 				{isClicked && <Chatconv/>}
+				{isClicked && <DkChatConv/>}
 			</div>
 
 		</>

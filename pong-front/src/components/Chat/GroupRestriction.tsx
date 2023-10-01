@@ -8,7 +8,7 @@ export function GroupRestriction () {
 		<>
 		<div className="pb-5">
 
-			<div className="w-full h-[75px] drop-shadow-lg bg-gray-100 bg-white rounded-custom flex flex-row items-center justify-around">
+			<div className="w-full h-[75px] drop-shadow-lg bg-white rounded-custom flex flex-row items-center justify-around">
 				<button className="flex items-center gap-[5px]">
 					<img src={hhamdy} className="w-[30px] h-[30px] rounded-full"></img>
 					<div className="text-sm text-[#353E6C]">hhamdy</div>

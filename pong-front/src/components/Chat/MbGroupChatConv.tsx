@@ -1,30 +1,40 @@
 
 import rmv from "/src/assets/remove.svg"
 import React from "react";
-import profile from "/src/assets/ahamdy.jpg"
-import profile1 from "/src/assets/hkhalil.jpg"
 import { Msg } from "./Msg";
 
+import { GroupSettings } from "./GroupSettings";
+import groupsetting from "/src/assets/GroupSetting.svg"
 
-export function Chatconv() {
+
+
+
+export function MbGroupChatConv() {
 	const [remove, SetRemove] = React.useState(false);
+	const [settings, Setsettings] = React.useState(false);
+
   
 	return (
 	  <>
 
 		{!remove && (
 
-		  <div className="fixed inset-0 bg-white z px-8 lg:hidden">
-			<div className="w-full h-full flex flex-col">
+		  <div className="fixed inset-0 px-8 z-min lg:hidden">
+			<div className="w-full h-full bg-white flex flex-col">
 			  <div className="pt-28 text-white text-xl py-2">
 				<div className="flex items-center justify-between">
 				  <div className="text-[#1B1D21]">Hamouu</div>
-				  <button
-					onClick={() => SetRemove(!remove)}
-					className="flex items-center justify-center border border-white rounded-full w-12 h-12 shadow-xl"
-				  >
-					<img src={rmv} alt="Remove" />
-				  </button>
+				  <div className="flex gap-2 items-center justify-center">
+					<button onClick={() => Setsettings(!settings)}>
+						<img src={groupsetting}></img>
+					</button>
+					<button
+						onClick={() => SetRemove(!remove)}
+						className="flex items-center justify-center border border-white rounded-full w-12 h-12 shadow-xl lg:hidden"
+						>
+						<img src={rmv} alt="Remove" />
+					</button>
+					</div>
 				</div>
 			  </div>
   
@@ -56,7 +66,7 @@ export function Chatconv() {
 			</div>
 		  </div>
 		)}
+		{settings && <GroupSettings/>}
 	  </>
 	);
   }
-  

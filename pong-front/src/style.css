@@ -559,9 +559,17 @@ video {
   padding-left: 10px;
 }
 
+.z-min { 
+	z-index: 99;
+}
+
 .z {
   z-index: 9999;
 }
+
+.z1 {
+	z-index: 80000;
+  }
 
 .above-all {
 	position: absolute; /* Position the div absolutely */
@@ -740,6 +748,11 @@ video {
 	overflow: auto;
   }
 
+  .scrollable-container {
+    height: calc(60vh); /* Set height to 100% of the viewport height */
+    overflow-y: auto; /* Enable vertical scrolling */
+}
+
 .notif-container {
   background: white;
   position: fixed;
@@ -814,7 +827,7 @@ video {
 	top: 50%;
 	left: 50%;
 	transform: translate(-50%, -50%);
-	z-index: 9999; /* To place it above other components */
+	z-index: 100000; /* To place it above other components */
 	/* Additional styling for your centered component */
   }
 

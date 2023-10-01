@@ -1,5 +1,7 @@
 import React from "react"
 import { GroupChatConv } from "./GruopChatConv";
+import { DkChatConv } from "./DkChatConv";
+import { MbGroupChatConv } from "./MbGroupChatConv";
 
 export function GroupComponents () {
 	const [conv, Setconv] = React.useState(false);
@@ -18,6 +20,7 @@ export function GroupComponents () {
 				</div>
 				</button>
 			{conv && <GroupChatConv/>}
+			{conv && <MbGroupChatConv/>}
 		</>
 	)
 }

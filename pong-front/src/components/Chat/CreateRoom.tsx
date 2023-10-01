@@ -34,7 +34,7 @@ export function CreateRoom() {
 	  <>
 		{!remove ? (
 		  <div className="blur-background z">
-			<div className="h-5/6 fixed top-1/4 w-full pr-8 pl-8 lg:w-6/12 xl:w-4/12 lg:right-[25%] xl:right-[35%] lg:h-4/6">
+			<div className="h-5/6 fixed top-1/4 w-full pr-8 pl-8 lg:w-6/12 xl:w-4/12 lg:right-[25%] xl:right-[35%] lg:h-5/6">
 			  <div className="w-full h-5/6 bg-white shadow-2xl rounded-custom">
 				<div className="flex items-center justify-between w-full p-8">
 				  <div className="text-lg text-[#11142D] font-semibold">Create new room chat</div>
@@ -45,7 +45,7 @@ export function CreateRoom() {
 					<img src={rmv}/>
 				  </button>
 				</div>
-				<div className="flex flex-col justify-between h-[80%] p-8">
+				<div className="flex flex-col justify-between h-[80%] p-8 pt-0">
 					<div className="flex flex-col gap-[10px]">
 						<div className="text-xs text-[#808191]">Room name</div>
 					<input

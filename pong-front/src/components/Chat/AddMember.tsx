@@ -5,7 +5,7 @@ export function AddMember () {
 		<>
 		<div className="py-1">
 
-			<div className="w-full h-[60px] drop-shadow-lg bg-gray-100 bg-white rounded-custom flex flex-row items-center justify-around">
+			<div className="w-full h-[60px] drop-shadow-lg bg-white rounded-custom flex flex-row items-center justify-around">
 				<div className="flex gap-[8px] items-center">
 					<img src={hhamdy} className="w-[30px] h-[30px] rounded-full"></img>
 					<div className="text-sm text-[#353E6C]">hhamdy</div>

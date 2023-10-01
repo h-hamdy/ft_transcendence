@@ -8,7 +8,7 @@ export function DirectMsg () {
 	const [Up, setUp] = React.useState(false);
 
 	const handleClick = (index: number) => {
-		const newButtonStates = Array(10).fill(false);
+		const newButtonStates = Array(17).fill(false);
 		newButtonStates[index] = !newButtonStates[index];
 		setButtonStates(newButtonStates);
 	  };

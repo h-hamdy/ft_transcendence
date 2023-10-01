@@ -1,38 +1,41 @@
 
 import rmv from "/src/assets/remove.svg"
 import React from "react";
-import profile from "/src/assets/ahamdy.jpg"
-import profile1 from "/src/assets/hkhalil.jpg"
 import { Msg } from "./Msg";
 
 
-export function Chatconv() {
+export function DkChatConv () {
 	const [remove, SetRemove] = React.useState(false);
   
 	return (
 	  <>
 
 		{!remove && (
+		<div className="w-full absolute lg:w-6/12 bg-white lg:pl-10 xl:pl-0 h-[100vh] top-0 right-0 mobile-nav-bar sm:hidden lg:block">
 
-		  <div className="fixed inset-0 bg-white z px-8 lg:hidden">
-			<div className="w-full h-full flex flex-col">
+		  <div className=" z px-8 h-[100vh] sm:hidden mobile-nav-bar lg:block">
+			<div className="w-full h-full flex flex-col justify-around">
 			  <div className="pt-28 text-white text-xl py-2">
-				<div className="flex items-center justify-between">
-				  <div className="text-[#1B1D21]">Hamouu</div>
+				<div className="flex items-center justify-between lg:px-10">
+				  <div className="text-[#1B1D21] md:text-2xl">Hamouu</div>
 				  <button
 					onClick={() => SetRemove(!remove)}
-					className="flex items-center justify-center border border-white rounded-full w-12 h-12 shadow-xl"
+					className="flex items-center justify-center border border-white rounded-full w-12 h-12 shadow-xl lg:hidden"
 				  >
 					<img src={rmv} alt="Remove" />
 				  </button>
 				</div>
 			  </div>
   
-			  <div className="flex-1 px-8 scrollable-div-ver10 ">
+			  <div className="px-8 h-[100%] scrollable-container lg:pt-10">
 				<Msg profile="/src/assets/hkhalil.jpg" name="hassan" time="2m ago" msg="ach wach"/>
 				<Msg profile="/src/assets/hkhalil.jpg" name="hassan" time="2m ago" msg="ach"/>
 				<Msg profile="/src/assets/hkhalil.jpg" name="hassan" time="2m ago" msg="ach    "/>
 				<Msg profile="/src/assets/hkhalil.jpg" name="hassan" time="2m ago" msg="  "/>
+				<Msg profile="/src/assets/hkhalil.jpg" name="hassan" time="2m ago" msg=" wach "/>
+				<Msg profile="/src/assets/hkhalil.jpg" name="hassan" time="2m ago" msg="ach wach "/>
+				<Msg profile="/src/assets/hkhalil.jpg" name="hassan" time="2m ago" msg="ach wach "/>
+				<Msg profile="/src/assets/hkhalil.jpg" name="hassan" time="2m ago" msg="ach wach "/>
 				<Msg profile="/src/assets/hkhalil.jpg" name="hassan" time="2m ago" msg="ach wach "/>
 				<Msg profile="/src/assets/hkhalil.jpg" name="hassan" time="2m ago" msg="ach wach "/>
 				<Msg profile="/src/assets/hkhalil.jpg" name="hassan" time="2m ago" msg="ach wach "/>
@@ -43,20 +46,22 @@ export function Chatconv() {
 			  </div>
   
 			  <div className="flex flex-col items-center justify-center py-5">
-				<form className="w-full max-w-xs">
-				  <input
-					className="w-full h-12 px-4 rounded-xl border border-[#6C5DD3] focus:outline-none focus:border-[#6C5DD3] text-[#808191]"
-					placeholder="Write Something"
-				  />
-				</form>
-				<button className="w-full max-w-xs bg-[#6C5DD3] text-white font-semibold rounded-xl h-12 mt-3">
-				  Send
-				</button>
-			  </div>
+				  <form className="w-full max-w-xs">
+					<input
+					  className="w-full h-12 px-4 rounded-xl border border-[#6C5DD3] focus:outline-none focus:border-[#6C5DD3] text-[#808191]"
+					  placeholder="Write Something"
+					/>
+				  </form>
+				  <button className="w-full max-w-xs bg-[#6C5DD3] text-white font-semibold rounded-xl h-12 mt-3">
+					Send
+				  </button>
+				</div>
 			</div>
-		  </div>
+		 </div>
+		</div>
 		)}
 	  </>
 	);
   }
+
   

@@ -122,6 +122,8 @@ export function MBburger () {
 					<img src={down} className="w-[12px] h-[12px]"></img>
 				</div>
 
+
+				<Link to="/Chat">
 				<button onClick={() => handleClick('button5', 'img5')} style={{ backgroundColor: buttonColors.button5 }} className={`p-3 border shadow-md border-white w-[50px] h-[50px] flex items-center justify-center rounded-2xl `}>
 				<svg width="20" height="20" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
 					<g id="Chat">
@@ -132,6 +134,7 @@ export function MBburger () {
 					</g>
 					</svg>
 				</button>
+				</Link>
 				<button onClick={() => {handleClick('button6', 'img6'); SetSettings(!settings)}} style={{ backgroundColor: buttonColors.button6 }} className={`p-3 border shadow-md border-white w-[50px] h-[50px] flex items-center justify-center rounded-2xl `}>
 				<svg width="20" height="20" viewBox="0 0 20 22" fill="none" xmlns="http://www.w3.org/2000/svg">
 					<g id="Setting">
