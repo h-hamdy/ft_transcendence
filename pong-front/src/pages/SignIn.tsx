@@ -3,10 +3,6 @@ import Google from "../components/Enbording/Google";
 import DiscoverMore from "../components/Enbording/DiscoverMore"
 import { Cards } from "../components/Enbording/Cards"
 import Logo from "../assets/mainLogo.svg"
-// import img1 from "../assets/img1.png"
-// // import img2 from "../assets/img2.png"
-// import img3 from "../assets/img3.png"
-// import dot from "../assets/dot.svg"
 import background from "../assets/onboarding.png"
 
 export function SignIn() {
