@@ -1,6 +1,8 @@
-import avatar from "../../../assets/hhamdy.jpg"
+interface Props {
+	avatar: string,
+}
 
-export function Avatar () {
+export function Avatar ( {avatar}: Props ) {
     return (
         <>
             <button>

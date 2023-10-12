@@ -9,12 +9,12 @@ import logo from "/src/assets/mainLogo.svg"
 import { useState } from "react"
 import React from "react"
 // import { BrStart } from "./BrStart"
-import { Link } from "react-router-dom"
+import { Link, useParams } from "react-router-dom"
 import { DkSettings } from "../../../settings/DkSettings"
 
+export function MBburger ( ) {
+	const { username } = useParams();
 
-
-export function MBburger () {
 	const initialColors: { [key: string]: string } = {
 		button1: 'initial',
 		button2: 'initial',
@@ -39,10 +39,8 @@ export function MBburger () {
     const [settings, SetSettings] = React.useState(false);
 	
 
-
 		const handleClick = (buttonName: string, imgNum: string) => {
 			SetClick(!click)
-
 			// setstrokeColor(click ? '#FFFFFF' : '#808191')
 			const newColors = { ...initialColors };
 			const newImgs = { ...strokeColors };
@@ -52,6 +50,8 @@ export function MBburger () {
 			setButtonColors(newColors);
 			setstrokeColor(newImgs);
 		};
+		const housam = "lfasi";
+		console.log(username + " vs " +  housam);
 
 
 	return (
@@ -70,8 +70,8 @@ export function MBburger () {
 				</svg>
  				</button>
 			</Link>
-			<Link to="/profile">
-				<button onClick={() => handleClick('button2', 'img2')} style={{ backgroundColor: buttonColors.button2 }} className={`p-3 border shadow-md border-white w-[50px] h-[50px]  flex items-center justify-center rounded-2xl `}>
+			<Link to={`/profile/me`}>
+				<button onClick={() => {handleClick('button2', 'img2')}} style={{ backgroundColor: buttonColors.button2 }} className={`p-3 border shadow-md border-white w-[50px] h-[50px]  flex items-center justify-center rounded-2xl `}>
 				<svg width="20" height="20" viewBox="0 0 18 21" fill="none" xmlns="http://www.w3.org/2000/svg">
 					<g id="Profile">
 					<circle id="Ellipse_736" cx="9.07881" cy="5.77803" r="4.77803" stroke={strokeColor.img2} stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>

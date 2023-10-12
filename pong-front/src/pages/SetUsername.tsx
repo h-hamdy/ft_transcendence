@@ -2,9 +2,10 @@ import rec from "/src/assets/rectangle.svg"
 import imgPath from "/src/assets/onboarding.png"
 import React from "react";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
-export function SetUsername () {
+export const SetUsername = () => {
 
     const [formData, setFormData] = useState<{username: string}>({
         username: '',
@@ -12,8 +13,8 @@ export function SetUsername () {
     
       const handleFormSubmit = async () => {    
         try {
-          const response = await axios.post('http://localhost:3000/set-username', formData, { withCredentials: true });
-          console.log('POST request successful:', response.data);
+          const response = await axios.post('http://localhost:3000/set-username', formData, { withCredentials: true }).then (function (response) {console.log(response)});
+
         } catch (error) {
           console.error('POST request failed:', error);
         }
@@ -29,7 +30,9 @@ export function SetUsername () {
                 <form className="flex justify-center items-center rounded-xl h-[70px] w-[300px]" onSubmit={handleFormSubmit}>
                     <input className="rounded-xl w-full h-full border bg-gray-100 border-[3px]  pr-3 pl-3 focus:border-[#6C5DD3] focus:outline-none text-[#888EFF] text-center" 
                     value={formData.username}
-                    onChange={(e) => setFormData({ ...formData, username: e.target.value })}
+                    onChange={(e) => {
+						setFormData({ ...formData, username: e.target.value });
+					  }}
                 />
                 </form>
                 </div>

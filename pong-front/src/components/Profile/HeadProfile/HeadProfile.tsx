@@ -1,4 +1,6 @@
+import { useState } from "react"
 import { Enline } from "../../Home/Friends/status/Enline"
+import { GameMode } from "../GamMode"
 import check from "/src/assets/check.svg"
 import play from "/src/assets/Game.svg"
 import plusFriend from "/src/assets/PersonPlusFill.svg"
@@ -7,9 +9,19 @@ interface Props {
 	profile: string,
 	name: string,
 	friendNum: string,
+	me: boolean,
 }
 
-export function HeadProfile ( {profile, name, friendNum}: Props ) {
+export function HeadProfile ( {profile, name, friendNum, me}: Props ) {
+
+	const [gameMode, setGameMode] = useState(false);
+
+	const handleMode = () => {
+		setGameMode(!gameMode);
+	}
+
+	console.log(me);
+	
 	return (
 		<>
 		<div className="pt-32 pl-10 pr-10 lg:pl-36 lg:pr-10">
@@ -33,19 +45,27 @@ export function HeadProfile ( {profile, name, friendNum}: Props ) {
 					</div>
 					</div>
 					<div className="flex gap-7 items-center justify-around">
-					<button className="flex justify-center items-center border rounded-xl bg-[#6C5DD3] border-[#6C5DD3] h-[45px] w-[100px] pr-">
-							<div className="text-white font-semibold lg:text-sm">Message</div>
-					</button>
-						<button className="flex items-center justify-center border border-[#6C5DD3] bg-[#6C5DD3] w-[50px] h-[45px] shadow rounded-xl">
+					{
+						me ? null :
+						<button className="flex justify-center items-center border rounded-xl bg-[#6C5DD3] border-[#6C5DD3] h-[45px] w-[100px] pr-">
+								<div className="text-white font-semibold lg:text-sm">Message</div>
+						</button>
+					}
+					{
+						<button className={`flex items-center justify-center border border-[#6C5DD3] bg-[#6C5DD3] w-[50px] h-[45px] shadow rounded-xl`}>
 							<img src={plusFriend}></img>
 						</button>
-						<button className="flex items-center justify-center pb-[4px] border border-[#6C5DD3] bg-[#6C5DD3] w-[50px] h-[45px] shadow rounded-xl">
+
+					}
+						<button className="flex items-center justify-center pb-[4px] border border-[#6C5DD3] bg-[#6C5DD3] w-[50px] h-[45px] shadow rounded-xl" onClick={handleMode}>
 							<img src={play}></img>
 						</button>
 					</div>
 				</div>
 			</div>
 		</div>
+
+		{ gameMode && <GameMode/> }
 		</>
 	)
 }

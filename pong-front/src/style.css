@@ -640,7 +640,7 @@ video {
 
 .path2 {
 	background-image: url("./src/assets/ProfileWive.png");
-  }
+}
 
   .path3 {
 	background-image: url("./src/assets/qrcode.svg");
@@ -665,6 +665,7 @@ video {
 .shadow {
   filter: drop-shadow(25 25px 25px rgba(82, 54, 255, 0.10));
 }
+
 
 .scrollable-div-ver{
   height: 600px;

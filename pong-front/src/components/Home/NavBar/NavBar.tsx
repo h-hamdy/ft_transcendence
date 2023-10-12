@@ -7,11 +7,15 @@ import { Brb } from "./Burger/Brb";
 // import { Home } from "../../../pages/Home";
 import { MBburger } from "./Burger/MBburger";
 
-export function NavBar() {
+interface Props {
+	avatar: string,
+	username: string,
+}
+
+export function NavBar( { avatar, username }: Props ) {
   const [showNotif, setShowNotif] = React.useState(false);
   const [showBurger, setShowBurger] = React.useState(false);
   
-
   return (
     <>
       <div className="nav-container zz">
@@ -21,7 +25,7 @@ export function NavBar() {
               <div>
                 <Burger clicked={() => setShowBurger(!showBurger)} />
                 <div className="fixed left-0 top-0 bg-white zz sm:hidden lg:block mobile-nav-bar">
-                  <MBburger />
+                  <MBburger username={username}/>
                 </div>
               </div>
               <div className="flex items-center">
@@ -32,7 +36,7 @@ export function NavBar() {
                   />
                 </div>
                 <div className="lg:pr-16">
-                  <Avatar />
+                  <Avatar avatar={avatar} />
                 </div>
               </div>
             </div>
