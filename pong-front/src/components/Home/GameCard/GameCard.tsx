@@ -9,7 +9,7 @@ export function GameCard ( {TableType, GameType ,imgPath, Views}: Props ) {
     return (
         <>
             <div className="flex justify-center items-center w-full pr-10 pt-8 pl-10 pb-10 sm:pl-0 sm:pt-0">
-                <div className="flex items-center pt-9 border bg-[#FFF] drop-shadow-md rounded-custom w-full sm:w-[350px] lg:h-[170px]">
+                <div className="flex items-center pt-9 border bg-[#FFF] drop-shadow-md rounded-custom w-full w-[350px] h-[180px]">
                         <div className="flex flex-col p-4 pb-12">
                             <img className="bbc lg:w-[200px]" src={imgPath} alt="3WinGame"></img>
                         </div> 

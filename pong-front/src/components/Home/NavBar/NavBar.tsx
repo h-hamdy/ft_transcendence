@@ -12,7 +12,7 @@ interface Props {
 	username: string,
 }
 
-export function NavBar( { avatar, username }: Props ) {
+export function NavBar( { avatar }: Props ) {
   const [showNotif, setShowNotif] = React.useState(false);
   const [showBurger, setShowBurger] = React.useState(false);
   
@@ -25,7 +25,7 @@ export function NavBar( { avatar, username }: Props ) {
               <div>
                 <Burger clicked={() => setShowBurger(!showBurger)} />
                 <div className="fixed left-0 top-0 bg-white zz sm:hidden lg:block mobile-nav-bar">
-                  <MBburger username={username}/>
+                  <MBburger/>
                 </div>
               </div>
               <div className="flex items-center">

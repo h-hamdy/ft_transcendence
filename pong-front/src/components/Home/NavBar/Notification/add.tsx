@@ -1,6 +1,5 @@
 import rmv from "/src/assets/remove.svg"
 import rec from "/src/assets/rectangle.svg"
-// import done from "/src/assets/done.svg"
 import React from "react"
 
 export function Add () {

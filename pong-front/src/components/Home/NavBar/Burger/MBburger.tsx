@@ -11,6 +11,7 @@ import React from "react"
 // import { BrStart } from "./BrStart"
 import { Link, useParams } from "react-router-dom"
 import { DkSettings } from "../../../settings/DkSettings"
+import { GameMode } from "../../../Profile/GamMode"
 
 export function MBburger ( ) {
 	const { username } = useParams();
@@ -37,6 +38,7 @@ export function MBburger ( ) {
 	const [buttonColors, setButtonColors] = useState(initialColors);
 	const [strokeColor, setstrokeColor] = useState(strokeColors);
     const [settings, SetSettings] = React.useState(false);
+	const [game, Setgame] = useState(false);
 	
 
 		const handleClick = (buttonName: string, imgNum: string) => {
@@ -50,8 +52,6 @@ export function MBburger ( ) {
 			setButtonColors(newColors);
 			setstrokeColor(newImgs);
 		};
-		const housam = "lfasi";
-		console.log(username + " vs " +  housam);
 
 
 	return (
@@ -70,27 +70,29 @@ export function MBburger ( ) {
 				</svg>
  				</button>
 			</Link>
-			<Link to={`/profile/me`}>
+			{/* <Link to={`/profile/me`}> */}
+			<a href="/profile/me">
 				<button onClick={() => {handleClick('button2', 'img2')}} style={{ backgroundColor: buttonColors.button2 }} className={`p-3 border shadow-md border-white w-[50px] h-[50px]  flex items-center justify-center rounded-2xl `}>
 				<svg width="20" height="20" viewBox="0 0 18 21" fill="none" xmlns="http://www.w3.org/2000/svg">
+				
 					<g id="Profile">
 					<circle id="Ellipse_736" cx="9.07881" cy="5.77803" r="4.77803" stroke={strokeColor.img2} stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
 					<path id="Path_33945" fill-rule="evenodd" clip-rule="evenodd" d="M1.50002 17.2013C1.49873 16.8654 1.57385 16.5336 1.7197 16.2311C2.17736 15.3157 3.46798 14.8306 4.53892 14.6109C5.31128 14.4461 6.09431 14.336 6.88217 14.2814C8.34084 14.1533 9.80793 14.1533 11.2666 14.2814C12.0544 14.3366 12.8374 14.4467 13.6099 14.6109C14.6808 14.8306 15.9714 15.27 16.4291 16.2311C16.7224 16.8479 16.7224 17.5639 16.4291 18.1807C15.9714 19.1418 14.6808 19.5812 13.6099 19.7917C12.8384 19.9633 12.0551 20.0766 11.2666 20.1304C10.0794 20.231 8.88659 20.2494 7.69681 20.1853C7.42221 20.1853 7.15677 20.1853 6.88217 20.1304C6.09663 20.0772 5.31632 19.964 4.54807 19.7917C3.46798 19.5812 2.18652 19.1418 1.7197 18.1807C1.5746 17.8746 1.49955 17.54 1.50002 17.2013Z" stroke={strokeColor.img2} stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
 					</g>
 				</svg>
                 </button>
-			</Link>
+			</a>
+			{/* </Link> */}
 		
-				<button onClick={() => handleClick('button3', 'img3')} style={{ backgroundColor: buttonColors.button3 }} className={`p-3 border shadow-md border-white w-[50px] h-[50px] flex items-center justify-center rounded-2xl `}>
-				<svg width="20" height="20" viewBox="0 0 22 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-					<g id="video">
-					<path id="Path" d="M15.5 7.6L17.3314 6.2814C18.6544 5.32887 20.5 6.27427 20.5 7.90447V12.0955C20.5 13.7257 18.6544 14.6711 17.3314 13.7186L15.5 12.4" stroke={strokeColor.img3}  stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-					<rect id="Rectangle" x="1.5" y="1" width="14" height="18" rx="4" stroke={strokeColor.img3}  stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-					</g>
-				</svg>
-                </button>
-				<Link to="/game">
-				<button onClick={() => handleClick('button4', 'img4')} style={{ backgroundColor: buttonColors.button4 }} className={`p-3 border shadow-md border-white w-[50px] h-[50px] flex items-center justify-center rounded-2xl `}>
+			<button onClick={() => handleClick('button3', 'img3')} style={{ backgroundColor: buttonColors.button3 }} className={`p-3 border shadow-md border-white w-[50px] h-[50px] flex items-center justify-center rounded-2xl `}>
+			<svg width="20" height="20" viewBox="0 0 22 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+				<g id="video">
+				<path id="Path" d="M15.5 7.6L17.3314 6.2814C18.6544 5.32887 20.5 6.27427 20.5 7.90447V12.0955C20.5 13.7257 18.6544 14.6711 17.3314 13.7186L15.5 12.4" stroke={strokeColor.img3}  stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+				<rect id="Rectangle" x="1.5" y="1" width="14" height="18" rx="4" stroke={strokeColor.img3}  stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+				</g>
+			</svg>
+			</button>
+				<button onClick={() => {handleClick('button4', 'img4'), Setgame(!game)}} style={{ backgroundColor: buttonColors.button4 }} className={`p-3 border shadow-md border-white w-[50px] h-[50px] flex items-center justify-center rounded-2xl `}>
 				<svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
 					<g id="Iconly/Two-tone/Game">
 					<g id="Game">
@@ -104,7 +106,6 @@ export function MBburger ( ) {
 					</g>
 				</svg>
 				</button>
-				</Link>
 
 
                 <div className="flex items-center justify-center text-[#808191] text-sm lg:text-md pt-16">Friends</div>
@@ -146,6 +147,7 @@ export function MBburger ( ) {
 			</div>
 		</div>
 		{settings && <DkSettings/>}
+		{game && <GameMode/>}
 		</>
 	)
 }

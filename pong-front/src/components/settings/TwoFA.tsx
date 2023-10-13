@@ -7,20 +7,18 @@ import group from "/src/assets/Group.svg"
 import mobile from "/src/assets/mobiledow.svg"
 // import qr from "/src/assets/qrcode.svg"
 
-interface Props {
-	activeButton: number;
-}
-
-export function TwoFa ( {activeButton}: Props ) {
+export function TwoFa ( ) {
     const [remove, SetRemove] = React.useState(false);
 	const [profile, setProfile] = useState(false);
+	const [activeButton, setActiveButton] = useState(2);
+
+	
 
 
 	return (
 		<>
 		{
 			remove ? null : (
-				profile ? <DkSettings/> : (
 					<div className="blur-background z mobile-nav-bar">
 					<div className="centered-component pt-16">
 						<div className="w-[600px] h-[720px] bg-white shadow-2xl rounded-custom">
@@ -38,9 +36,13 @@ export function TwoFa ( {activeButton}: Props ) {
 									<button onClick={() => setProfile(!profile)} className={`flex items-center justify-center border  border-[2px] w-[120px] h-[35px] rounded-xl ${activeButton === 1 ? "bg-[#6C5DD3] border-[#6C5DD3]" : "bg-white border-[#FF754C]"}`}>
 										<div className={`${activeButton === 1 ? "text-white" : "text-black"} font-semibold`}>Your Profile</div>
 									</button> 
-									<button onClick={() => setProfile(!profile)} className={`flex ${activeButton === 2 ? "bg-[#6C5DD3] border-[#6C5DD3]" : "bg-white border-[#FF754C]"} items-center justify-center border border-[2px] w-[100px] h-[35px] rounded-xl`}>
+									<button className={`flex ${activeButton === 2 ? "bg-[#6C5DD3] border-[#6C5DD3]" : "bg-white border-[#FF754C]"} items-center justify-center border border-[2px] w-[100px] h-[35px] rounded-xl`}>
 										<div className={`font-semibold ${activeButton === 2 ? "text-white" : "text-balck"}`}>2FA</div>
 									</button>
+									<button  className={`flex items-center justify-center border  border-[2px] w-[120px] h-[35px] rounded-xl ${activeButton === 3 ? "bg-[#6C5DD3] border-[#6C5DD3]" : "bg-white border-[#FF754C]"}`}>
+										<div className={`${activeButton === 3 ? "text-white" : "text-black"} font-semibold`}>Game setting</div>
+									</button>
+									
 								</div>
 							<div className="scrollable-div-ver7">
 								<div className="flex items-center justify-around">
@@ -104,7 +106,6 @@ export function TwoFa ( {activeButton}: Props ) {
 					</div>
 				</div>
 				)
-			)
 		}
 		</>
 	)

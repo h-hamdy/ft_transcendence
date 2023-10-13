@@ -823,6 +823,35 @@ video {
 	z-index: 10000;
 }
 
+.file-input-wrapper {
+	position: relative;
+	overflow: hidden;
+  }
+  
+  .file-input {
+	position: absolute;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	font-size: 100px; /* Set a large font size to cover the button */
+	opacity: 0; /* Make the input transparent */
+	cursor: pointer;
+  }
+
+  .hover-grow:hover {
+    transform: scale(1.1); /* Increase the size on hover */
+    transition: transform 0.4s ease; /* Add a smooth transition effect */
+}
+
+.selected {
+    border: 4px solid #6C5DD3; /* Change the border style to indicate selection */
+    box-shadow: 0 0 5px rgba(108, 93, 211, 0.5); /* Update box shadow color */
+}
+
+
+  
+
 .centered-component {
 	position: fixed;
 	top: 50%;

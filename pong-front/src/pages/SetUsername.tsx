@@ -14,7 +14,6 @@ export const SetUsername = () => {
       const handleFormSubmit = async () => {    
         try {
           const response = await axios.post('http://localhost:3000/set-username', formData, { withCredentials: true }).then (function (response) {console.log(response)});
-
         } catch (error) {
           console.error('POST request failed:', error);
         }

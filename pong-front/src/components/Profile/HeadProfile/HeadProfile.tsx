@@ -4,6 +4,8 @@ import { GameMode } from "../GamMode"
 import check from "/src/assets/check.svg"
 import play from "/src/assets/Game.svg"
 import plusFriend from "/src/assets/PersonPlusFill.svg"
+import Friendadded from "/src/assets/Friends.svg"
+import { Add } from "../../Home/NavBar/Notification/add"
 
 interface Props {
 	profile: string,
@@ -15,12 +17,20 @@ interface Props {
 export function HeadProfile ( {profile, name, friendNum, me}: Props ) {
 
 	const [gameMode, setGameMode] = useState(false);
+	const [clicked, setClick] = useState(false);
+	const [search, Setsearch] = useState(false);
 
 	const handleMode = () => {
 		setGameMode(!gameMode);
 	}
 
-	console.log(me);
+	const handleFriend = () => {
+		setClick(!clicked);
+	}
+
+	const handleSearch = () => {
+		Setsearch(!search);
+	}
 	
 	return (
 		<>
@@ -52,9 +62,28 @@ export function HeadProfile ( {profile, name, friendNum, me}: Props ) {
 						</button>
 					}
 					{
-						<button className={`flex items-center justify-center border border-[#6C5DD3] bg-[#6C5DD3] w-[50px] h-[45px] shadow rounded-xl`}>
-							<img src={plusFriend}></img>
-						</button>
+							clicked ? <button className={`flex items-center justify-center border border-gray-100 bg-gray-100 w-[50px] h-[45px] shadow rounded-xl`} onClick={handleFriend}>
+								<img src={Friendadded} className="w-[24px] h-[24px]"></img>
+							</button>
+						:
+						me ? 
+						(
+							search ?
+							<>
+								<button className={`flex items-center justify-center border border-[#6C5DD3] bg-[#6C5DD3] w-[50px] h-[45px] shadow rounded-xl`} onClick={handleSearch}>
+								<img src={plusFriend} className="w-[24px] h-[24px]"></img>
+								</button>
+								<Add/> 
+							</>
+							:
+							<button className={`flex items-center justify-center border border-[#6C5DD3] bg-[#6C5DD3] w-[50px] h-[45px] shadow rounded-xl`} onClick={handleSearch}>
+							<img src={plusFriend} className="w-[24px] h-[24px]"></img>
+							</button>
+						) :
+							<button className={`flex items-center justify-center border border-[#6C5DD3] bg-[#6C5DD3] w-[50px] h-[45px] shadow rounded-xl`} onClick={handleFriend}>
+							<img src={plusFriend} className="w-[24px] h-[24px]"></img>
+							</button>
+						  
 
 					}
 						<button className="flex items-center justify-center pb-[4px] border border-[#6C5DD3] bg-[#6C5DD3] w-[50px] h-[45px] shadow rounded-xl" onClick={handleMode}>

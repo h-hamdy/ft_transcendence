@@ -4,8 +4,9 @@ import { LastMatch } from "../components/Profile/LastMatch/LastMatch";
 import { ProfileCard } from "../components/Profile/ProfileCard/ProfileCard";
 import { States } from "../components/Profile/States/States";
 import { StartEnjoying } from "../components/Home/Start/StartEnjoying";
-import { MyFriends } from "../components/Profile/MyFriends/MyFriends";
+// import { MyFriends } from "../components/Profile/MyFriends/MyFriends";
 import { Achivement } from "../components/Profile/Achivement/Achivement";
+import { LatestMatches } from "../components/Home/LTSMatches/LatestMatches";
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
@@ -66,7 +67,7 @@ export function Profile() {
               profile2="/src/assets/hkhalil.jpg"
             />
             <div className="mobile-nav-bar sm:hidden xl:block scrollable-div-hor1">
-              <States res1="18" res2="24" res3="6" res4="66" />
+              <States res1={userData.wins.toString()} res2={userData.loses.toString()} res3={userData.draws.toString()} res4={(userData.wins + userData.loses + userData.draws).toString()} />
             </div>
           </div>
           <ProfileCard
@@ -78,15 +79,15 @@ export function Profile() {
           />
         </div>
         <div className="xl:hidden">
-          <States res1="18" res2="24" res3="6" res4="66" />
+          <States res1={userData.wins.toString()} res2={userData.loses.toString()} res3={userData.draws.toString()} res4={(userData.wins + userData.loses + userData.draws).toString()} />
         </div>
-        <div className="sm:pt-10 lg:pl-36">
+        {/* <div className="sm:pt-10 lg:pl-36">
           <StartEnjoying />
-        </div>
-        <div className="md:flex md:flex-row md:justify-around md:pt-10 md:w-full lg:pl-28">
-          <div className="md:w-6/12">
-            <MyFriends />
-          </div>
+        </div> */}
+        <div className="md:flex md:flex-row md:justify-around md:pt-10 md:w-full lg:pl-28 pt-10">
+		<div className="md:w-6/12">
+			<LatestMatches/>
+		</div>
           <div className="md:w-6/12">
             <Achivement />
           </div>

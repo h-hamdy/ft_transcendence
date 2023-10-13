@@ -19,7 +19,7 @@ export function States ( {res1, res2, res3, res4}: Props ) {
 				<div className="border w-[200px] h-[100px]  bg-[#F44771] rounded-2xl">
 					<div className="state1 h-[100px]">
 						<div className="flex flex-col">
-							<div className="p-4 text-white font-bold text-md">7 to win match</div>
+							<div className="p-4 text-white font-bold text-md">Wins score</div>
 							<div className="flex gap-[10px]">
 								<div>
 									<img src={up} className="pl-4"></img>
@@ -35,7 +35,7 @@ export function States ( {res1, res2, res3, res4}: Props ) {
 				<div className="border w-[200px] h-[100px]  bg-[#FF9A3E] rounded-2xl">
 					<div className="state2 h-[98px]">
 						<div className="flex flex-col">
-							<div className="p-4 text-white font-bold text-md">3 to win match</div>
+							<div className="p-4 text-white font-bold text-md">Loses score</div>
 							<div className="flex gap-[10px]">
 								<div>
 									<img src={up} className="pl-4"></img>
@@ -53,7 +53,7 @@ export function States ( {res1, res2, res3, res4}: Props ) {
 				<div className="border w-[200px] h-[100px]  bg-[#7F77C5] rounded-2xl">
 					<div className="state3 h-[100px]">
 						<div className="flex flex-col">
-							<div className="p-4 text-white font-bold text-md">5 to win match</div>
+							<div className="p-4 text-white font-bold text-md">Draws score</div>
 							<div className="flex gap-[10px]">
 								<div>
 									<img src={up} className="pl-4"></img>
@@ -69,7 +69,7 @@ export function States ( {res1, res2, res3, res4}: Props ) {
 				<div className="border w-[200px] h-[100px]  bg-[#00AD83] rounded-2xl">
 					<div className="state4 h-[100px]">
 						<div className="flex flex-col">
-							<div className="p-4 text-white font-bold text-md">1 to win match</div>
+							<div className="p-4 text-white font-bold text-md">Total matches</div>
 							<div className="flex gap-[10px]">
 								<div>
 									<img src={up} className="pl-4"></img>
