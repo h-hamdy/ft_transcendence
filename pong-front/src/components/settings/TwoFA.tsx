@@ -5,21 +5,23 @@ import { DkSettings } from "./DkSettings";
 import pic from "/src/assets/hhamdy.jpg"
 import group from "/src/assets/Group.svg"
 import mobile from "/src/assets/mobiledow.svg"
-// import qr from "/src/assets/qrcode.svg"
+import { GameSetting } from "./GameSettings";
+import { MbSettings } from "./MbSettings";
+import { MbGameSettings } from "./MbGameSetting";
 
 export function TwoFa ( ) {
     const [remove, SetRemove] = React.useState(false);
 	const [profile, setProfile] = useState(false);
-	const [activeButton, setActiveButton] = useState(2);
+	const [gameSetting, setgameSetting] = React.useState(false);
+	const [enable, Setenable] = React.useState(false);
 
-	
 
 
 	return (
 		<>
 		{
 			remove ? null : (
-					<div className="blur-background z mobile-nav-bar">
+					<div className="blur-background z mobile-nav-bar sm:block">
 					<div className="centered-component pt-16">
 						<div className="w-[600px] h-[720px] bg-white shadow-2xl rounded-custom">
 
@@ -33,14 +35,14 @@ export function TwoFa ( ) {
 									</div>
 								</div>
 								<div className="flex items-center justify-around gap-10 pt-5 p-10">
-									<button onClick={() => setProfile(!profile)} className={`flex items-center justify-center border  border-[2px] w-[120px] h-[35px] rounded-xl ${activeButton === 1 ? "bg-[#6C5DD3] border-[#6C5DD3]" : "bg-white border-[#FF754C]"}`}>
-										<div className={`${activeButton === 1 ? "text-white" : "text-black"} font-semibold`}>Your Profile</div>
+									<button  className={`flex items-center justify-center border  border-[2px] w-[120px] h-[35px] rounded-xl bg-white border-[#FF754C]`} onClick={() => {setProfile(!profile), SetRemove(!remove)}}>
+										<div className={`"text-black font-semibold`}>Your Profile</div>
 									</button> 
-									<button className={`flex ${activeButton === 2 ? "bg-[#6C5DD3] border-[#6C5DD3]" : "bg-white border-[#FF754C]"} items-center justify-center border border-[2px] w-[100px] h-[35px] rounded-xl`}>
-										<div className={`font-semibold ${activeButton === 2 ? "text-white" : "text-balck"}`}>2FA</div>
+									<button className={`flex bg-[#6C5DD3] border-[#6C5DD3] items-center justify-center border border-[2px] w-[100px] h-[35px] rounded-xl`}>
+										<div className={`font-semibold text-white`}>2FA</div>
 									</button>
-									<button  className={`flex items-center justify-center border  border-[2px] w-[120px] h-[35px] rounded-xl ${activeButton === 3 ? "bg-[#6C5DD3] border-[#6C5DD3]" : "bg-white border-[#FF754C]"}`}>
-										<div className={`${activeButton === 3 ? "text-white" : "text-black"} font-semibold`}>Game setting</div>
+									<button  className={`flex items-center justify-center border  border-[2px] w-[120px] h-[35px] rounded-xl bg-white border-[#FF754C]`} onClick={() => {setgameSetting(!gameSetting) , SetRemove(!remove)}}>
+										<div className={`text-black font-semibold`}>Game setting</div>
 									</button>
 									
 								</div>
@@ -52,12 +54,22 @@ export function TwoFa ( ) {
 											<img src={pic} className="w-[80px] h-[80px] rounded-full"></img>
 										</div>
 										<div className="text-[#11142D] text-sm">Hhamdy</div>
-										<form className="flex  justify-center items-center rounded-xl h-[45px] w-[130px]">
+										{/* <form className="flex  justify-center items-center rounded-xl h-[45px] w-[130px]">
 											<input className="rounded-xl w-full h-full border bg-gray-100 border-[3px]  pr-3 pl-3 focus:border-[#6C5DD3] focus:outline-none text-[#888EFF] text-center"></input>
-										</form>
-										<button className="flex justify-center items-center border rounded-xl bg-[#6C5DD3] border-[#6C5DD3] h-[45px] w-[130px] pr-">
+										</form> */}
+										{
+											enable ? 
+											<button className={`flex justify-center items-center border rounded-xl bg-[#6C5DD3] border-[#6C5DD3] h-[45px] w-[130px]`} onClick={() => Setenable(!enable)}>
 												<div className="text-white font-semibold lg:text-sm">Enable 2FA</div>
-										</button>
+											</button>
+											: null
+										}
+										{
+											enable ? null : 
+												<button className="flex justify-center items-center border rounded-xl bg-gray-100 border-gray-100 h-[45px] w-[130px]" onClick={() => Setenable(!enable)}>
+														<div className="text-[#11142D] font-semibold lg:text-sm">Disable 2FA</div>
+												</button>
+										}
 
 									</div>
 									<div className="flex-col items-center">
@@ -106,6 +118,18 @@ export function TwoFa ( ) {
 					</div>
 				</div>
 				)
+		}
+		{ profile &&
+			<div>
+				<DkSettings/>
+				<MbSettings/>
+			</div>
+		}
+		{ gameSetting &&
+			<div>
+				<GameSetting/>
+				<MbGameSettings/>
+			</div>
 		}
 		</>
 	)

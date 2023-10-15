@@ -1,43 +1,40 @@
 import rmv from "/src/assets/remove.svg"
 import avatar from "/src/assets/ahamdy.jpg"
 import React, { useState } from "react";
-import { TwoFa } from "./TwoFA";
 import { MbTwoFA } from "./MbTwoFA";
+import { GameSetting } from "./GameSettings";
+import { MbGameSettings } from "./MbGameSetting";
+import { TwoFa } from "./TwoFA";	
+
 export function MbSettings () {
 
     const [remove, SetRemove] = React.useState(false);
-	const [activeButton, setActiveButton] = useState(1);
 	const [twoFA, setTwoFa] = useState(false);
-
-	const handleButtonClick = (buttonId: number) => {
-		if (buttonId === 2)
-			setTwoFa(!twoFA);
-		setActiveButton(buttonId);
-	  };
+	const [gameSetting, setgameSetting] = useState(false);
 	
 
 	return (
 		<>
 		{
 			remove ? null : (
-				twoFA ? <MbTwoFA activeButton={activeButton}/> : (
 				<div className="blur-background z bg-white sm:hidden">
-				<div className="centered-component pt-16">
-				
-
+				<div className="centered-component pt-32">
 				<div className="flex items-center justify-between pr-10">
 					<div className="text-[#11142D] font-semibold text-lg p-10">Account Settings</div>
 					<button onClick={() => SetRemove(!remove)}  className="flex items-center justify-center border border-white rounded-full w-[48px] h-[48px] lg:w-[50px] h-[50px] shadow-xl">
                         <img src={rmv}></img>
                     </button>
 				</div>
-				<div className="flex items-center justify-around gap-10 pt-10 p-10 pt-0">
-				<button onClick={() => handleButtonClick(1)} className={`flex items-center justify-center border  border-[2px] w-[120px] h-[35px] rounded-xl ${activeButton === 1 ? "bg-[#6C5DD3] border-[#6C5DD3]" : "bg-white border-[#FF754C]"}`}>
-					<div className={`${activeButton === 1 ? "text-white" : "text-black"} font-semibold`}>Your Profile</div>
+				<div className="flex items-center justify-around gap-[10px] pt-5 p-10 pt-0">
+				<button  className={`flex items-center justify-center border  border-[2px] w-[110px] h-[35px] rounded-xl bg-[#6C5DD3] border-[#6C5DD3]`} >
+					<div className={`text-white font-semibold`}>Your Profile</div>
 				</button> 
-				<button onClick={() => {handleButtonClick(2) }} className={`flex ${activeButton === 2 ? "bg-[#6C5DD3] border-[#6C5DD3]" : "bg-white border-[#FF754C]"} items-center justify-center border border-[2px] w-[100px] h-[35px] rounded-xl`}>
-					<div className={`font-semibold ${activeButton === 2 ? "text-white" : "text-balck"}`}>2FA</div>
+				<button className={`flex bg-[#6C5DD3] border-[#6C5DD3] items-center justify-center border border-[2px] bg-white border-[#FF754C] w-[80px] h-[35px] rounded-xl`} onClick={() => {setTwoFa(!twoFA), SetRemove(!remove)}}>
+					<div className={`font-semibold text-balck`}>2FA</div>
 				</button>
+				<button className={`flex items-center justify-center border  border-[2px] w-[110px] h-[35px] rounded-xl bg-white border-[#FF754C]`} onClick={() => {setgameSetting(!gameSetting), SetRemove(!remove)}}>
+					<div className={`text-black font-semibold`}>Game Setting</div>
+				</button> 
 				</div>
 				<div className="pt- pl-5 pr-5">
 					<div className="flex flex-col gap-1">
@@ -74,8 +71,19 @@ export function MbSettings () {
 				</div>
 				</div>
 			</div>
-				)
 			)
+		}
+		{ twoFA &&
+			<div>
+				<TwoFa/>
+				<MbTwoFA/>
+			</div>
+		}
+		{ gameSetting &&
+			<div>
+				<GameSetting/>
+				<MbGameSettings/>
+			</div>
 		}
 	</>
 	)

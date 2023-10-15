@@ -1,10 +1,11 @@
 import rmv from "/src/assets/remove.svg"
-import avatar from "/src/assets/ahamdy.jpg"
 import React, { useState } from "react";
 import { TwoFa } from "./TwoFA";
 import { useEffect } from "react";
 import axios from "axios";
 import { GameSetting } from "./GameSettings";
+import { MbTwoFA } from "./MbTwoFA";
+import { MbGameSettings } from "./MbGameSetting";
 
 export function DkSettings () {
 
@@ -39,35 +40,15 @@ export function DkSettings () {
 	  }, []);
 
     const [remove, SetRemove] = React.useState(false);
-	const [activeButton, setActiveButton] = useState(1);
 	const [twoFA, setTwoFa] = useState(false);
     const [gameSetting, setgameSetting] = React.useState(false);
-
-
-  const handleButtonClick = (buttonId: number) => {
-	if (buttonId === 2)
-		setTwoFa(!twoFA);
-	if (buttonId === 3)
-		setgameSetting(!gameSetting);
-    setActiveButton(buttonId);
-  };
-
-//   const handleFileUpload = async () => {    
-// 	try {
-// 	  const res = await axios.post('http://localhost:3000/upload-avatar', { withCredentials: true }).then (function (res) {console.log(res)});
-
-// 	} catch (error) {
-// 	  console.error('POST request failed1337:', error);
-// 	}
-//   };
-	
 
 	return (
 		<>
 		{
 			remove ? null : (
 				(
-					<div className="blur-background z mobile-nav-bar">
+					<div className="blur-background z mobile-nav-bar sm:block">
 					<div className="centered-component pt-28">
 					<div className="flex w-[480px] h-[600px] bg-white shadow-2xl rounded-custom">
 						<div className="flex flex-col">
@@ -82,14 +63,14 @@ export function DkSettings () {
 						<div className="flex flex-col">
 
 						<div className="flex items-center justify-around gap-10 pt-5 p-10 pl-5">
-							<button onClick={() => handleButtonClick(1)} className={`flex items-center justify-center border  border-[2px] w-[120px] h-[35px] rounded-xl ${activeButton === 1 ? "bg-[#6C5DD3] border-[#6C5DD3]" : "bg-white border-[#FF754C]"}`}>
-								<div className={`${activeButton === 1 ? "text-white" : "text-black"} font-semibold`}>Your Profile</div>
+							<button  className={`flex items-center justify-center border  border-[2px] w-[120px] h-[35px] rounded-xl bg-[#6C5DD3] border-[#6C5DD3]`} >
+								<div className={`text-white font-semibold`}>Your Profile</div>
 							</button> 
-							<button onClick={() => {handleButtonClick(2) }} className={`flex ${activeButton === 2 ? "bg-[#6C5DD3] border-[#6C5DD3]" : "bg-white border-[#FF754C]"} items-center justify-center border border-[2px] w-[100px] h-[35px] rounded-xl`}>
-								<div className={`font-semibold ${activeButton === 2 ? "text-white" : "text-balck"}`}>2FA</div>
+							<button className={`flex bg-[#6C5DD3] border-[#6C5DD3] items-center justify-center border border-[2px] bg-white border-[#FF754C] w-[100px] h-[35px] rounded-xl`} onClick={() => {setTwoFa(!twoFA), SetRemove(!remove)}}>
+								<div className={`font-semibold text-balck`}>2FA</div>
 							</button>
-							<button onClick={() => handleButtonClick(3)} className={`flex items-center justify-center border  border-[2px] w-[120px] h-[35px] rounded-xl ${activeButton === 3 ? "bg-[#6C5DD3] border-[#6C5DD3]" : "bg-white border-[#FF754C]"}`}>
-								<div className={`${activeButton === 3 ? "text-white" : "text-black"} font-semibold`}>Game Setting</div>
+							<button className={`flex items-center justify-center border  border-[2px] w-[120px] h-[35px] rounded-xl bg-white border-[#FF754C]`} onClick={() => {setgameSetting(!gameSetting), SetRemove(!remove)}}>
+								<div className={`text-black font-semibold`}>Game Setting</div>
 							</button> 
 						</div>
 						<div className="pt- pl-5 pr-5">
@@ -144,7 +125,18 @@ export function DkSettings () {
 
 			)
 		}
-		{twoFA && <GameSetting/>}
+		{ twoFA &&
+			<div>
+				<TwoFa/>
+				<MbTwoFA/>
+			</div>
+		}
+		{ gameSetting &&
+			<div>
+				<GameSetting/>
+				<MbGameSettings/>
+			</div>
+		}
 		</>
 	)
 }

@@ -1,10 +1,14 @@
-import React from "react";
+import React, { useState } from "react";
 import rmv from "/src/assets/remove.svg"
 import GameBack1 from "/src/assets/GameBack1.png"
 import GameBack2 from "/src/assets/GameBack2.png"
 import GameBack3 from "/src/assets/GameBack3.png"
 import GameBack4 from "/src/assets/GameBack4.png"
 import { Deblock } from "./Deblock";
+import { TwoFa } from "./TwoFA";
+import { DkSettings } from "./DkSettings";
+import { MbSettings } from "./MbSettings";
+import { MbTwoFA } from "./MbTwoFA";
 
 
 export function GameSetting  () {
@@ -54,19 +58,18 @@ export function GameSetting  () {
 		const Newshadow = {...Shadow};
 		Newshadow[Buttonnum] = "selected";
 		SetShadow(Newshadow);
-
-
-
 	}
-
+	
+	const [twoFA, setTwoFa] = useState(false);
+	const [profile, setProfile] = useState(false);
 	
 	return (
 		<>
 		{
 
 			remove ? null : 
-			<div className="blur-background z mobile-nav-bar">
-					<div className="centered-component ">
+			<div className="blur-background z mobile-nav-bar sm:block">
+					<div className="centered-component sm:pt-20">
 					<div className="flex w-[600px] h-[700px] bg-white shadow-2xl rounded-custom">
 						<div className="flex flex-col w-full">
 						<div className="flex justify-between">
@@ -78,14 +81,14 @@ export function GameSetting  () {
 							</div>
 						</div>
 						<div className="flex items-center justify-around gap-10 pt-5 pl-5">
-							<button  className={`flex items-center justify-center border  border-[2px]  border-[#FF754C] w-[120px] h-[35px] rounded-xl`}>
-								<div >Your Profile</div>
+							<button  className={`flex items-center justify-center border  border-[2px]  border-[#FF754C] w-[120px] h-[35px] rounded-xl`}  onClick={() => {setProfile(!profile), SetRemove(!remove)}}>
+								<div className="font-semibold">Your Profile</div>
 							</button> 
-							<button className={`flex items-center justify-center border border-[2px]  border-[#FF754C] w-[100px] h-[35px] rounded-xl`}>
-								<div >2FA</div>
+							<button className={`flex items-center justify-center border border-[2px]  border-[#FF754C] w-[100px] h-[35px] rounded-xl`} onClick={() => {setTwoFa(!twoFA), SetRemove(!remove)}}>
+								<div className="font-semibold">2FA</div>
 							</button>
-							<button className={`flex items-center justify-center border  border-[2px]  border-[#FF754C] w-[120px] h-[35px] rounded-xl `}>
-								<div >Game Setting</div>
+							<button className={`flex items-center justify-center border  border-[2px]  bg-[#6C5DD3] border-[#6C5DD3] w-[120px] h-[35px] rounded-xl`}>
+								<div className="text-white font-semibold">Game Setting</div>
 							</button> 
 						</div>
 						<div className="flex flex-col pt-10">
@@ -160,6 +163,18 @@ export function GameSetting  () {
 					</div>
 				</div>
 			</div>
+			}
+			{ twoFA &&
+				<div>
+					<TwoFa/>
+					<MbTwoFA/>
+				</div>
+			}
+			{ profile &&
+				<div>
+					<DkSettings/>
+					<MbSettings/>
+				</div>
 			}
 		</>
 	)

@@ -1,21 +1,19 @@
 import { Avatar } from "../Avatar"
-// import game from "/src/assets/Game.svg"
-// import profile from "/src/assets/Profile.svg"
-// import video from "/src/assets/video.svg"
-// import chat from "/src/assets/Chat.svg"
-// import setting from "/src/assets/Setting.svg"
 import down from "/src/assets/small-down.svg"
 import logo from "/src/assets/mainLogo.svg"
 import { useState } from "react"
 import React from "react"
-// import { BrStart } from "./BrStart"
-import { Link, useParams } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import { DkSettings } from "../../../settings/DkSettings"
 import { GameMode } from "../../../Profile/GamMode"
+import axios from "axios"
+import { Navigate } from "react-router-dom"
 
-export function MBburger ( ) {
-	const { username } = useParams();
+interface Props {
+	id: number
+}
 
+export function MBburger ( {id}: Props ) {
 	const initialColors: { [key: string]: string } = {
 		button1: 'initial',
 		button2: 'initial',
@@ -39,6 +37,7 @@ export function MBburger ( ) {
 	const [strokeColor, setstrokeColor] = useState(strokeColors);
     const [settings, SetSettings] = React.useState(false);
 	const [game, Setgame] = useState(false);
+	const [logout, Setlogout] = useState(false);
 	
 
 		const handleClick = (buttonName: string, imgNum: string) => {
@@ -52,12 +51,23 @@ export function MBburger ( ) {
 			setButtonColors(newColors);
 			setstrokeColor(newImgs);
 		};
+	const navigate = useNavigate();
+
+	const handleLogout = async () => {
+			try {
+			const response = await axios.get(`http://localhost:3000/logout`, { withCredentials: true });
+			if (response) {
+				navigate('/');
+			  }
+			} catch (error) {
+			console.error("Error logout:");
+			}
+	}
 
 
 	return (
 		<>
 		<div className="h-screen border w-[112px] flex justify-center">
-
 			<div className="flex flex-col gap-3 items-center pt-4">
 				<img src={logo} className="w-[90px] h-[90px] pb-8"></img>
 			<Link to="/home">
@@ -70,7 +80,6 @@ export function MBburger ( ) {
 				</svg>
  				</button>
 			</Link>
-			{/* <Link to={`/profile/me`}> */}
 			<a href="/profile/me">
 				<button onClick={() => {handleClick('button2', 'img2')}} style={{ backgroundColor: buttonColors.button2 }} className={`p-3 border shadow-md border-white w-[50px] h-[50px]  flex items-center justify-center rounded-2xl `}>
 				<svg width="20" height="20" viewBox="0 0 18 21" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -82,16 +91,19 @@ export function MBburger ( ) {
 				</svg>
                 </button>
 			</a>
-			{/* </Link> */}
 		
-			<button onClick={() => handleClick('button3', 'img3')} style={{ backgroundColor: buttonColors.button3 }} className={`p-3 border shadow-md border-white w-[50px] h-[50px] flex items-center justify-center rounded-2xl `}>
-			<svg width="20" height="20" viewBox="0 0 22 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-				<g id="video">
-				<path id="Path" d="M15.5 7.6L17.3314 6.2814C18.6544 5.32887 20.5 6.27427 20.5 7.90447V12.0955C20.5 13.7257 18.6544 14.6711 17.3314 13.7186L15.5 12.4" stroke={strokeColor.img3}  stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-				<rect id="Rectangle" x="1.5" y="1" width="14" height="18" rx="4" stroke={strokeColor.img3}  stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-				</g>
-			</svg>
-			</button>
+			<Link to="/Chat">
+				<button onClick={() => handleClick('button3', 'img3')} style={{ backgroundColor: buttonColors.button3 }} className={`p-3 border shadow-md border-white w-[50px] h-[50px] flex items-center justify-center rounded-2xl `}>
+				<svg width="20" height="20" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+					<g id="Chat">
+					<path id="Path" fill-rule="evenodd" clip-rule="evenodd" d="M11.0568 1.00008C7.54687 0.985898 4.28557 2.80704 2.4605 5.80035C0.635434 8.79366 0.512919 12.5223 2.13757 15.6286L2.33789 16.0191C2.50209 16.3264 2.53644 16.6864 2.43329 17.0191C2.14742 17.7784 1.90849 18.5544 1.71784 19.3429C1.71784 19.7429 1.83231 19.9715 2.26158 19.962C3.0219 19.7941 3.77068 19.5777 4.50332 19.3143C4.81886 19.2274 5.15437 19.2475 5.45725 19.3715C5.73389 19.5048 6.2967 19.8477 6.31578 19.8477C9.99154 21.7804 14.4808 21.2472 17.5998 18.5074C20.7187 15.7676 21.8199 11.39 20.3676 7.50403C18.9153 3.61809 15.2111 1.03053 11.0568 1.00008V1.00008Z" stroke={strokeColor.img3} stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+					<ellipse id="Oval" cx="6.28751" cy="11.0001" rx="0.476965" ry="0.47619" stroke={strokeColor.img3} stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+					<ellipse id="Oval_2" cx="11.057" cy="11.0001" rx="0.476965" ry="0.47619" stroke={strokeColor.img3} stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+					<ellipse id="Oval_3" cx="15.8266" cy="11.0001" rx="0.476965" ry="0.47619" stroke={strokeColor.img3} stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+					</g>
+					</svg>
+				</button>
+				</Link>
 				<button onClick={() => {handleClick('button4', 'img4'), Setgame(!game)}} style={{ backgroundColor: buttonColors.button4 }} className={`p-3 border shadow-md border-white w-[50px] h-[50px] flex items-center justify-center rounded-2xl `}>
 				<svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
 					<g id="Iconly/Two-tone/Game">
@@ -124,18 +136,6 @@ export function MBburger ( ) {
 				</div>
 
 
-				<Link to="/Chat">
-				<button onClick={() => handleClick('button5', 'img5')} style={{ backgroundColor: buttonColors.button5 }} className={`p-3 border shadow-md border-white w-[50px] h-[50px] flex items-center justify-center rounded-2xl `}>
-				<svg width="20" height="20" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
-					<g id="Chat">
-					<path id="Path" fill-rule="evenodd" clip-rule="evenodd" d="M11.0568 1.00008C7.54687 0.985898 4.28557 2.80704 2.4605 5.80035C0.635434 8.79366 0.512919 12.5223 2.13757 15.6286L2.33789 16.0191C2.50209 16.3264 2.53644 16.6864 2.43329 17.0191C2.14742 17.7784 1.90849 18.5544 1.71784 19.3429C1.71784 19.7429 1.83231 19.9715 2.26158 19.962C3.0219 19.7941 3.77068 19.5777 4.50332 19.3143C4.81886 19.2274 5.15437 19.2475 5.45725 19.3715C5.73389 19.5048 6.2967 19.8477 6.31578 19.8477C9.99154 21.7804 14.4808 21.2472 17.5998 18.5074C20.7187 15.7676 21.8199 11.39 20.3676 7.50403C18.9153 3.61809 15.2111 1.03053 11.0568 1.00008V1.00008Z" stroke={strokeColor.img5} stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-					<ellipse id="Oval" cx="6.28751" cy="11.0001" rx="0.476965" ry="0.47619" stroke={strokeColor.img5} stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-					<ellipse id="Oval_2" cx="11.057" cy="11.0001" rx="0.476965" ry="0.47619" stroke={strokeColor.img5} stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-					<ellipse id="Oval_3" cx="15.8266" cy="11.0001" rx="0.476965" ry="0.47619" stroke={strokeColor.img5} stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-					</g>
-					</svg>
-				</button>
-				</Link>
 				<button onClick={() => {handleClick('button6', 'img6'); SetSettings(!settings)}} style={{ backgroundColor: buttonColors.button6 }} className={`p-3 border shadow-md border-white w-[50px] h-[50px] flex items-center justify-center rounded-2xl `}>
 				<svg width="20" height="20" viewBox="0 0 20 22" fill="none" xmlns="http://www.w3.org/2000/svg">
 					<g id="Setting">
@@ -143,6 +143,24 @@ export function MBburger ( ) {
 					<circle id="Ellipse_737" cx="10.1752" cy="10.8891" r="2.63616" stroke={strokeColor.img6} stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
 					</g>
 				</svg>
+				</button>
+				<button onClick={() => {handleClick('button5', 'img5'); Setlogout(!logout); handleLogout()}} style={{ backgroundColor: buttonColors.button5 }} className={`p-3 border shadow-md border-white w-[50px] h-[50px] flex items-center justify-center rounded-2xl `}>
+				<svg fill="#808191" height="20" width="20" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg"
+						viewBox="0 0 489.9 489.9">
+						<g><g><g>
+							<path d="M468.3,255.8c0.1-0.1,0.1-0.1,0.2-0.2c0.3-0.4,0.6-0.7,0.8-1.1c0.1-0.1,0.1-0.2,0.2-0.3c0.2-0.4,0.5-0.8,0.7-1.2
+								c0-0.1,0.1-0.2,0.1-0.2c0.2-0.4,0.4-0.8,0.6-1.3c0-0.1,0-0.1,0.1-0.2c0.2-0.4,0.3-0.9,0.5-1.4c0-0.1,0-0.2,0.1-0.2
+								c0.1-0.5,0.3-0.9,0.3-1.4c0-0.2,0-0.3,0.1-0.5c0.1-0.4,0.1-0.8,0.2-1.2c0.1-0.6,0.1-1.1,0.1-1.7c0-0.6,0-1.1-0.1-1.7
+								c0-0.4-0.1-0.8-0.2-1.2c0-0.2,0-0.3-0.1-0.5c-0.1-0.5-0.2-0.9-0.3-1.4c0-0.1,0-0.2-0.1-0.2c-0.1-0.5-0.3-0.9-0.5-1.4
+								c0-0.1,0-0.1-0.1-0.2c-0.2-0.4-0.4-0.9-0.6-1.3c0-0.1-0.1-0.2-0.1-0.2c-0.2-0.4-0.4-0.8-0.7-1.2c-0.1-0.1-0.1-0.2-0.2-0.3
+								c-0.3-0.4-0.5-0.8-0.8-1.1c-0.1-0.1-0.1-0.1-0.2-0.2c-0.4-0.4-0.7-0.9-1.2-1.3l-98.9-98.8c-6.7-6.7-17.6-6.7-24.3,0
+								c-6.7,6.7-6.7,17.6,0,24.3l69.6,69.6H136.8c-9.5,0-17.2,7.7-17.2,17.1c0,9.5,7.7,17.2,17.2,17.2h276.8l-69.1,69.1
+								c-6.7,6.7-6.7,17.6,0,24.3c3.3,3.3,7.7,5,12.1,5s8.8-1.7,12.1-5l98.3-98.3C467.5,256.6,467.9,256.2,468.3,255.8z"/>
+							<path d="M110.7,34.3h128c9.5,0,17.2-7.7,17.2-17.1c0-9.5-7.7-17.2-17.2-17.2h-128C59.4,0,17.6,41.8,17.6,93.1v303.7
+								c0,51.3,41.8,93.1,93.1,93.1h125.9c9.5,0,17.2-7.7,17.2-17.1c0-9.5-7.7-17.2-17.2-17.2H110.7c-32.4,0-58.8-26.4-58.8-58.8V93.1
+								C52,60.6,78.3,34.3,110.7,34.3z"/>
+						</g></g></g>
+					</svg>
 				</button>
 			</div>
 		</div>

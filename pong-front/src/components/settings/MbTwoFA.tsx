@@ -4,26 +4,25 @@ import { useState } from "react";
 import pic from "/src/assets/hhamdy.jpg"
 import group from "/src/assets/Group.svg"
 import mobile from "/src/assets/mobiledow.svg"
-import qr from "/src/assets/qrcode.svg"
+
+import { GameSetting } from "./GameSettings";
 import { MbSettings } from "./MbSettings";
+import { DkSettings } from "./DkSettings";
+import { MbGameSettings } from "./MbGameSetting";
 
-interface Props {
-	activeButton: number;
-}
 
-export function MbTwoFA ( {activeButton}: Props ) {
+export function MbTwoFA (  ) {
 	const [remove, SetRemove] = React.useState(false);
 	const [profile, setProfile] = useState(false);
+	const [gameSetting, setgameSetting] = React.useState(false);
+
 
 	return (
 		<>
 			{
 				remove ? null : (
-					profile ? <MbSettings/> : (
-						<div className="blur-background z bg-white">
+						<div className="blur-background z bg-white sm:hidden">
 					<div className="centered-component pt-28">
-						{/* <div className="w-full h-[720px] bg-white shadow-2xl rounded-custom"> */}
-
 							<div className="flex-col">
 								<div className="flex justify-between">
 									<div className="text-[#11142D] font-semibold text-lg p-10">Account Settings</div>
@@ -33,16 +32,18 @@ export function MbTwoFA ( {activeButton}: Props ) {
 										</button>
 									</div>
 								</div>
-								<div className="flex items-center justify-around gap-10 pt-5 p-10 pt-0">
-									<button onClick={() => setProfile(!profile)} className={`flex items-center justify-center border  border-[2px] w-[120px] h-[35px] rounded-xl ${activeButton === 1 ? "bg-[#6C5DD3] border-[#6C5DD3]" : "bg-white border-[#FF754C]"}`}>
-										<div className={`${activeButton === 1 ? "text-white" : "text-black"} font-semibold`}>Your Profile</div>
+								<div className="flex items-center justify-around gap-[10px] pt-5 p-10 pt-0">
+								<button  className={`flex items-center justify-center border  border-[2px] w-[120px] h-[35px] rounded-xl bg-white border-[#FF754C]`} onClick={() => {setProfile(!profile), SetRemove(!remove)}}>
+										<div className={`"text-black font-semibold`}>Your Profile</div>
 									</button> 
-									<button onClick={() => setProfile(!profile)} className={`flex ${activeButton === 2 ? "bg-[#6C5DD3] border-[#6C5DD3]" : "bg-white border-[#FF754C]"} items-center justify-center border border-[2px] w-[100px] h-[35px] rounded-xl`}>
-										<div className={`font-semibold ${activeButton === 2 ? "text-white" : "text-balck"}`}>2FA</div>
+									<button className={`flex bg-[#6C5DD3] border-[#6C5DD3] items-center justify-center border border-[2px] w-[100px] h-[35px] rounded-xl`}>
+										<div className={`font-semibold text-white`}>2FA</div>
+									</button>
+									<button  className={`flex items-center justify-center border  border-[2px] w-[120px] h-[35px] rounded-xl bg-white border-[#FF754C]`} onClick={() => {setgameSetting(!gameSetting) , SetRemove(!remove)}}>
+										<div className={`text-black font-semibold`}>Game setting</div>
 									</button>
 								</div>
 							<div className="scrollable-div-ver7">
-								{/* <div className="flex-col items-center justify-center"> */}
 									<div className="flex flex-col justify-center gap-[6px] items-center">
 										<div className="text-[#11142D] text-xl font-semibold">Setup 2FA</div>
 										<div>
@@ -96,16 +97,25 @@ export function MbTwoFA ( {activeButton}: Props ) {
 										</div>
 									</div>
 									</div>
-
 						</div>
 						</div>
 
 					</div>
-				// </div>
-					)
 						
 				)
 			}
+			{ profile &&
+			<div>
+				<DkSettings/>
+				<MbSettings/>
+			</div>
+		}
+		{ gameSetting &&
+			<div>
+				<GameSetting/>
+				<MbGameSettings/>
+			</div>
+		}
 		</>
 	)
 }

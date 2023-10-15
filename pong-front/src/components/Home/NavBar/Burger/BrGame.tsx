@@ -1,5 +1,8 @@
-import game from "/src/assets/Game.svg"
 import { Link } from "react-router-dom"
+import React from "react"
+import { MbGameSettings } from "../../../settings/MbGameSetting";
+import { GameSetting } from "../../../settings/GameSettings";
+import { GameMode } from "../../../Profile/GamMode";
 
 interface Props {
 	buttonColors: { [key: string]: string }
@@ -8,12 +11,14 @@ interface Props {
 }
 
 export function BrGame ( {buttonColors, strokeColor, handleClick}: Props ) {
+
+	const [game, Setgame] = React.useState(false);
+
     return (
         <>
             <div className="pr-8 pl-8">
-			<Link to="/game">
 
-			<button onClick={() => handleClick('button4', 'img4')} style={{ backgroundColor: buttonColors.button4 }} className="flex items-center pl-8 bg-[#6C5DD3] w-full h-[56px] rounded-2xl">
+			<button onClick={() => {handleClick('button4', 'img4'), Setgame(!game)}} style={{ backgroundColor: buttonColors.button4 }} className="flex items-center pl-8 bg-[#6C5DD3] w-full h-[56px] rounded-2xl">
 			<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
 				<g id="Iconly/Two-tone/Game">
 				<g id="Game">
@@ -28,8 +33,9 @@ export function BrGame ( {buttonColors, strokeColor, handleClick}: Props ) {
 			</svg>
 				<div className={`pl-8 text-[${strokeColor.img4}] font-semibold text-base`}>Games</div>
 			</button>
-			</Link>
                 </div>
+			{game && <GameMode/>}
+
         </>
     )
 }

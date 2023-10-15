@@ -71,7 +71,7 @@ export function HeadProfile ( {profile, name, friendNum, me}: Props ) {
 							search ?
 							<>
 								<button className={`flex items-center justify-center border border-[#6C5DD3] bg-[#6C5DD3] w-[50px] h-[45px] shadow rounded-xl`} onClick={handleSearch}>
-								<img src={plusFriend} className="w-[24px] h-[24px]"></img>
+									<img src={plusFriend} className="w-[24px] h-[24px]"></img>
 								</button>
 								<Add/> 
 							</>

@@ -10,9 +10,10 @@ import { MBburger } from "./Burger/MBburger";
 interface Props {
 	avatar: string,
 	username: string,
+	id: number
 }
 
-export function NavBar( { avatar }: Props ) {
+export function NavBar( { avatar, id }: Props ) {
   const [showNotif, setShowNotif] = React.useState(false);
   const [showBurger, setShowBurger] = React.useState(false);
   
@@ -25,7 +26,7 @@ export function NavBar( { avatar }: Props ) {
               <div>
                 <Burger clicked={() => setShowBurger(!showBurger)} />
                 <div className="fixed left-0 top-0 bg-white zz sm:hidden lg:block mobile-nav-bar">
-                  <MBburger/>
+                  <MBburger id={id}/>
                 </div>
               </div>
               <div className="flex items-center">

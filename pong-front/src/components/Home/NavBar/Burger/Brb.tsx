@@ -15,6 +15,7 @@ import { BrSettings } from "./BrSettings";
 import { BrStart } from "./BrStart";
 
 import { useState } from "react";
+import { BrLogout } from "./BrLogout";
 
 export function Brb() {
   const initialColors: { [key: string]: string } = {
@@ -68,10 +69,11 @@ export function Brb() {
             strokeColor={strokeColor}
             handleClick={handleClick}
           />
-          <BrVideo
+          <BrChat
             buttonColors={buttonColors}
             strokeColor={strokeColor}
             handleClick={handleClick}
+            msgnum="5"
           />
           <BrGame
             buttonColors={buttonColors}
@@ -123,23 +125,19 @@ export function Brb() {
           </div>
         </div>
 
-        <div className="flex flex-col pt-16 pl-8">
+        <div className="flex flex-col pt-16 pl-8 pb-10">
           <div className="text-[#808191] text-sm pb-8 pl-8">CyberPong</div>
 
-          <BrChat
-            buttonColors={buttonColors}
-            strokeColor={strokeColor}
-            handleClick={handleClick}
-            msgnum="5"
-          />
           <BrSettings
             buttonColors={buttonColors}
             strokeColor={strokeColor}
             handleClick={handleClick}
-          />
+			/>
+			<BrLogout/>
         </div>
-        <BrStart />
+        {/* <BrStart /> */}
       </div>
+	  
     </>
   );
 }

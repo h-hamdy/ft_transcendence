@@ -8,11 +8,11 @@ interface Props {
 }
 
 export function BrProfile (  {buttonColors, strokeColor, handleClick}: Props ) {
-	const {username} = useParams();
     return (
         <>
            <div className="pr-8 pl-8">
-		   <Link to="/profile:username">
+		   <a href="/profile/me">
+
 
 		   	<button onClick={() => handleClick('button2', 'img2')} style={{ backgroundColor: buttonColors.button2 }} className="flex items-center pl-8 bg-[#6C5DD3] w-full h-[56px] rounded-2xl">
 				<svg width="18" height="21" viewBox="0 0 18 21" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -23,7 +23,7 @@ export function BrProfile (  {buttonColors, strokeColor, handleClick}: Props ) {
 					</svg>
 					<div className={`pl-8 text-[${strokeColor.img2}] font-semibold text-base`}>Profile</div>
                 </button>
-				</Link>
+				</a>
             </div>
         </>
     )

@@ -1,9 +1,19 @@
 import rmv from "/src/assets/remove.svg"
 import rec from "/src/assets/rectangle.svg"
 import React from "react"
+import axios from "axios";
 
 export function Add () {
     const [remove, SetRemove] = React.useState(false);
+	const [friendName, SetfriendName] = React.useState<string>('');
+
+	const handleFormSubmit = async ( ) => {
+        try {
+          const response = await axios.post(`http://localhost:3000/add-friend/${friendName}`, null, { withCredentials: true }).then (function (response) {console.log(response)});
+        } catch (error) {
+          console.error('POST Add friend failed:', error);
+        }
+      };
 
     return (
         <>
@@ -20,11 +30,16 @@ export function Add () {
                             </button>
                         </div>
                         <div className="pr-8 pl-8 pb-2">
-                            <form className="flex items-center border border-4 border-[#6C5DD3] rounded-xl w-full h-[56px] lg:w-full lg:h-[50px]">
-                                <input  className="rounded-xl w-full h-full pr-3 pl-3 lg:text-md lg:pl-5 focus:outline-none text-[#888EFF]" placeholder="Username"></input>
+                            <form className="flex items-center border border-4 border-[#6C5DD3] rounded-xl w-full h-[56px] lg:w-full lg:h-[50px]" onSubmit={handleFormSubmit}>
+                                <input  className="rounded-xl w-full h-full pr-3 pl-3 lg:text-md lg:pl-5 focus:outline-none text-[#888EFF]" placeholder="Username"
+								value={friendName}
+								onChange={(e) => {
+									SetfriendName(e.target.value );
+								  }}>
+								  </input>
                             </form>
-                            <div className="absolute pt-[10px] lg:pt-[20px]">
-                                <div className="border bg-[#E9DCE5] rounded-xl w-[170px] h-[25px]  flex gap-1 items-center justify-center">
+                            {/* <div className="absolute pt-[10px] lg:pt-[20px]">
+                                <div className="border bg-[#E9DCE5] rounded-lg w-[170px] h-[25px]  flex gap-1 items-center justify-center">
                                     <div className="text-xs font-semibold text-[#6C5DD3]">This user not found</div>
                                     <div>
                                         <div  style={{ backgroundImage: `url(${rec})`}} className="w-[14px] h-[14px] bg-center bg-no-repeat bg-cover">
@@ -34,16 +49,16 @@ export function Add () {
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            </div> */}
                         </div>
 
 
                         <div className="flex justify-around pt-16">
-                            <button className="flex justify-center items-center border rounded-xl bg-[#E4E4E47F] border-[#E4E4E47F] h-[45px] w-[100px]">
+                            <button className="flex justify-center items-center border rounded-xl bg-[#E4E4E47F] border-[#E4E4E47F] h-[45px] w-[100px]" onClick={() => SetRemove(!remove)}>
                                 <div className="text-[#808191] font-semibold lg:text-sm">Cancel</div>
                             </button>
 
-                            <button className="flex justify-center items-center border rounded-xl bg-[#6C5DD3] border-[#6C5DD3] h-[45px] w-[100px]">
+                            <button className="flex justify-center items-center border rounded-xl bg-[#6C5DD3] border-[#6C5DD3] h-[45px] w-[100px]" onClick={handleFormSubmit}>
                                 <div className="text-white font-semibold lg:text-sm">Invite</div>
                             </button>
 

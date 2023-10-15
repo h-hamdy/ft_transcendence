@@ -533,7 +533,7 @@ video {
   --tw-backdrop-saturate:  ;
   --tw-backdrop-sepia:  ;
 }
-
+  
 
 .gap-05 {
   gap: 0.5rem;
@@ -631,35 +631,35 @@ video {
 }
 
 .path {
-  background-image: url("./src/assets/Start.png");
+  background-image: url("/src/assets/Start.png");
 }
 
 .path1 {
-  background-image: url("./src/assets/Starting.png");
+  background-image: url("/src/assets/Starting.png");
 }
 
 .path2 {
-	background-image: url("./src/assets/ProfileWive.png");
+	background-image: url("/src/assets/ProfileWive.png");
 }
 
   .path3 {
-	background-image: url("./src/assets/qrcode.svg");
+	background-image: url("/src/assets/qrcode.svg");
   }
 
 .state1 {
-	background-image: url("./src/assets/state1.svg");
+	background-image: url("/src/assets/state1.svg");
 }
 
 .state2 {
-	background-image: url("./src/assets/state2.svg");
+	background-image: url("/src/assets/state2.svg");
 }
 
 .state3 {
-	background-image: url("./src/assets/state3.svg");
+	background-image: url("/src/assets/state3.svg");
 }
 
 .state4 {
-	background-image: url("./src/assets/state4.svg");
+	background-image: url("/src/assets/state4.svg");
 }
 
 .shadow {
@@ -849,9 +849,6 @@ video {
     box-shadow: 0 0 5px rgba(108, 93, 211, 0.5); /* Update box shadow color */
 }
 
-
-  
-
 .centered-component {
 	position: fixed;
 	top: 50%;
@@ -886,24 +883,27 @@ video {
     cursor: pointer;
 }
 
-::-webkit-scrollbar {
-  width: 10px;
-}
-
-/* Track */
-::-webkit-scrollbar-track {
-  background: #f1f1f1;
-}
-
-/* Handle */
-::-webkit-scrollbar-thumb {
-  background: #888;
-}
-
-/* Handle on hover */
-::-webkit-scrollbar-thumb:hover {
-  background: #555;
-}
+body::-webkit-scrollbar {
+	width: 1px; /* Set width for vertical scrollbar */
+  }
+  
+  body::-webkit-scrollbar-thumb {
+	background-color: #555;
+  }
+  
+  /* For Firefox */
+  body {
+	scrollbar-width: thin; /* Set width for both vertical and horizontal scrollbar */
+  }
+  
+  body::-webkit-scrollbar-thumb {
+	background-color: #555;
+  }
+  
+  body::-webkit-scrollbar-track {
+	background-color: #ddd; /* Color of the track */
+  }
+  
 
 @media (min-width: 0px) and  (max-width: 1024px) {
 	.Dk-display {
@@ -912,7 +912,6 @@ video {
 
 	.scrollable-div-ver0{
 		height: 350px;
-		/* Adjust the height as needed */
 		overflow: auto;
 	  }
 

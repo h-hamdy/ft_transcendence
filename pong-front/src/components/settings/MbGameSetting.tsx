@@ -5,6 +5,10 @@ import GameBack2 from "/src/assets/GameBack2.png"
 import GameBack3 from "/src/assets/GameBack3.png"
 import GameBack4 from "/src/assets/GameBack4.png"
 import { Deblock } from "./Deblock";
+import { TwoFa } from "./TwoFA";
+import { MbTwoFA } from "./MbTwoFA";
+import { DkSettings } from "./DkSettings";
+import { MbSettings } from "./MbSettings";
 
 export function MbGameSettings () {
 
@@ -53,19 +57,18 @@ export function MbGameSettings () {
 		const Newshadow = {...Shadow};
 		Newshadow[Buttonnum] = "selected";
 		SetShadow(Newshadow);
-
-
-
 	}
+
+	const [twoFA, setTwoFa] = React.useState(false);
+	const [profile, setProfile] = React.useState(false);
 
 	return (
 		<>
 			{
 
 				remove ? null : 
-				<div className="blur-background z mobile-nav-bar">
+				<div className="blur-background z bg-white sm:hidden">
 						<div className="centered-component pt-28">
-						<div className="flex w-[600px] h-[600px] bg-white shadow-2xl rounded-custom">
 							<div className="flex flex-col w-full">
 							<div className="flex justify-between">
 								<div className="text-[#11142D] font-semibold text-lg p-10">Game settings</div>
@@ -75,18 +78,18 @@ export function MbGameSettings () {
 									</button>
 								</div>
 							</div>
-							<div className="flex items-center justify-around gap-10 pt-5 pl-5">
-								<button  className={`flex items-center justify-center border  border-[2px]  border-[#FF754C] w-[120px] h-[35px] rounded-xl`}>
-									<div >Your Profile</div>
-								</button> 
-								<button className={`flex items-center justify-center border border-[2px]  border-[#FF754C] w-[100px] h-[35px] rounded-xl`}>
-									<div >2FA</div>
-								</button>
-								<button className={`flex items-center justify-center border  border-[2px]  border-[#FF754C] w-[120px] h-[35px] rounded-xl `}>
-									<div >Game Setting</div>
-								</button> 
+							<div className="flex items-center justify-around gap-[10px] pt-5 p-10 pt-0">
+							<button  className={`flex items-center justify-center border  border-[2px]  border-[#FF754C] w-[120px] h-[35px] rounded-xl`}  onClick={() => {setProfile(!profile), SetRemove(!remove)}}>
+								<div className="font-semibold">Your Profile</div>
+							</button> 
+							<button className={`flex items-center justify-center border border-[2px]  border-[#FF754C] w-[100px] h-[35px] rounded-xl`} onClick={() => {setTwoFa(!twoFA), SetRemove(!remove)}}>
+								<div className="font-semibold">2FA</div>
+							</button>
+							<button className={`flex items-center justify-center border  border-[2px]  bg-[#6C5DD3] border-[#6C5DD3] w-[120px] h-[35px] rounded-xl`}>
+								<div className="text-white font-semibold">Game Setting</div>
+							</button> 
 							</div>
-							<div className="flex flex-col pt-10">
+							<div className="flex flex-col">
 								<div className="flex flex-col items-center justify-center gap-[10px]">
 								<div className="text-sm text-[#808191]">Time </div>
 								<div className="flex gap-[15px]">
@@ -106,27 +109,33 @@ export function MbGameSettings () {
 								</div>
 
 							</div>
-							<div className="flex flex-col pt-10">
+							<div className="flex flex-col pt-5 px-5">
 								<div className="flex flex-col items-center justify-center gap-[10px]">
 								<div className="text-sm text-[#808191]">Choose Table Style</div>
 								<div className="flex items-center justify-center gap-[15px] px-5">
+									<div>
+
 									<button className="hover-grow">
-										<img src={GameBack1} className={`w-[200px] h-[85px] rounded-xl ${shadow.button1}`} onClick={() => handleshadow('button1')}></img>
+										<img src={GameBack1} className={`w-[200px] h-[70px] rounded-xl ${shadow.button1}`} onClick={() => handleshadow('button1')}></img>
 									</button>
 									<button className="hover-grow">
-										<img src={GameBack2} className={`w-[200px] h-[85px] rounded-xl ${shadow.button2}`} onClick={() => handleshadow('button2')}></img>
+										<img src={GameBack2} className={`w-[200px] h-[70px] rounded-xl ${shadow.button2}`} onClick={() => handleshadow('button2')}></img>
+									</button>
+									</div>
+									<div>
+
+									<button className="hover-grow">
+										<img src={GameBack3} className={`w-[200px] h-[70px] rounded-xl ${shadow.button3}`} onClick={() => handleshadow('button3')}></img>
 									</button>
 									<button className="hover-grow">
-										<img src={GameBack3} className={`w-[200px] h-[85px] rounded-xl ${shadow.button3}`} onClick={() => handleshadow('button3')}></img>
+										<img src={GameBack4} className={`w-[200px] h-[70px] rounded-xl ${shadow.button4}`} onClick={() => handleshadow('button4')}></img>
 									</button>
-									<button className="hover-grow">
-										<img src={GameBack4} className={`w-[200px] h-[85px] rounded-xl ${shadow.button4}`} onClick={() => handleshadow('button4')}></img>
-									</button>
+									</div>
 								</div>
 								</div>
 
 							</div>
-							<div className="flex flex-col pt-10">
+							<div className="flex flex-col pt-10 px-5">
 								<div className="flex flex-col items-center justify-center gap-[10px] px-5">
 								<div className="text-sm text-[#808191]">Blocked user</div>
 									<div className="flex overflow-y-auto gap-[10px] flex-wrap w-full h-[120px] px-3 py-3 border-[2px] border-[#6C5DD3] rounded-xl">
@@ -155,10 +164,21 @@ export function MbGameSettings () {
 
 							</div>
 							</div>
-						</div>
 					</div>
 				</div>
 				}
+				{ twoFA &&
+				<div>
+					<TwoFa/>
+					<MbTwoFA/>
+				</div>
+			}
+			{ profile &&
+				<div>
+					<DkSettings/>
+					<MbSettings/>
+				</div>
+			}
 		</>
 	)
 }

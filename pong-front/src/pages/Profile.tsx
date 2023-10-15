@@ -12,7 +12,6 @@ import axios from "axios";
 import { useParams } from "react-router-dom";
 
 export function Profile() {
-//   const [Me, setMe] = useState<boolean>(true);
 	const { username } = useParams();
 
   const [userData, setUserData] = useState({
@@ -50,7 +49,7 @@ export function Profile() {
   return (
     <>
       <div>
-        <NavBar avatar={userData.user_data.avatar} username={userData.user_data.username} />
+        <NavBar avatar={userData.user_data.avatar} username={userData.user_data.username} id={userData.user_data.id} />
         <HeadProfile
           profile={userData.user_data.avatar}
           name={userData.user_data.username}

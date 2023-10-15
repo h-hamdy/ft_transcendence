@@ -13,7 +13,7 @@ export function BrChat ( {msgnum, buttonColors, strokeColor, handleClick}: Props
 
     return (
         <>
-		<div className="pr-8">
+		<div className="pr-8 pl-8">
 			<Link to="/Chat">
                 <button onClick={() => handleClick('button5', 'img5')} style={{ backgroundColor: buttonColors.button5 }} className="flex w-full h-[56px] pl-8  items-center rounded-2xl">
                     <div>
@@ -36,7 +36,6 @@ export function BrChat ( {msgnum, buttonColors, strokeColor, handleClick}: Props
                 </button>
 			</Link>
 		</div>
-		{/* { chat && <MbChat/>} */}
         </>
     )
 }
