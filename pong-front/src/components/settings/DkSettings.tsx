@@ -85,7 +85,7 @@ export function DkSettings () {
 								<div className="file-input-wrapper">
 									<button className="flex justify-center items-center border rounded-xl bg-[#6C5DD3] border-[#6C5DD3] h-[45px] w-[100px] pr-">
 										<div className="text-white font-semibold text-sm">Upload New</div>
-										{/* <input type="file" className="file-input" onChange={handleFileUpload} /> */}
+										<input type="file" className="file-input"/>
 									</button>
 									</div>
 									<div>
@@ -93,10 +93,6 @@ export function DkSettings () {
 										Choose a file
 									</label> */}
 									</div>
-
-									{/* <button className="flex justify-center items-center border rounded-xl bg-gray-100 border-gray-100 h-[45px] w-[100px] pr-">
-										<div className="text-[#11142D] font-semibold text-sm">Delete Avatar</div>
-									</button> */}
 								</div>
 								<div className="text-sm font-extralight text-[#808191]">Avatar help your friends recognize you in CyberPong.</div>
 								</div>

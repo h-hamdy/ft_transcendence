@@ -11,7 +11,7 @@ import { DkSettings } from "./DkSettings";
 import { MbGameSettings } from "./MbGameSetting";
 
 
-export function MbTwoFA (  ) {
+export function MbTwoFA ( ) {
 	const [remove, SetRemove] = React.useState(false);
 	const [profile, setProfile] = useState(false);
 	const [gameSetting, setgameSetting] = React.useState(false);

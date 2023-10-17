@@ -3,7 +3,7 @@ import Google from "../components/Enbording/Google";
 import DiscoverMore from "../components/Enbording/DiscoverMore"
 import { Cards } from "../components/Enbording/Cards"
 import Logo from "../assets/mainLogo.svg"
-import background from "../assets/onboarding.png"
+import background from "/src/assets/onboarding.png"
 
 export function SignIn() {
     return (

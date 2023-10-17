@@ -8,6 +8,8 @@ import { DkSettings } from "../../../settings/DkSettings"
 import { GameMode } from "../../../Profile/GamMode"
 import axios from "axios"
 import { Navigate } from "react-router-dom"
+import { useEffect } from "react"
+import { MbGameMode } from "../../../Profile/MbGameMode"
 
 interface Props {
 	id: number
@@ -54,17 +56,73 @@ export function MBburger ( {id}: Props ) {
 	const navigate = useNavigate();
 
 	const handleLogout = async () => {
-			try {
-			const response = await axios.get(`http://localhost:3000/logout`, { withCredentials: true });
-			if (response) {
-				navigate('/');
-			  }
-			} catch (error) {
-			console.error("Error logout:");
+		try {
+		const response = await axios.get(`http://localhost:3000/logout`, { withCredentials: true });
+		if (response) {
+			navigate('/');
 			}
+		} catch (error) {
+		console.error("Error logout:");
+		}
 	}
 
+	interface UserData {
+		id: number;
+		username: string;
+		avatar: string;
+		rating: number;
+		me: boolean;
+		is_two_factor_auth_enabled: boolean;
+	  }
+	  
+	  interface Friend {
+		id: number;
+		username: string;
+		avatar: string;
+	  }
+	  
+	  interface UserState {
+		user_data: UserData;
+		friends: Friend[];
+		match_history: any[];
+		achievements: any[];
+		wins: number;
+		loses: number;
+		draws: number;
+	  }
+	  
+	  const [userData, setUserData] = useState<UserState>({
+		user_data: {
+		  id: 0,
+		  username: "",
+		  avatar: "",
+		  rating: 0,
+		  me: false,
+		  is_two_factor_auth_enabled: false,
+		},
+		friends: [],
+		match_history: [],
+		achievements: [],
+		wins: 0,
+		loses: 0,
+		draws: 0,
+	  });
 
+	  useEffect(() => {
+		const fetchData = async () => {
+		  try {
+			const response = await axios.get(`http://localhost:3000/profile/me`, { withCredentials: true });
+			setUserData(response.data);
+
+		} catch (error) {
+			console.error("Error fetching user data:");
+		}
+		};
+	
+		fetchData();
+	  }, []);
+	
+	console.log(userData.friends);
 	return (
 		<>
 		<div className="h-screen border w-[112px] flex justify-center">
@@ -121,15 +179,15 @@ export function MBburger ( {id}: Props ) {
 
 
                 <div className="flex items-center justify-center text-[#808191] text-sm lg:text-md pt-16">Friends</div>
-				<div className="flex flex-col items-center justify-center pl-1 pt-5 gap-3 scrollable-div-ver6">
-					<Avatar/>
-					<Avatar/>
-					<Avatar/>
-					<Avatar/>
-					<Avatar/>
-					<Avatar/>
-					<Avatar/>
-					<Avatar/>
+				<div className="flex flex-col pl-1 pt-5 gap-3 scrollable-div-ver6">
+					<div>
+						{userData.friends.map((friend, index: number) => (
+							<div key={index}>
+								<Avatar avatar={friend.avatar}/>
+							</div>
+						))
+						}
+					</div>
 				</div>
 				<div className="flex items-center justify-center pb-16 pt-5">
 					<img src={down} className="w-[12px] h-[12px]"></img>
@@ -165,7 +223,12 @@ export function MBburger ( {id}: Props ) {
 			</div>
 		</div>
 		{settings && <DkSettings/>}
-		{game && <GameMode/>}
+		{game &&
+			<div>
+				<GameMode/>
+				<MbGameMode/>
+			</div> 
+		}
 		</>
 	)
 }

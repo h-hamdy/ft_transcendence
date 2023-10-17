@@ -6,6 +6,7 @@ import play from "/src/assets/Game.svg"
 import plusFriend from "/src/assets/PersonPlusFill.svg"
 import Friendadded from "/src/assets/Friends.svg"
 import { Add } from "../../Home/NavBar/Notification/add"
+import axios from "axios"
 
 interface Props {
 	profile: string,
@@ -24,10 +25,17 @@ export function HeadProfile ( {profile, name, friendNum, me}: Props ) {
 		setGameMode(!gameMode);
 	}
 
-	const handleFriend = () => {
-		setClick(!clicked);
-	}
-
+	const handleFriend = async () => {
+		try {
+			const response = await axios.post(`http://localhost:3000/add-friend/${name}`, null, { withCredentials: true })
+			.then (function (response) {
+			setClick(!clicked);
+			});
+		} catch (error) {
+			console.error('POST friend failed:', error);
+			}
+		};
+		
 	const handleSearch = () => {
 		Setsearch(!search);
 	}
@@ -73,7 +81,7 @@ export function HeadProfile ( {profile, name, friendNum, me}: Props ) {
 								<button className={`flex items-center justify-center border border-[#6C5DD3] bg-[#6C5DD3] w-[50px] h-[45px] shadow rounded-xl`} onClick={handleSearch}>
 									<img src={plusFriend} className="w-[24px] h-[24px]"></img>
 								</button>
-								<Add/> 
+								<Add/>
 							</>
 							:
 							<button className={`flex items-center justify-center border border-[#6C5DD3] bg-[#6C5DD3] w-[50px] h-[45px] shadow rounded-xl`} onClick={handleSearch}>

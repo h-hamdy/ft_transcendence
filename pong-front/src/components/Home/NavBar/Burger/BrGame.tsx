@@ -3,6 +3,7 @@ import React from "react"
 import { MbGameSettings } from "../../../settings/MbGameSetting";
 import { GameSetting } from "../../../settings/GameSettings";
 import { GameMode } from "../../../Profile/GamMode";
+import { MbGameMode } from "../../../Profile/MbGameMode";
 
 interface Props {
 	buttonColors: { [key: string]: string }
@@ -34,7 +35,12 @@ export function BrGame ( {buttonColors, strokeColor, handleClick}: Props ) {
 				<div className={`pl-8 text-[${strokeColor.img4}] font-semibold text-base`}>Games</div>
 			</button>
                 </div>
-			{game && <GameMode/>}
+			{game && 
+				<div>
+					<GameMode/>
+					<MbGameMode/>
+				</div>
+			}
 
         </>
     )

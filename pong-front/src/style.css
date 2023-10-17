@@ -830,13 +830,8 @@ video {
   
   .file-input {
 	position: absolute;
-	top: 0;
-	right: 0;
-	bottom: 0;
-	left: 0;
-	font-size: 100px; /* Set a large font size to cover the button */
-	opacity: 0; /* Make the input transparent */
-	cursor: pointer;
+	font-size: 100px;
+	opacity: 0;
   }
 
   .hover-grow:hover {

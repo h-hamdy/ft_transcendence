@@ -1,43 +1,99 @@
-import Plus from "/src/assets/Add_Friend.svg"
 import { FriendStatus } from "./FriendsStatus"
 import React from "react"
-// import { AddFriend } from "./AddFriend"
-import { Add } from "../NavBar/Notification/add"
+import rmv from "/src/assets/remove.svg"
+import { useState } from "react";
+import { useEffect } from "react";
+import axios from "axios";
+import { Avatar } from "../NavBar/Avatar";
 
 export function Friends () {
+	const [remove, Setremove] = React.useState(false);
 
-    const [invite, SetInvite] = React.useState(false);
+	interface UserData {
+		id: number;
+		username: string;
+		avatar: string;
+		rating: number;
+		me: boolean;
+		is_two_factor_auth_enabled: boolean;
+	  }
+	  
+	  interface Friend {
+		id: number;
+		username: string;
+		avatar: string;
+	  }
+	  
+	  interface UserState {
+		user_data: UserData;
+		friends: Friend[];
+		match_history: any[];
+		achievements: any[];
+		wins: number;
+		loses: number;
+		draws: number;
+	  }
+	  
+	  const [userData, setUserData] = useState<UserState>({
+		user_data: {
+		  id: 0,
+		  username: "",
+		  avatar: "",
+		  rating: 0,
+		  me: false,
+		  is_two_factor_auth_enabled: false,
+		},
+		friends: [],
+		match_history: [],
+		achievements: [],
+		wins: 0,
+		loses: 0,
+		draws: 0,
+	  });
+
+	  useEffect(() => {
+		const fetchData = async () => {
+		  try {
+			const response = await axios.get(`http://localhost:3000/profile/me`, { withCredentials: true });
+			setUserData(response.data);
+
+		} catch (error) {
+			console.error("Error fetching user data:");
+		}
+		};
+	
+		fetchData();
+	  }, []);
 
     return (
         <>
-             <div className="pt-10 pr-6 lg:pr-0 lg:pt-0 pl-10 lg:pl-0 lg:flex lg:items-center lg:justify-center">
-                <div className="flex flex-col border bg-[#FFF] drop-shadow-md rounded-custom lg:rounded-custom h-[270px] lg:h-[280px] scrollable-div-hor lg:scrollable-div-hor2">
-                    <div className="pl-10 pt-10 pb-6">
-                        <div className="text-blue-900 font-poppins text-2xl font-semibold leading-normal tracking-wider lg:text-2xl">Friends</div>
-                    </div>
-                    <div className="flex">
-                        <div className="flex flex-col items-center justify-center pl-10 pb-6">
-                            <button onClick={() => SetInvite(!invite)} className="flex items-center justify-center border border-[#6C5DD3] bg-[#6C5DD3] rounded-full w-[72px] h-[72px] lg:w-[80px] lg:h-[80px]">
-                                <div>
-                                    <img src={Plus} className="lg:w-[80px] lg:h-[80px]"></img>
-                                </div>
-                            </button>
-                            <div className="pt-2 lg:text-md">
-                                Add Yours
-                            </div>
-                        </div>
-                        <div className="flex">
-                            <FriendStatus avatar="/src/assets/hkhalil.jpg" name="hkhalil" time="enligne"/>
-                            <FriendStatus avatar="/src/assets/ahamdy.jpg" name="ahdmdy" time="14m ago"/>
-                            <FriendStatus avatar="/src/assets/hhamdy.jpg" name="ahdmdy" time="14m ago"/>
-                            <FriendStatus avatar="/src/assets/hhamdy.jpg" name="ahdmdy" time="14m ago"/>
-                            <FriendStatus avatar="/src/assets/hkhalil.jpg" name="hkhalil" time="enligne"/>
-                            <FriendStatus avatar="/src/assets/hkhalil.jpg" name="hkhalil" time="enligne"/>
-                        </div>
-                    </div>
-                </div>
-            </div>
-			{invite && <Add/>}
+		{
+			remove ? null :
+			<div className="blur-background z">
+					<div className="centered-component"></div>
+				<div className="flex items-center justify-center pt-28">
+					<div className="flex flex-col border bg-[#FFF] rounded-custom lg:h-[320px] lg:w-[800px] w-screen h-screen pt-10">
+						<div className="p-10 px-4 lg:px-10 lg:pt-4 flex items-center justify-between">
+							<div className="text-blue-900 font-poppins font-semibold leading-normal tracking-wider lg:text-2xl text-lg">Invite friend to play with </div>
+							<button
+								onClick={() => Setremove(!remove)}
+								className="flex items-center shadow-lg justify-center border border-white rounded-full w-12 h-12"
+							>
+								<img src={rmv} alt="Remove" />
+							</button>
+						</div>
+						<div className="flex flex-col lg:flex-row items-center justify-center lg:overflow-x-auto overflow-y-auto gap-[15px] lg:gap-0">
+							{userData.friends.map((friend, index: number) => (
+								<div key={index}>
+									<FriendStatus avatar={friend.avatar} name={friend.username} state="offline"/>
+								</div>
+							))
+							}
+						</div>
+					</div>
+				</div>
+				</div>
+		}	
         </>
     )
 }

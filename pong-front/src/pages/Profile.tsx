@@ -49,7 +49,7 @@ export function Profile() {
   return (
     <>
       <div>
-        <NavBar avatar={userData.user_data.avatar} username={userData.user_data.username} id={userData.user_data.id} />
+        <NavBar avatar={userData.user_data.avatar} username={userData.user_data.username} id={userData.user_data.id}/>
         <HeadProfile
           profile={userData.user_data.avatar}
           name={userData.user_data.username}

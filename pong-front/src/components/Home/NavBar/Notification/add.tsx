@@ -9,7 +9,10 @@ export function Add () {
 
 	const handleFormSubmit = async ( ) => {
         try {
-          const response = await axios.post(`http://localhost:3000/add-friend/${friendName}`, null, { withCredentials: true }).then (function (response) {console.log(response)});
+          const response = await axios.post(`http://localhost:3000/add-friend/${friendName}`, null, { withCredentials: true })
+		  .then (function (response) {
+			console.log(response  + " Ach ban lik");
+		});
         } catch (error) {
           console.error('POST Add friend failed:', error);
         }
