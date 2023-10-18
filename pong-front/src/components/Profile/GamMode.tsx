@@ -25,9 +25,9 @@ export function GameMode () {
 									</button>
 								</div>
 							<div className="flex lg:flex-row overflow-x-auto pt-3">
-								<GameCard TableType="Simple Table" GameType="Bot Game" imgPath="/src/assets/Bot_Img.png"/>
-								<GameCard TableType="Astro Table" GameType="Friend Game" imgPath="/src/assets/3_win_game.png"/>
-								<GameCard TableType="Sky Table" GameType="World Wide" imgPath="/src/assets/7_win_game.png"/>
+								<GameCard TableType="AI Table" GameType="5" imgPath="/src/assets/Bot_Img.png"/>
+								<GameCard TableType="world Table" GameType="2" imgPath="/src/assets/3_win_game.png"/>
+								<GameCard TableType="friend Table" GameType="1" imgPath="/src/assets/7_win_game.png"/>
 							</div>
 							</div>
 						</div>

@@ -11,8 +11,8 @@ export const SetUsername = () => {
         username: '',
       });
     
-      const handleFormSubmit = async () => {    
-        try {
+      const handleFormSubmit = async () => {   
+          try {
           const response = await axios.post('http://localhost:3000/set-username', formData, { withCredentials: true }).then (function (response) {console.log(response)});
         } catch (error) {
           console.error('POST request failed:', error);
@@ -34,9 +34,9 @@ export const SetUsername = () => {
 					  }}
                 />
                 </form>
-				{/* <button className="flex justify-center items-center border rounded-xl bg-[#6C5DD3] border-[#6C5DD3] h-[45px] w-[100px]" onClick={handleFormSubmit}>
+				<button className="flex justify-center items-center border rounded-xl bg-[#6C5DD3] border-[#6C5DD3] h-[45px] w-[100px]" onClick={handleFormSubmit}>
 					<div className="text-white font-semibold lg:text-sm">Submit</div>
-				</button> */}
+				</button>
                 </div>
                 <div className="pt-[10px] lg:pt-[20px]">
                     <div className="border bg-[#E9DCE5] rounded-lg w-[300px] h-[30px]  flex gap-1 items-center justify-center">

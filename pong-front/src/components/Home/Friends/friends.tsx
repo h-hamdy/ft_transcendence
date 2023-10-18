@@ -6,7 +6,11 @@ import { useEffect } from "react";
 import axios from "axios";
 import { Avatar } from "../NavBar/Avatar";
 
-export function Friends () {
+interface Props {
+	ChooseFriend: () => void;
+}
+
+export function Friends ( ) {
 	const [remove, Setremove] = React.useState(false);
 
 	interface UserData {
