@@ -6,6 +6,7 @@ import axios from "axios";
 import { GameSetting } from "./GameSettings";
 import { MbTwoFA } from "./MbTwoFA";
 import { MbGameSettings } from "./MbGameSetting";
+import { json } from "react-router-dom";
 
 export function DkSettings () {
 
@@ -42,6 +43,41 @@ export function DkSettings () {
     const [remove, SetRemove] = React.useState(false);
 	const [twoFA, setTwoFa] = useState(false);
     const [gameSetting, setgameSetting] = React.useState(false);
+	const [formData, setFormData] = useState<{username: string}>({
+        username: '',
+      });
+
+	const handleFileUpload = async (event: any) => {
+		try {
+
+			const file = event.target.files[0];
+			const formData = new FormData();
+			formData.append("avatar", file);
+			axios.post('http://localhost:3000/upload-avatar', formData,  { 
+				withCredentials: true,
+				headers: {
+					"Content-Type": "multipart/form-data",
+				} 
+			}
+			)
+			.then((response) => {
+				console.log(response);
+			  })
+		}
+		  catch(error) {
+			console.log("Post profile faild", error);
+		  }
+	}
+
+	const handleName = async () => {
+		try {
+			const response = await axios.post('http://localhost:3000/set-username', formData, {withCredentials: true}).then (function (response) {console.log(response)});
+		}
+		catch(error) {
+			console.log("Post profile faild", error);
+		}
+	}
+
 
 	return (
 		<>
@@ -88,11 +124,6 @@ export function DkSettings () {
 										<input type="file" className="file-input"/>
 									</button>
 									</div>
-									<div>
-									{/* <label >
-										Choose a file
-									</label> */}
-									</div>
 								</div>
 								<div className="text-sm font-extralight text-[#808191]">Avatar help your friends recognize you in CyberPong.</div>
 								</div>
@@ -103,9 +134,14 @@ export function DkSettings () {
 						<div className="text-[#808191]">Update Your Name</div>
 						<div className="flex flex-col gap-9">
 						<form className="flex  justify-center items-center rounded-xl h-[70px] w-[200px]">
-							<input className="rounded-xl w-full h-full border bg-gray-100 border-[3px]  pr-3 pl-3 focus:border-[#6C5DD3] focus:outline-none  text-[#888EFF] text-center"></input>
+							<input className="rounded-xl w-full h-full border bg-gray-100 border-[3px]  pr-3 pl-3 focus:border-[#6C5DD3] focus:outline-none  text-[#888EFF] text-center" value={formData.username} maxLength={8}
+								onChange={(e) => {
+									setFormData({ ...formData, username: e.target.value });
+								}}>
+	
+								</input>
 						</form>
-						<button className="flex justify-center items-center border rounded-xl bg-[#6C5DD3] border-[#6C5DD3] h-[50px] w-[120px]">
+						<button className="flex justify-center items-center border rounded-xl bg-[#6C5DD3] border-[#6C5DD3] h-[50px] w-[120px]" onClick={handleName}>
 							<div className="text-white font-semibold text-sm">Update Profile</div>
 						</button>
 						</div>

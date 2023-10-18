@@ -61,6 +61,7 @@ body {
   margin: 0;
   /* 1 */
   line-height: inherit;
+  overflow: auto;
   /* 2 */
 }
 
@@ -533,7 +534,6 @@ video {
   --tw-backdrop-saturate:  ;
   --tw-backdrop-sepia:  ;
 }
-  
 
 .gap-05 {
   gap: 0.5rem;
@@ -877,18 +877,8 @@ video {
     border-radius: 5px;
     cursor: pointer;
 }
-
 body::-webkit-scrollbar {
-	width: 1px; /* Set width for vertical scrollbar */
-  }
-  
-  body::-webkit-scrollbar-thumb {
-	background-color: #555;
-  }
-  
-  /* For Firefox */
-  body {
-	scrollbar-width: thin; /* Set width for both vertical and horizontal scrollbar */
+	width: 10px;
   }
   
   body::-webkit-scrollbar-thumb {
@@ -896,8 +886,9 @@ body::-webkit-scrollbar {
   }
   
   body::-webkit-scrollbar-track {
-	background-color: #ddd; /* Color of the track */
+	background-color: #ddd;
   }
+  
   
 
 @media (min-width: 0px) and  (max-width: 1024px) {

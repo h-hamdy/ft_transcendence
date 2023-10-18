@@ -11,7 +11,7 @@ export const SetUsername = () => {
         username: '',
       });
     
-      const handleFormSubmit = async () => {   
+      const handleFormSubmit = async () => {
           try {
           const response = await axios.post('http://localhost:3000/set-username', formData, { withCredentials: true }).then (function (response) {console.log(response)});
         } catch (error) {
@@ -27,7 +27,8 @@ export const SetUsername = () => {
                 <div className="flex items-center justify-center text-[#808191]">Enter Your Full Name</div>
                 <div className="flex flex-col gap-9 pt-5">
                 <form className="flex justify-center items-center rounded-xl h-[70px] w-[300px]" onSubmit={handleFormSubmit}>
-                    <input className="rounded-xl w-full h-full border bg-gray-100 border-[3px]  pr-3 pl-3 focus:border-[#6C5DD3] focus:outline-none text-[#888EFF] text-center" 
+                    <input className="rounded-xl w-full h-full border bg-gray-100 border-[3px]  pr-3 pl-3 focus:border-[#6C5DD3] focus:outline-none text-[#888EFF] text-center"
+					maxLength={8}
                     value={formData.username}
                     onChange={(e) => {
 						setFormData({ ...formData, username: e.target.value });

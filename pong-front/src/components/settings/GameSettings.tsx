@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import rmv from "/src/assets/remove.svg"
-import GameBack1 from "/src/assets/GameBack1.png"
-import GameBack2 from "/src/assets/GameBack2.png"
-import GameBack3 from "/src/assets/GameBack3.png"
-import GameBack4 from "/src/assets/GameBack4.png"
+import GameBack1 from "/src/assets/black.png"
+import GameBack2 from "/src/assets/GameBack.png"
+import GameBack3 from "/src/assets/Blue.png"
+// import GameBack4 from "/src/assets/GameBack4.png"
 import { Deblock } from "./Deblock";
 import { TwoFa } from "./TwoFA";
 import { DkSettings } from "./DkSettings";
@@ -116,17 +116,17 @@ export function GameSetting  () {
 							<div className="text-sm text-[#808191]">Choose Table Style</div>
 							<div className="flex items-center justify-center gap-[15px] px-5">
 								<button className="hover-grow">
-									<img src={GameBack1} className={`w-[200px] h-[85px] rounded-xl ${shadow.button1}`} onClick={() => handleshadow('button1')}></img>
+									<img src={GameBack1} className={`w-[150px] h-[85px] rounded-xl ${shadow.button1}`} onClick={() => handleshadow('button1')}></img>
 								</button>
 								<button className="hover-grow">
-									<img src={GameBack2} className={`w-[200px] h-[85px] rounded-xl ${shadow.button2}`} onClick={() => handleshadow('button2')}></img>
+									<img src={GameBack2} className={`w-[150px] h-[85px] rounded-xl ${shadow.button2}`} onClick={() => handleshadow('button2')}></img>
 								</button>
 								<button className="hover-grow">
-									<img src={GameBack3} className={`w-[200px] h-[85px] rounded-xl ${shadow.button3}`} onClick={() => handleshadow('button3')}></img>
+									<img src={GameBack3} className={`w-[150px] h-[85px] rounded-xl ${shadow.button3}`} onClick={() => handleshadow('button3')}></img>
 								</button>
-								<button className="hover-grow">
+								{/* <button className="hover-grow">
 									<img src={GameBack4} className={`w-[200px] h-[85px] rounded-xl ${shadow.button4}`} onClick={() => handleshadow('button4')}></img>
-								</button>
+								</button> */}
 							</div>
 							</div>
 
