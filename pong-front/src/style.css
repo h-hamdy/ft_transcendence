@@ -704,12 +704,6 @@ video {
 	overflow: auto;
 }
 
-.scrollable-div-ver7{
-	height: 500px;
-	/* Adjust the height as needed */
-	overflow: auto;
-}
-
 .scrollable-div-ver8{
 	height: 600px;
 	/* Adjust the height as needed */
@@ -735,6 +729,8 @@ video {
   height: 500px;
   /* Adjust the height as needed */
   overflow: auto;
+	position: relative;
+	bottom: 0;
 }
 
 .scrollable-div-ver9 {

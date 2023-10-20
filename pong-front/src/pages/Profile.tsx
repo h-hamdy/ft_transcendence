@@ -14,6 +14,19 @@ import { useParams } from "react-router-dom";
 export function Profile() {
 	const { username } = useParams();
 
+
+	React.useEffect(() => {
+		var timer = sessionStorage.getItem("Timer");
+		var table = sessionStorage.getItem("Table");
+		if (table == null)
+			table = '#000000'
+		if (timer == null) {
+			timer = '1';
+		}
+		sessionStorage.setItem("Timer", timer);
+		sessionStorage.setItem("Table", table);
+	  }, []);
+
   const [userData, setUserData] = useState({
     user_data: {
       id: 0,
@@ -44,14 +57,24 @@ export function Profile() {
     fetchData();
   }, []);
 
+  var BASE_URL;
+  const url = userData.user_data.avatar.substring(0, 30);
+
+  console.log(userData.user_data.avatar);
+  if (url === "https://cdn.intra.42.fr/users/")
+  	BASE_URL = userData.user_data.avatar;	
+  else
+  	BASE_URL = `http://localhost:3000/avatars/${userData.user_data.avatar}`;
+
+	console.log(BASE_URL);
 
 
   return (
     <>
       <div>
-        <NavBar avatar={userData.user_data.avatar} username={userData.user_data.username} id={userData.user_data.id}/>
+        <NavBar avatar={BASE_URL} username={userData.user_data.username} id={userData.user_data.id}/>
         <HeadProfile
-          profile={userData.user_data.avatar}
+          profile={BASE_URL}
           name={userData.user_data.username}
           friendNum={userData.friends.length.toString()}
 		  me={userData.user_data.me}
@@ -61,7 +84,7 @@ export function Profile() {
             <LastMatch
               date="18 January 2023"
               name1={userData.user_data.username}
-              profile1={userData.user_data.avatar}
+              profile1={BASE_URL}
               name2="hassan d3if"
               profile2="/src/assets/hkhalil.jpg"
             />
@@ -70,7 +93,7 @@ export function Profile() {
             </div>
           </div>
           <ProfileCard
-            profile={userData.user_data.avatar}
+            profile={`http://localhost:3000/avatars/${userData.user_data.avatar}`}
             name={userData.user_data.username}
             winNum={userData.wins.toString()}
             LoseNum={userData.loses.toString()}
@@ -80,9 +103,6 @@ export function Profile() {
         <div className="xl:hidden">
           <States res1={userData.wins.toString()} res2={userData.loses.toString()} res3={userData.draws.toString()} res4={(userData.wins + userData.loses + userData.draws).toString()} />
         </div>
-        {/* <div className="sm:pt-10 lg:pl-36">
-          <StartEnjoying />
-        </div> */}
         <div className="md:flex md:flex-row md:justify-around md:pt-10 md:w-full lg:pl-28 pt-10">
 		<div className="md:w-6/12">
 			<LatestMatches/>

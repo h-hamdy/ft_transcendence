@@ -3,7 +3,6 @@ import player from "/src/assets/Player.png"
 import wins from "/src/assets/Wins.svg"
 import Loses from "/src/assets/Loses.svg"
 import achi from "/src/assets/achivements.svg"
-import wive from "/src/assets/ProfileWive.png"
 
 interface Props {
 	profile: string,
@@ -18,7 +17,7 @@ export function ProfileCard ( {profile, name, winNum, LoseNum, achivNum}: Props 
 		<>
 		<div className="lg:pt-10 md:pb-10 pt-10 flex items-center justify-center lg:pr-16">
 			<div className=" border border-white w-[290px] h-[460px] shadow rounded-custom">
-			<div className="flex gap-16 flex-col p-10 bg-no-repeat w-[290px] h-[192px] rounded-custom-img path2">
+			<div className="flex relative gap-16 flex-col p-10 bg-no-repeat w-[290px] h-[192px] rounded-custom-img path2">
 				<img src={player} className="absolute pl-10"></img>
 				<div className="text-white text-2xl font-bold tracking-wider">{name}</div>
 				<div className="flex gap-[10px] pt-2">

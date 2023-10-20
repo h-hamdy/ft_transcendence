@@ -53,7 +53,8 @@ export function DkSettings () {
 			const file = event.target.files[0];
 			const formData = new FormData();
 			formData.append("avatar", file);
-			axios.post('http://localhost:3000/upload-avatar', formData,  { 
+
+			axios.post('http://localhost:3000/upload-avatar', formData,  {
 				withCredentials: true,
 				headers: {
 					"Content-Type": "multipart/form-data",
@@ -114,14 +115,14 @@ export function DkSettings () {
 							<div className="font-light text-sm text-[#808191]">Your Avatar</div>
 							<div className="flex gap-2 items-center">
 								<div className="w-[65px] h-[65px]">
-									<img src={userData.user_data.avatar} className="rounded-full"></img>
+									<img src={`http://localhost:3000/avatars/${userData.user_data.avatar}`} className="rounded-full"></img>
 								</div>
 								<div className="flex flex-col gap-1">
 								<div className="flex gap-9">
 								<div className="file-input-wrapper">
 									<button className="flex justify-center items-center border rounded-xl bg-[#6C5DD3] border-[#6C5DD3] h-[45px] w-[100px] pr-">
 										<div className="text-white font-semibold text-sm">Upload New</div>
-										<input type="file" className="file-input"/>
+										<input type="file" className="file-input" onChange={handleFileUpload}/>
 									</button>
 									</div>
 								</div>

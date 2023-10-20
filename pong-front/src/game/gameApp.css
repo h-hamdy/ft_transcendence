@@ -49,13 +49,12 @@ body, html, #root {
   padding: 0;
   width: 100%;
   height: 100%;
-  overflow: hidden; /* Prevent scrollbars */
 }
 
 #root {
   box-sizing: border-box;
     width: 100vw; /* 100% of the viewport width */
     height: 100vh; /* 100% of the viewport height */
-    overflow: hidden; /* Prevent scrollbars */
     /* Add any other styles you want here */ 
+	overflow-x: hidden;
 }

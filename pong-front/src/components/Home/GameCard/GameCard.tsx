@@ -28,6 +28,8 @@ export function GameCard({ TableType, GameType, imgPath }: Props) {
   const navigate = useNavigate();
   const [showFriends, setShowFriends] = React.useState(false);
   const [chooseFr, setChooseFr] = React.useState(false);
+  if (GameType == "Bot Game")
+	sessionStorage.setItem("Timer", "5");
 
   const handleClick = () => {
     console.log(GameType);

@@ -42,22 +42,28 @@ export function GameSetting  () {
 	const handleButton = ( Buttonnum: string ) => {
 		const NewColors = {...timeButton};
 		const TextColors = {...textColor};
-		// const Newshadow = {...Shadow};
+		sessionStorage.setItem("Timer", Buttonnum.charAt(Buttonnum.length - 1));
+
 
 		NewColors[Buttonnum] = "#6C5DD3";
 		TextColors[Buttonnum] = "white"
-		// Newshadow[Buttonnum] = "drop-shadow-xl";
 
 		sethandleTimeButton(NewColors);
 		sethandleTextColor(TextColors);
-		// SetShadow(Newshadow);
-
 	}
 
 	const handleshadow = ( Buttonnum: string ) => {
 		const Newshadow = {...Shadow};
 		Newshadow[Buttonnum] = "selected";
 		SetShadow(Newshadow);
+
+		const color = Buttonnum.charAt(Buttonnum.length - 1);
+		if (color == '1')
+			sessionStorage.setItem("Table", "#000000");
+		else if (color == '2')
+			sessionStorage.setItem("Table", "#6C5DD3");
+		else
+			sessionStorage.setItem("Table", "#7EC3DD");
 	}
 	
 	const [twoFA, setTwoFa] = useState(false);
@@ -124,9 +130,6 @@ export function GameSetting  () {
 								<button className="hover-grow">
 									<img src={GameBack3} className={`w-[150px] h-[85px] rounded-xl ${shadow.button3}`} onClick={() => handleshadow('button3')}></img>
 								</button>
-								{/* <button className="hover-grow">
-									<img src={GameBack4} className={`w-[200px] h-[85px] rounded-xl ${shadow.button4}`} onClick={() => handleshadow('button4')}></img>
-								</button> */}
 							</div>
 							</div>
 

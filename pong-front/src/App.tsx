@@ -9,22 +9,12 @@ import React from "react"
 import { SetUsername } from "./pages/SetUsername"
 import { SocketContext, SocketProvider } from "./game/contexts/SocketContext"
 // import { SocketContext } from './contexts/SocketContext';
-import { useContext } from "react"
 import { useLocation } from "react-router-dom"
+import { TwofaAuth } from "./pages/TwofaAuth"
 
 const GameSetup = () =>
 {
   const {state} = useLocation();
-
-    // const socket = useContext(SocketContext);
-    // const handleScoreUpdated = (data : string) => {
-    //   console.log('Score updated in GameSetup:', data);
-    // };
-
-    // socket.on("getScore", ()=>
-    // {
-    //   console.log("jere")
-    // })
 
   return (
     <SocketProvider gameDuration={state.gameDuration}>
@@ -41,6 +31,7 @@ function App() {
 			<Route path="/set_username" element={<SetUsername />}/>
 			<Route path="/" element={<SignIn/>}/>
 			<Route path="/home" element={<Home/>}/>
+			<Route path="/2fa" element={<TwofaAuth/>}/>
 			<Route path={`/Profile/:username`} element={<Profile/>}/>
 			<Route path="Game" element={<GameSetup/>}/>
 			<Route path="Chat" element={<Chat/>}/>

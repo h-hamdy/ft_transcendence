@@ -7,6 +7,8 @@ import plusFriend from "/src/assets/PersonPlusFill.svg"
 import Friendadded from "/src/assets/Friends.svg"
 import { Add } from "../../Home/NavBar/Notification/add"
 import axios from "axios"
+import { useEffect } from "react"
+import React from "react"
 
 interface Props {
 	profile: string,
@@ -15,8 +17,9 @@ interface Props {
 	me: boolean,
 }
 
-export function HeadProfile ( {profile, name, friendNum, me}: Props ) {
 
+export function HeadProfile ( {profile, name, friendNum, me}: Props ) {
+	
 	const [gameMode, setGameMode] = useState(false);
 	const [clicked, setClick] = useState(false);
 	const [search, Setsearch] = useState(false);
@@ -46,9 +49,9 @@ export function HeadProfile ( {profile, name, friendNum, me}: Props ) {
 			<div className="w-full h-[215px] sm:h-[150px] pr-6 pl-6 border border-white rounded-custom shadow">
 				<div className="flex flex-col sm:flex-row sm:justify-around pt-8 gap-8">
 					<div className="flex gap-6">
-					<div className="flex items-center justify-center border border-[3px] border-[#0049C6] rounded-full w-[75px]  h-[75px] sm:w-[85px] sm:h-[85px]">
-							<img src={profile} className="absolute bbc rounded-full w-[57px] h-[57px] sm:w-[67px] sm:h-[67px]"></img>
-							<div className="absolute pb-12 pl-14 lg:pb-14 lg:pl-16">
+					<div className="flex relative items-center justify-center border border-[3px] border-[#0049C6] rounded-full w-[75px]  h-[75px] sm:w-[85px] sm:h-[85px]">
+						<img src={profile} className="absolute bbc rounded-full w-[57px] h-[57px] sm:w-[67px] sm:h-[67px]"/>
+							<div className="absolute right-0 top-0">
 								<Enline/>
 							</div>
 					</div>
@@ -74,7 +77,7 @@ export function HeadProfile ( {profile, name, friendNum, me}: Props ) {
 								<img src={Friendadded} className="w-[24px] h-[24px]"></img>
 							</button>
 						:
-						me ? 
+						me ?
 						(
 							search ?
 							<>
