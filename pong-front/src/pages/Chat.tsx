@@ -3,9 +3,11 @@ import { NavBar } from "../components/Home/NavBar/NavBar";
 import { useEffect } from "react";
 import axios from "axios";
 import React from "react";
+import { useNavigate } from "react-router-dom";
+
 export function Chat () {
 
-
+	const navigate = useNavigate();
 	const [userData, setUserData] = React.useState({
 		user_data: {
 		  id: 0,
@@ -31,6 +33,7 @@ export function Chat () {
 			setUserData(response.data);
 		  } catch (error) {
 			console.error("Error fetching user data:");
+			navigate("/error");
 		  }
 		};
 	

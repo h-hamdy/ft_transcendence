@@ -11,6 +11,7 @@ import { SocketContext, SocketProvider } from "./game/contexts/SocketContext"
 // import { SocketContext } from './contexts/SocketContext';
 import { useLocation } from "react-router-dom"
 import { TwofaAuth } from "./pages/TwofaAuth"
+import { ForOFor } from "./pages/ForOFor"
 
 const GameSetup = () =>
 {
@@ -33,7 +34,7 @@ function App() {
 			<Route path="/home" element={<Home/>}/>
 			<Route path="/2fa" element={<TwofaAuth/>}/>
 			<Route path={`/Profile/:username`} element={<Profile/>}/>
-			<Route path="error"/>
+			<Route path="/error" element={<ForOFor/>}/>
 			<Route path="Game" element={<GameSetup/>}/>
 			<Route path="Chat" element={<Chat/>}/>
         </Routes>

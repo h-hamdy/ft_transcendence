@@ -11,6 +11,7 @@ import { MbGameSettings } from "./MbGameSetting";
 import axios from "axios";
 import { useEffect } from "react";
 import rec from "/src/assets/rectangle.svg"
+import { useNavigate } from "react-router-dom";
 
 
 export function TwoFa ( ) {
@@ -24,6 +25,7 @@ export function TwoFa ( ) {
 	});
 	const [error, Seterror] = useState(false);
 	const [sent, Setsent] = useState(false);
+	const navigate = useNavigate();
 
 
 
@@ -66,6 +68,7 @@ export function TwoFa ( ) {
 			setData(`data:image/png;base64,${base64}`);
 		} catch (error) {
 			console.error('Error fetching data:', error);
+			navigate("/error");
 		}
 		};
 
@@ -108,6 +111,7 @@ export function TwoFa ( ) {
 		  setUserData(response.data);
 		} catch (error) {
 		  console.error("Error fetching user data:");
+			navigate("/error");
 		}
 	  };
 	
@@ -118,6 +122,7 @@ export function TwoFa ( ) {
 			setUserData(response.data);
 		  } catch (error) {
 			console.error("Error fetching user data:");
+			navigate("/error");
 		  }
 		};
 	

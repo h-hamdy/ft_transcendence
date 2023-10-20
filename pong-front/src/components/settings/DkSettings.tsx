@@ -6,9 +6,10 @@ import axios from "axios";
 import { GameSetting } from "./GameSettings";
 import { MbTwoFA } from "./MbTwoFA";
 import { MbGameSettings } from "./MbGameSetting";
-import { json } from "react-router-dom";
+import { json, useNavigate } from "react-router-dom";
 
 export function DkSettings () {
+	const navigate = useNavigate();
 
 	const [userData, setUserData] = useState({
 		user_data: {
@@ -34,6 +35,7 @@ export function DkSettings () {
 			setUserData(response.data);
 		  } catch (error) {
 			console.error("Error fetching user data:");
+			navigate("/error");
 		  }
 		};
 	

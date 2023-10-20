@@ -9,10 +9,11 @@ import { Achivement } from "../components/Profile/Achivement/Achivement";
 import { LatestMatches } from "../components/Home/LTSMatches/LatestMatches";
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 export function Profile() {
 	const { username } = useParams();
+	const navigate = useNavigate();
 
 
 	React.useEffect(() => {
@@ -51,6 +52,7 @@ export function Profile() {
         setUserData(response.data);
       } catch (error) {
         console.error("Error fetching user data:");
+		navigate("/error");
       }
     };
 

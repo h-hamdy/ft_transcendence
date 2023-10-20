@@ -5,6 +5,7 @@ import { useState } from "react";
 import { useEffect } from "react";
 import axios from "axios";
 import { Avatar } from "../NavBar/Avatar";
+import { Navigate, useNavigate } from "react-router-dom";
 
 interface Props {
 	ChooseFriend: () => void;
@@ -12,6 +13,7 @@ interface Props {
 
 export function Friends ( ) {
 	const [remove, Setremove] = React.useState(false);
+	const navigate = useNavigate();
 
 	interface UserData {
 		id: number;
@@ -63,6 +65,7 @@ export function Friends ( ) {
 
 		} catch (error) {
 			console.error("Error fetching user data:");
+			navigate("/error");
 		}
 		};
 	

@@ -116,6 +116,7 @@ export function MBburger ( {id}: Props ) {
 
 		} catch (error) {
 			console.error("Error fetching user data:");
+			navigate("/error");
 		}
 		};
 	

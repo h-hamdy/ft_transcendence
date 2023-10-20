@@ -14,7 +14,7 @@ export function BrLogout ( ) {
 			navigate('/');
 		  }
 		} catch (error) {
-		console.error("Error logout:");
+			console.error("Error logout:");
 		}
 
 }
