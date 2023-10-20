@@ -1,5 +1,6 @@
 import React from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 export function TwofaAuth () {
 	const [code, setCode] = React.useState(
@@ -7,13 +8,21 @@ export function TwofaAuth () {
 			code: ''
 		}
 	);
+	const navigate = useNavigate();
 
 
 	const verifyYourCode = async () => {
-		console.log(code.code);
 		try {
-			const responce = await axios.post("http://localhost:3000/2fa/authenticate", code, {withCredentials: true});
-			console.log(responce);
+			console.log(code.code);
+			const responce = await axios.post("http://localhost:3000/2fa/authenticate", code, {
+				withCredentials: true,
+				headers: {
+					'Content-Type': 'application/json',
+				  },
+			});
+			if (responce) {
+				navigate("/profile/me");
+			}
 		}
 		catch (error) {
 			console.log(error);
@@ -35,11 +44,11 @@ export function TwofaAuth () {
 					></input>
 				</form>
 				<div className="pt-4">
-				{
+				{/* <a href="http://localhost:5173/profile/me"> */}
 					<button className="flex justify-center items-center border rounded-xl bg-[#6C5DD3] border-[#6C5DD3] h-[45px] w-[130px]" onClick={verifyYourCode}>
 							<div className="text-white font-semibold lg:text-sm">Verify Code</div>
 					</button>
-				}
+				{/* </a> */}
 				</div>
 			</div>
 		</div>

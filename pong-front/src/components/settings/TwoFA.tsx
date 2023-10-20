@@ -10,37 +10,45 @@ import { MbSettings } from "./MbSettings";
 import { MbGameSettings } from "./MbGameSetting";
 import axios from "axios";
 import { useEffect } from "react";
+import rec from "/src/assets/rectangle.svg"
+
 
 export function TwoFa ( ) {
     const [remove, SetRemove] = React.useState(false);
 	const [profile, setProfile] = useState(false);
 	const [gameSetting, setgameSetting] = React.useState(false);
-	// const [enable, Setenable] = React.useState(false);
 	const [generate, setGenerate] = React.useState(false);
 	const [data, setData] = useState('');
 	const [code, setCode] = useState({
 		code: ''
 	});
+	const [error, Seterror] = useState(false);
+	const [sent, Setsent] = useState(false);
+
 
 
 	const handle2faOn = async () => {
 		try {
-			console.log("hasan d3if");
 			const response = await axios.post(`http://localhost:3000/2fa/turn-on`, code, { withCredentials: true })
 			.then (function (response) {
+				Setsent(true);
 			});
 		} catch (error) {
+			Seterror(true);
+			Setsent(false);
 			console.error('two-fa on:', error);
 			}
 		};
 
 		const handle2faOff = async () => {
 			try {
-			console.log("houssam nadi");
 				const response = await axios.post(`http://localhost:3000/2fa/turn-off`, code, { withCredentials: true })
 				.then (function (response) {
+					Setsent(true);
 				});
 			} catch (error) {
+				Seterror(true);
+				Setsent(false);
 				console.error('two-fa Off:', error);
 				}
 			};
@@ -147,15 +155,6 @@ export function TwoFa ( ) {
 								</div>
 							<div className="scrollable-div-ver7">
 								<div className="flex items-center justify-around">
-									{/* <div className="flex flex-col gap-[6px] items-center">
-										<div className="text-[#11142D] text-xl font-semibold">Setup 2FA</div>
-										<div>
-											<img src={pic} className="w-[80px] h-[80px] rounded-full"></img>
-										</div>
-										<div className="text-[#11142D] text-sm">Hhamdy</div>
-
-
-									</div> */}
 									<div className="flex-col items-center">
 										<div className="flex flex-col items-center pt-5 border border-[3px] border-[#BACCFD] rounded-custom w-[240px] h-[257px]">
 											<div className="text-[#BACCFD]">Install Google Auth</div>
@@ -192,8 +191,8 @@ export function TwoFa ( ) {
 								</button>
 								</div>
 								<div className="flex flex-col justify-center items-center pt-5 pb-10">
-										<div id="last" className="flex flex-col items-center pt-5 border border-[3px] border-[#BACCFD] rounded-custom w-[240px] h-[257px] pt-5">
-											<div className="text-[#888EFF] font-bold pb-16">Verify your device</div>
+										<div id="last" className="flex flex-col items-center border border-[3px] border-[#BACCFD] rounded-custom w-[240px] h-[257px] pt-5">
+											<div className="text-[#888EFF] font-bold pb-10">Verify your device</div>
 											<div className="text-[#888EFF] font-light pb-1">Enter your code</div>
 											<form className="flex  justify-center items-center rounded-xl h-[30px] w-[160px]">
 												<input className="flex rounded-xl text-[#888EFF] w-full h-full border bg-gray-100 border-[3px]  pr-3 pl-3 focus:border-[#6C5DD3] focus:outline-none text-center"
@@ -203,7 +202,39 @@ export function TwoFa ( ) {
 												}}
 												></input>
 											</form>
-											<div className="pt-4">
+											{
+												error ? 
+												<div className="pt-1">
+													<div className="border bg-[#E9DCE5] rounded-lg w-[170px] h-[25px]  flex gap-1 items-center justify-center">
+														<div className="text-xs font-semibold text-[#6C5DD3]">Invitation Code</div>
+														<div>
+															<div  style={{ backgroundImage: `url(${rec})`}} className="w-[14px] h-[14px] bg-center bg-no-repeat bg-cover">
+																<div className="text-white flex items-center justify-center text-xs font-semibold">
+																	!
+																</div>
+															</div>
+														</div>
+													</div>
+												</div> : null
+
+											}
+											{
+												sent ?
+												<div className="pt-1">
+													<div className="border bg-[#E9DCE5] rounded-lg w-[170px] h-[25px]  flex gap-1 items-center justify-center">
+														<div className="text-xs font-semibold text-[#6C5DD3]">Code Sent</div>
+														<div>
+															<div  style={{ backgroundImage: `url(${rec})`}} className="w-[14px] h-[14px] bg-center bg-no-repeat bg-cover">
+																<div className="text-white flex items-center justify-center text-xs font-semibold">
+																	!
+																</div>
+															</div>
+														</div>
+													</div>
+												</div> : null
+
+											}
+											<div className="pt-5">
 											
 											{
 												userData.user_data.is_two_factor_auth_enabled ?

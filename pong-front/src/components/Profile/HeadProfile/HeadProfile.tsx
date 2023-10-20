@@ -42,6 +42,7 @@ export function HeadProfile ( {profile, name, friendNum, me}: Props ) {
 	const handleSearch = () => {
 		Setsearch(!search);
 	}
+
 	
 	return (
 		<>

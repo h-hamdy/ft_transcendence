@@ -33,6 +33,7 @@ function App() {
 			<Route path="/home" element={<Home/>}/>
 			<Route path="/2fa" element={<TwofaAuth/>}/>
 			<Route path={`/Profile/:username`} element={<Profile/>}/>
+			<Route path="error"/>
 			<Route path="Game" element={<GameSetup/>}/>
 			<Route path="Chat" element={<Chat/>}/>
         </Routes>

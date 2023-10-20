@@ -47,6 +47,18 @@ export function DkSettings () {
         username: '',
       });
 
+	  var BASE_URL;
+	  const url = userData.user_data.avatar.substring(0, 30);
+	
+	  console.log(userData.user_data.avatar);
+	  if (url === "https://cdn.intra.42.fr/users/")
+		  BASE_URL = userData.user_data.avatar;	
+	  else
+		  BASE_URL = `http://localhost:3000/avatars/${userData.user_data.avatar}`;
+	
+		console.log(BASE_URL);
+	
+
 	const handleFileUpload = async (event: any) => {
 		try {
 
@@ -115,7 +127,7 @@ export function DkSettings () {
 							<div className="font-light text-sm text-[#808191]">Your Avatar</div>
 							<div className="flex gap-2 items-center">
 								<div className="w-[65px] h-[65px]">
-									<img src={`http://localhost:3000/avatars/${userData.user_data.avatar}`} className="rounded-full"></img>
+									<img src={BASE_URL} className="rounded-full"></img>	
 								</div>
 								<div className="flex flex-col gap-1">
 								<div className="flex gap-9">

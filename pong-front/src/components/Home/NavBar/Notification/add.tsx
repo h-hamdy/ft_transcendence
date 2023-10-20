@@ -6,15 +6,22 @@ import axios from "axios";
 export function Add () {
     const [remove, SetRemove] = React.useState(false);
 	const [friendName, SetfriendName] = React.useState<string>('');
+	const [error, SetError] = React.useState(false);
+	const [sent, Setsent] = React.useState(false);
+
+
 
 	const handleFormSubmit = async ( ) => {
-        try {
-          const response = await axios.post(`http://localhost:3000/add-friend/${friendName}`, null, { withCredentials: true })
-		  .then (function (response) {
-			console.log(response  + " Ach ban lik");
-		});
+		try {
+			const response = await axios.post(`http://localhost:3000/add-friend/${friendName}`, null, { withCredentials: true })
+			.then (function (response) {
+				SetError(false);
+				Setsent(true);
+			});
         } catch (error) {
           console.error('POST Add friend failed:', error);
+		  SetError(true);
+		  Setsent(false);
         }
       };
 
@@ -41,18 +48,38 @@ export function Add () {
 								  }}>
 								  </input>
                             </form>
-                            {/* <div className="absolute pt-[10px] lg:pt-[20px]">
-                                <div className="border bg-[#E9DCE5] rounded-lg w-[170px] h-[25px]  flex gap-1 items-center justify-center">
-                                    <div className="text-xs font-semibold text-[#6C5DD3]">This user not found</div>
-                                    <div>
-                                        <div  style={{ backgroundImage: `url(${rec})`}} className="w-[14px] h-[14px] bg-center bg-no-repeat bg-cover">
-                                            <div className="text-white flex items-center justify-center text-xs font-semibold">
-                                                !
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div> */}
+							{
+								error ? 
+								<div className="absolute pt-[10px] lg:pt-[20px]">
+									<div className="border bg-[#E9DCE5] rounded-lg w-[170px] h-[25px]  flex gap-1 items-center justify-center">
+										<div className="text-xs font-semibold text-[#6C5DD3]">Invitation Not Valid</div>
+										<div>
+											<div  style={{ backgroundImage: `url(${rec})`}} className="w-[14px] h-[14px] bg-center bg-no-repeat bg-cover">
+												<div className="text-white flex items-center justify-center text-xs font-semibold">
+													!
+												</div>
+											</div>
+										</div>
+									</div>
+								</div> : null
+
+							}
+							{
+								sent ? 
+								<div className="absolute pt-[10px] lg:pt-[20px]">
+									<div className="border bg-[#E9DCE5] rounded-lg w-[170px] h-[25px]  flex gap-1 items-center justify-center">
+										<div className="text-xs font-semibold text-[#6C5DD3]">Invitation Send</div>
+										<div>
+											<div  style={{ backgroundImage: `url(${rec})`}} className="w-[14px] h-[14px] bg-center bg-no-repeat bg-cover">
+												<div className="text-white flex items-center justify-center text-xs font-semibold">
+													!
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+								: null
+							}
                         </div>
 
 

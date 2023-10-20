@@ -93,7 +93,7 @@ export function Profile() {
             </div>
           </div>
           <ProfileCard
-            profile={`http://localhost:3000/avatars/${userData.user_data.avatar}`}
+            profile={BASE_URL}
             name={userData.user_data.username}
             winNum={userData.wins.toString()}
             LoseNum={userData.loses.toString()}
