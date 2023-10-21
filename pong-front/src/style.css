@@ -693,9 +693,9 @@ video {
 }
 
 .scrollable-div-ver5{
-	height: 400px;
+	/* height: 10px; */
 	/* Adjust the height as needed */
-	overflow: auto;
+	/* overflow: auto; */
 }
 
 .scrollable-div-ver6{
