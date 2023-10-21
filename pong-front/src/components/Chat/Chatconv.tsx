@@ -16,7 +16,7 @@ export function Chatconv() {
 
 		  <div className="fixed inset-0 bg-white z px-8 lg:hidden">
 			<div className="w-full h-full flex flex-col">
-			  <div className="pt-28 text-white text-xl py-2">
+			  <div className="text-white text-xl py-2">
 				<div className="flex items-center justify-between">
 				  <div className="text-[#1B1D21]">Hamouu</div>
 				  <button

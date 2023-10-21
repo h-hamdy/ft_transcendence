@@ -7,7 +7,7 @@ export function MbChat () {
 
 	return (
 		<>
-			<div className="pr-8 pl-8 pt-28 lg:pl-32 lg:w-6/12">
+			<div className="pr-8 pl-8 pt-28 lg:pl-32">
 				<DirectMsg/>
 				<div className="pt-8">
 					{/* <GroupMsg/> */}
