@@ -21,7 +21,7 @@ export function Chatprofile ( { isClicked, onClick }: Props ) {
 				<div className="relative flex items-center justify-center border border-[2px] border-[#0049C6] rounded-full w-[48px] h-[48px]">
 					<img src={avatar} className="bbc rounded-full w-[40px] h-[40px]" alt="Avatar" />
 					<div className="absolute top-0 mt-[-3px] lg:mt-[-10px] lg:mr-[-10px] right-0 mr-[-5px]">
-					<Enline />
+					{/* <Enline /> */}
 					</div>
 					</div>
 					<div>
@@ -29,7 +29,7 @@ export function Chatprofile ( { isClicked, onClick }: Props ) {
 					<div className={`pl-3 Inter text-sm lg:text-sm font-meduim ${isClicked ? 'text-white' : 'text-[#808191CC]'}`}>3m ago</div>
 				</div>
 				</button>
-				{isClicked && <Chatconv/>}
+				{/* {isClicked && <Chatconv/>} */}
 				{isClicked && <DkChatConv/>}
 			</div>
 

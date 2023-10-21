@@ -12,17 +12,7 @@ import { SocketContext, SocketProvider } from "./game/contexts/SocketContext"
 import { useLocation } from "react-router-dom"
 import { TwofaAuth } from "./pages/TwofaAuth"
 import { ForOFor } from "./pages/ForOFor"
-
-const GameSetup = () =>
-{
-  const {state} = useLocation();
-
-  return (
-    <SocketProvider gameDuration={state.gameDuration}>
-      <Game/>
-    </SocketProvider>
-  );
-}
+import { GameSetup } from "./components/Game/GameSetup"
 
 function App() {
 
@@ -35,8 +25,8 @@ function App() {
 			<Route path="/2fa" element={<TwofaAuth/>}/>
 			<Route path={`/Profile/:username`} element={<Profile/>}/>
 			<Route path="/error" element={<ForOFor/>}/>
-			<Route path="Game" element={<GameSetup/>}/>
-			<Route path="Chat" element={<Chat/>}/>
+			<Route path="/Game" element={<GameSetup/>}/>
+			<Route path="/Chat" element={<Chat/>}/>
         </Routes>
     </BrowserRouter>
   )

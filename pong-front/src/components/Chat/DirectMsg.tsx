@@ -8,7 +8,7 @@ export function DirectMsg () {
 	const [Up, setUp] = React.useState(false);
 
 	const handleClick = (index: number) => {
-		const newButtonStates = Array(17).fill(false);
+		const newButtonStates = Array(1).fill(false);
 		newButtonStates[index] = !newButtonStates[index];
 		setButtonStates(newButtonStates);
 	  };
@@ -26,7 +26,7 @@ export function DirectMsg () {
 		{
 		Up ? null : (
 			<>
-			<div className="scrollable-div-ver5 flex flex-col">
+			<div className="flex flex-col overflow-auto">
 				{buttonStates.map((isClicked, index) => (
 					<Chatprofile
 					onClick={() => handleClick(index)}
@@ -34,7 +34,7 @@ export function DirectMsg () {
 					/>
 					))}
 				</div>
-				<div className="border border-gray-300 bt-[5px]"></div>
+				{/* <div className="border border-gray-300 bt-[5px]"></div> */}
 			</>
 		)
 	}

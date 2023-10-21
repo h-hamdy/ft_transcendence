@@ -56,5 +56,4 @@ body, html, #root {
     width: 100vw; /* 100% of the viewport width */
     height: 100vh; /* 100% of the viewport height */
     /* Add any other styles you want here */ 
-	overflow-x: hidden;
 }

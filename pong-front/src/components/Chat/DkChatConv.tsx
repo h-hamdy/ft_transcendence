@@ -29,20 +29,6 @@ export function DkChatConv () {
   
 			  <div className="px-8 h-[100%] scrollable-container lg:pt-10">
 				<Msg profile="/src/assets/hkhalil.jpg" name="hassan" time="2m ago" msg="ach wach"/>
-				<Msg profile="/src/assets/hkhalil.jpg" name="hassan" time="2m ago" msg="ach"/>
-				<Msg profile="/src/assets/hkhalil.jpg" name="hassan" time="2m ago" msg="ach    "/>
-				<Msg profile="/src/assets/hkhalil.jpg" name="hassan" time="2m ago" msg="  "/>
-				<Msg profile="/src/assets/hkhalil.jpg" name="hassan" time="2m ago" msg=" wach "/>
-				<Msg profile="/src/assets/hkhalil.jpg" name="hassan" time="2m ago" msg="ach wach "/>
-				<Msg profile="/src/assets/hkhalil.jpg" name="hassan" time="2m ago" msg="ach wach "/>
-				<Msg profile="/src/assets/hkhalil.jpg" name="hassan" time="2m ago" msg="ach wach "/>
-				<Msg profile="/src/assets/hkhalil.jpg" name="hassan" time="2m ago" msg="ach wach "/>
-				<Msg profile="/src/assets/hkhalil.jpg" name="hassan" time="2m ago" msg="ach wach "/>
-				<Msg profile="/src/assets/hkhalil.jpg" name="hassan" time="2m ago" msg="ach wach "/>
-				<Msg profile="/src/assets/hkhalil.jpg" name="hassan" time="2m ago" msg="ach wach "/>
-				<Msg profile="/src/assets/hkhalil.jpg" name="hassan" time="2m ago" msg="ach wach "/>
-				<Msg profile="/src/assets/hkhalil.jpg" name="hassan" time="2m ago" msg="ach wach "/>
-
 			  </div>
   
 			  <div className="flex flex-col items-center justify-center py-5">

@@ -4,11 +4,16 @@ import { FriendPoints } from "../../Profile/MyFriends/Friendpoints";
 import { Friends } from "../Friends/friends";
 import { Route, Routes, useNavigate } from "react-router-dom";
 import { Game } from "../../../pages/Game";
+import { useState } from "react";
+import { useEffect } from "react";
+import axios from "axios";
 
 interface Props {
     TableType: string,
     GameType: string,
     imgPath: string,
+    username: string,
+    user_id: number,
 }
 
 
@@ -20,31 +25,35 @@ interface customParam
 
 const  Param : customParam = 
 {
-  // gameMode  : 'simple',
+
   gameDuration: '1',
 }
 
-export function GameCard({ TableType, GameType, imgPath }: Props) {
+
+
+export function GameCard({ TableType, GameType, imgPath, user_id }: Props) {
   const navigate = useNavigate();
   const [showFriends, setShowFriends] = React.useState(false);
   const [chooseFr, setChooseFr] = React.useState(false);
+
   if (GameType == "Bot Game")
 	sessionStorage.setItem("Timer", "5");
-
   const handleClick = () => {
+    
     console.log(GameType);
-    if (GameType === "1") {
+    if (GameType === "0") {
       // If GameType is 1, set the state to show Friends component
       setShowFriends(true);
     } else {
       // If GameType is not 1, navigate to '/game'
-      navigate('/game', { state: { gameDuration: GameType } });
+      navigate('/game', { state: { gameDuration: GameType, user_id: user_id } });
     }
   };
 
   const handleFriendsClose = () => {
     
-    navigate('/game', { state: { gameDuration: GameType } });
+    console.log("me = " + user_id);
+    navigate('/game', { state: { gameDuration: GameType, user_id: user_id} });
   };
 
   return (

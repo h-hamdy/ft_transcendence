@@ -1,9 +1,41 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { GameCard } from "../Home/GameCard/GameCard";
 import rmv from "/src/assets/remove.svg"
-
+import axios from "axios";
+// import { useEffect } from "react";
 export function GameMode () {
 	const [remove, Setremove] = useState(false);
+
+	const [userData, setUserData] = useState({
+	user_data: {
+		id: 0,
+		username: "",
+		avatar: "",
+		rating: 0,
+		me: false,
+		is_two_factor_auth_enabled: false,
+	},
+	friends: [],
+	match_history: [],
+	achievements: [],
+	wins: 0,
+	loses: 0,
+	draws: 0,
+	});
+
+	useEffect(() => {
+	const fetchData = async () => {
+		try {
+		// const response = await axios.get(http://localhost:3000/profile/${username}, { withCredentials: true });
+		const response = await axios.get('http://localhost:3000/profile/me', {withCredentials: true})
+		setUserData(response.data);
+		} catch (error) {
+		console.error("Error fetching user data:");
+		}
+	};
+
+	fetchData();
+	}, []);
 
 	const handleremove = () => {
 		Setremove(!remove);
@@ -25,9 +57,9 @@ export function GameMode () {
 									</button>
 								</div>
 							<div className="flex lg:flex-row overflow-x-auto pt-3">
-								<GameCard TableType="AI Table" GameType="5" imgPath="/src/assets/Bot_Img.png"/>
-								<GameCard TableType="world Table" GameType="2" imgPath="/src/assets/3_win_game.png"/>
-								<GameCard TableType="friend Table" GameType="1" imgPath="/src/assets/7_win_game.png"/>
+								<GameCard TableType="AI Table" GameType="5" imgPath="/src/assets/Bot_Img.png" user_id={userData.user_data.id}/>
+								<GameCard TableType="world Table" GameType="2" imgPath="/src/assets/3_win_game.png" user_id={userData.user_data.id}/>
+								<GameCard TableType="friend Table" GameType="1" imgPath="/src/assets/7_win_game.png" user_id={userData.user_data.id}/>
 							</div>
 							</div>
 						</div>
