@@ -14,7 +14,11 @@ import rec from "/src/assets/rectangle.svg"
 import { useNavigate } from "react-router-dom";
 
 
-export function TwoFa ( ) {
+interface Props {
+	hide: () => void;
+}
+
+export function TwoFa ( {hide}:Props ) {
     const [remove, SetRemove] = React.useState(false);
 	const [profile, setProfile] = useState(false);
 	const [gameSetting, setgameSetting] = React.useState(false);
@@ -141,7 +145,7 @@ export function TwoFa ( ) {
 								<div className="flex justify-between">
 									<div className="text-[#11142D] font-semibold text-lg p-10">Account Settings</div>
 									<div className="pt-8 pr-[37px]">
-										<button onClick={() => SetRemove(!remove)} className="flex items-center justify-center border border-white rounded-full w-[48px] h-[48px] lg:w-[50px] h-[50px] shadow-xl">
+										<button onClick={() => {SetRemove(!remove); hide()}} className="flex items-center justify-center border border-white rounded-full w-[48px] h-[48px] lg:w-[50px] h-[50px] shadow-xl">
 											<img src={rmv}></img>
 										</button>
 									</div>
@@ -269,13 +273,13 @@ export function TwoFa ( ) {
 		}
 		{ profile &&
 			<div>
-				<DkSettings/>
+				<DkSettings  hide={hide}/>
 				<MbSettings/>
 			</div>
 		}
 		{ gameSetting &&
 			<div>
-				<GameSetting/>
+				<GameSetting  hide={hide}/>
 				<MbGameSettings/>
 			</div>
 		}

@@ -9,6 +9,7 @@ import { useEffect, useState } from "react";
 
 import { useContext , createContext} from "react";
 import { Scorecontext } from "../game/components/Sketch";
+import React from "react";
 
 
 
@@ -19,7 +20,7 @@ import { Scorecontext } from "../game/components/Sketch";
 // }
 
 export function Game () {
-		const socket = useContext(SocketContext);
+	const socket = useContext(SocketContext);
 
 	return (
 		<>

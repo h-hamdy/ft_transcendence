@@ -8,7 +8,11 @@ import { MbTwoFA } from "./MbTwoFA";
 import { MbGameSettings } from "./MbGameSetting";
 import { json, useNavigate } from "react-router-dom";
 
-export function DkSettings () {
+interface Props {
+	hide: () => void;
+}
+
+export function DkSettings ( {hide}: Props ) {
 	const navigate = useNavigate();
 
 	const [userData, setUserData] = useState({
@@ -21,6 +25,7 @@ export function DkSettings () {
 		  is_two_factor_auth_enabled: false,
 		},
 		friends: [],
+		blocks: [],
 		match_history: [],
 		achievements: [],
 		wins: 0,
@@ -106,7 +111,7 @@ export function DkSettings () {
 						<div className="flex justify-between">
 							<div className="text-[#11142D] font-semibold text-lg p-10">Account Settings</div>
 							<div className="pt-8 pr-5">
-								<button onClick={() => SetRemove(!remove)} className="flex items-center justify-center border border-white rounded-full w-[48px] h-[48px] lg:w-[50px] h-[50px] shadow-xl">
+								<button onClick={() => {SetRemove(!remove); hide();}} className="flex items-center justify-center border border-white rounded-full w-[48px] h-[48px] lg:w-[50px] h-[50px] shadow-xl">
 									<img src={rmv}></img>
 								</button>
 							</div>
@@ -117,7 +122,7 @@ export function DkSettings () {
 							<button  className={`flex items-center justify-center border  border-[2px] w-[120px] h-[35px] rounded-xl bg-[#6C5DD3] border-[#6C5DD3]`} >
 								<div className={`text-white font-semibold`}>Your Profile</div>
 							</button> 
-							<button className={`flex bg-[#6C5DD3] border-[#6C5DD3] items-center justify-center border border-[2px] bg-white border-[#FF754C] w-[100px] h-[35px] rounded-xl`} onClick={() => {setTwoFa(!twoFA), SetRemove(!remove)}}>
+							<button className={`flex bg-[#6C5DD3] border-[#6C5DD3] items-center justify-center border border-[2px] bg-white border-[#FF754C] w-[100px] h-[35px] rounded-xl`} onClick={() => {setTwoFa(!twoFA); SetRemove(!remove)}}>
 								<div className={`font-semibold text-balck`}>2FA</div>
 							</button>
 							<button className={`flex items-center justify-center border  border-[2px] w-[120px] h-[35px] rounded-xl bg-white border-[#FF754C]`} onClick={() => {setgameSetting(!gameSetting), SetRemove(!remove)}}>
@@ -174,13 +179,13 @@ export function DkSettings () {
 		}
 		{ twoFA &&
 			<div>
-				<TwoFa/>
+				<TwoFa  hide={hide}/>
 				<MbTwoFA/>
 			</div>
 		}
 		{ gameSetting &&
 			<div>
-				<GameSetting/>
+				<GameSetting  hide={hide}/>
 				<MbGameSettings/>
 			</div>
 		}

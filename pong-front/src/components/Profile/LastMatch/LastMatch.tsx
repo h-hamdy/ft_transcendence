@@ -1,5 +1,6 @@
 import calendar from "/src/assets/Calendar.svg";
 import divide from "/src/assets/divide.svg";
+import React from "react";
 
 interface Props {
   date: string;
@@ -56,10 +57,12 @@ export function LastMatch({ date, name1, profile1, name2, profile2 }: Props) {
             <div className="flex items-center gap-[15px]">
             <div className="font-bold text-3xl text-[#14D1A4] mobile-nav-bar sm:hidden xl:block pr-4">6</div>
             <div className="text-xl font-bold text-[#121212] sm:hidden mobile-nav-bar xl:block">{name2}</div>
+			<a href={`/profile/${name2}`}>
             <img
               src={profile2}
               className="w-[80px] h-[80px] xl:w-[60px] xl:h-[60px] rounded-full mobile-nav-bar sm:hidden xl:block"
             ></img>
+			</a>
             </div>
             </div>
 			</div>

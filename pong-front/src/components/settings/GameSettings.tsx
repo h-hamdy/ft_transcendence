@@ -10,10 +10,18 @@ import { DkSettings } from "./DkSettings";
 import { MbSettings } from "./MbSettings";
 import { MbTwoFA } from "./MbTwoFA";
 
+import { useEffect } from "react";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
-export function GameSetting  () {
+interface Props {
+	hide: () => void;
+}
+
+export function GameSetting  ( {hide}:Props ) {
 
 	const [remove, SetRemove] = React.useState(false);
+	const navigate = useNavigate();
 
 	const timeButton: { [key: string]: string } = {
 		button1: "white",
@@ -68,6 +76,73 @@ export function GameSetting  () {
 	
 	const [twoFA, setTwoFa] = useState(false);
 	const [profile, setProfile] = useState(false);
+
+	interface UserData {
+		id: number;
+		username: string;
+		avatar: string;
+		rating: number;
+		me: boolean;
+		is_two_factor_auth_enabled: boolean;
+	  }
+	  
+	  interface Friend {
+		id: number;
+		username: string;
+		avatar: string;
+	  }
+
+	  interface Blocks {
+		id: number;
+		username: string;
+		avatar: string;
+	  }
+	  
+	  interface UserState {
+		user_data: UserData;
+		friends: Friend[];
+		blocks: Blocks[];
+		match_history: any[];
+		achievements: any[];
+		wins: number;
+		loses: number;
+		draws: number;
+	  }
+	  
+	  const [userData, setUserData] = useState<UserState>({
+		user_data: {
+		  id: 0,
+		  username: "",
+		  avatar: "",
+		  rating: 0,
+		  me: false,
+		  is_two_factor_auth_enabled: false,
+		},
+		friends: [],
+		blocks: [],
+		match_history: [],
+		achievements: [],
+		wins: 0,
+		loses: 0,
+		draws: 0,
+	  });
+
+	  useEffect(() => {
+			const fetchData = async () => {
+			try {
+				const response = await axios.get(`http://localhost:3000/profile/me`, { withCredentials: true });
+				setUserData(response.data);
+				
+			} catch (error) {
+				console.error("Error fetching user data:");
+				navigate("/error");
+			}
+		};
+		
+		fetchData();
+	}, []);
+
+	// console.log(userData.blocks[0].username);
 	
 	return (
 		<>
@@ -81,7 +156,7 @@ export function GameSetting  () {
 						<div className="flex justify-between">
 							<div className="text-[#11142D] font-semibold text-lg p-10">Game settings</div>
 							<div className="pt-8 pr-5">
-								<button onClick={() => SetRemove(!remove)} className="flex items-center justify-center border border-white rounded-full w-[48px] h-[48px] lg:w-[50px] h-[50px] shadow-xl">
+								<button onClick={() => {SetRemove(!remove), hide()}} className="flex items-center justify-center border border-white rounded-full w-[48px] h-[48px] lg:w-[50px] h-[50px] shadow-xl">
 									<img src={rmv}></img>
 								</button>
 							</div>
@@ -138,21 +213,14 @@ export function GameSetting  () {
 							<div className="flex flex-col items-center justify-center gap-[10px] px-5">
 							<div className="text-sm text-[#808191]">Blocked user</div>
 								<div className="flex overflow-y-auto gap-[10px] flex-wrap w-full h-[120px] px-3 py-3 border-[2px] border-[#6C5DD3] rounded-xl">
-									<Deblock name="Haassan"/>
-									<Deblock name="Haassan"/>
-									<Deblock name="Haassan"/>
-									<Deblock name="Haassan"/>
-									<Deblock name="Haassan"/>
-									<Deblock name="Haassan"/>
-									<Deblock name="Haassan"/>
-									<Deblock name="Haassan"/>
-									<Deblock name="Haassan"/>
-									<Deblock name="Haassan"/>
-									<Deblock name="Haassan"/>
-									<Deblock name="Haassan"/>
-									<Deblock name="Haassan"/>
-									<Deblock name="Haassan"/>
-									<Deblock name="Haassan"/>
+									<div>
+									{userData.blocks.map((block, index: number) => (
+										<div key={index}>
+											<Deblock name={block.username}/>
+										</div>
+									))
+									}
+								</div>
 								</div>
 								<div></div>
 								<button className="flex justify-center items-center border rounded-xl bg-[#6C5DD3] border-[#6C5DD3] h-[45px] w-[100px]">
@@ -169,13 +237,13 @@ export function GameSetting  () {
 			}
 			{ twoFA &&
 				<div>
-					<TwoFa/>
+					<TwoFa hide={hide}/>
 					<MbTwoFA/>
 				</div>
 			}
 			{ profile &&
 				<div>
-					<DkSettings/>
+					<DkSettings hide={hide}/>
 					<MbSettings/>
 				</div>
 			}

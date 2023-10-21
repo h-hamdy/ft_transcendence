@@ -2,8 +2,13 @@ import { useEffect, useState } from "react"
 import { GameCard } from "../Home/GameCard/GameCard";
 import rmv from "/src/assets/remove.svg"
 import axios from "axios";
-// import { useEffect } from "react";
-export function GameMode () {
+import React from "react";
+
+interface Props {
+	hide: () => void;
+}
+
+export function GameMode ( {hide}: Props ) {
 	const [remove, Setremove] = useState(false);
 
 	const [userData, setUserData] = useState({
@@ -16,6 +21,7 @@ export function GameMode () {
 		is_two_factor_auth_enabled: false,
 	},
 	friends: [],
+	blocks: [],
 	match_history: [],
 	achievements: [],
 	wins: 0,
@@ -26,7 +32,6 @@ export function GameMode () {
 	useEffect(() => {
 	const fetchData = async () => {
 		try {
-		// const response = await axios.get(http://localhost:3000/profile/${username}, { withCredentials: true });
 		const response = await axios.get('http://localhost:3000/profile/me', {withCredentials: true})
 		setUserData(response.data);
 		} catch (error) {
@@ -37,9 +42,6 @@ export function GameMode () {
 	fetchData();
 	}, []);
 
-	const handleremove = () => {
-		Setremove(!remove);
-	}
 	return (
 		<>
 			{
@@ -50,7 +52,7 @@ export function GameMode () {
 								<div className="flex items-center justify-between px-10 pt-5 lg:pt-0">
 									<div className="flex items-center justify-center text-xl p-5 pt-5 text-[#11142D] font-bold">Game Mode</div>
 									<button
-										onClick={handleremove}
+										onClick={() => {Setremove(!remove); hide();}}
 										className="flex items-center justify-center border border-white rounded-full w-12 h-12 shadow-xl"
 									>
 										<img src={rmv} alt="Remove"/>

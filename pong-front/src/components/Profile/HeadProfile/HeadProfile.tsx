@@ -5,6 +5,7 @@ import check from "/src/assets/check.svg"
 import play from "/src/assets/Game.svg"
 import plusFriend from "/src/assets/PersonPlusFill.svg"
 import Friendadded from "/src/assets/Friends.svg"
+import block from "/src/assets/block.svg"
 import { Add } from "../../Home/NavBar/Notification/add"
 import axios from "axios"
 import { useEffect } from "react"
@@ -43,6 +44,14 @@ export function HeadProfile ( {profile, name, friendNum, me}: Props ) {
 		Setsearch(!search);
 	}
 
+	const blockFriend = async () => {
+		try {
+			const response = await axios.post(`http://localhost:3000/block-friend/${name}`, null, {withCredentials: true}).then (function(response) {console.log(response)})
+		}
+		catch (error) {
+			console.log(error);
+		}
+	}
 	
 	return (
 		<>
@@ -85,7 +94,7 @@ export function HeadProfile ( {profile, name, friendNum, me}: Props ) {
 								<button className={`flex items-center justify-center border border-[#6C5DD3] bg-[#6C5DD3] w-[50px] h-[45px] shadow rounded-xl`} onClick={handleSearch}>
 									<img src={plusFriend} className="w-[24px] h-[24px]"></img>
 								</button>
-								<Add/>
+								<Add hide={() => {Setsearch(!search)}}/>
 							</>
 							:
 							<button className={`flex items-center justify-center border border-[#6C5DD3] bg-[#6C5DD3] w-[50px] h-[45px] shadow rounded-xl`} onClick={handleSearch}>
@@ -101,12 +110,17 @@ export function HeadProfile ( {profile, name, friendNum, me}: Props ) {
 						<button className="flex items-center justify-center pb-[4px] border border-[#6C5DD3] bg-[#6C5DD3] w-[50px] h-[45px] shadow rounded-xl" onClick={handleMode}>
 							<img src={play}></img>
 						</button>
+						{
+							me ? null :
+							<button className={`flex items-center justify-center border w-[50px] border-[#6C5DD3] bg-[#6C5DD3] h-[45px] shadow rounded-xl`} onClick={blockFriend}>
+								<img src={block} className="w-[24px] h-[24px]"></img>
+							</button>
+						}
 					</div>
 				</div>
 			</div>
 		</div>
-
-		{ gameMode && <GameMode/> }
+		{ gameMode && <GameMode hide={()=> setGameMode(!gameMode)}/>}
 		</>
 	)
 }

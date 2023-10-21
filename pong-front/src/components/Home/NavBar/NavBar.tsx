@@ -13,7 +13,7 @@ interface Props {
 	id: number
 }
 
-export function NavBar( { avatar, id }: Props ) {
+export function NavBar( { avatar, id, username }: Props ) {
   const [showNotif, setShowNotif] = React.useState(false);
   const [showBurger, setShowBurger] = React.useState(false);
   
@@ -24,7 +24,7 @@ export function NavBar( { avatar, id }: Props ) {
           <div className="border h-24 sm:h-20">
             <div className="flex justify-between items-center h-full px-7">
               <div>
-                <Burger clicked={() => setShowBurger(!showBurger)} />
+                <Burger clicked={() => setShowBurger(!showBurger)}/>
                 <div className="fixed left-0 top-0 bg-white zz sm:hidden lg:block mobile-nav-bar">
                   <MBburger id={id}/>
                 </div>
@@ -37,7 +37,7 @@ export function NavBar( { avatar, id }: Props ) {
                   />
                 </div>
                 <div className="lg:pr-16">
-                  <Avatar avatar={avatar} />
+                  <Avatar avatar={avatar} name={username} />
                 </div>
               </div>
             </div>

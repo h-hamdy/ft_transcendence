@@ -21,7 +21,7 @@ function App() {
         <Routes>
 			<Route path="/set_username" element={<SetUsername />}/>
 			<Route path="/" element={<SignIn/>}/>
-			<Route path="/home" element={<Home/>}/>
+			{/* <Route path="/home" element={<Home/>}/> */}
 			<Route path="/2fa" element={<TwofaAuth/>}/>
 			<Route path={`/Profile/:username`} element={<Profile/>}/>
 			<Route path="/error" element={<ForOFor/>}/>
