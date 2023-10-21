@@ -32,7 +32,7 @@ export function HeadProfile ( {profile, name, friendNum, me}: Props ) {
 		try {
 			const response = await axios.post(`http://localhost:3000/add-friend/${name}`, null, { withCredentials: true })
 			.then (function (response) {
-			setClick(!clicked);
+				setClick(true);	
 			});
 		} catch (error) {
 			console.error('POST friend failed:', error);

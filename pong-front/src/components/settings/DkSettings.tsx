@@ -129,7 +129,7 @@ export function DkSettings () {
 							<div className="font-light text-sm text-[#808191]">Your Avatar</div>
 							<div className="flex gap-2 items-center">
 								<div className="w-[65px] h-[65px]">
-									<img src={BASE_URL} className="rounded-full"></img>	
+									<img src={BASE_URL} width="65px" height="65px"  className="rounded-full object-cover bg-cover"></img>	
 								</div>
 								<div className="flex flex-col gap-1">
 								<div className="flex gap-9">
