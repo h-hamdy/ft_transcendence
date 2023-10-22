@@ -128,7 +128,9 @@ export function MBburger ( {id}: Props ) {
 		<>
 		<div className="h-screen border w-[112px] flex justify-center">
 			<div className="flex flex-col gap-3 items-center pt-4">
+			<a href="/profile/me">
 				<img src={logo} className="w-[90px] h-[90px] pb-8"></img>
+			</a>
 			<a href="/profile/me">
 				<button onClick={() => {handleClick('button2', 'img2')}} style={{ backgroundColor: buttonColors.button2 }} className={`p-3 border shadow-md border-white w-[50px] h-[50px]  flex items-center justify-center rounded-2xl `}>
 				<svg width="20" height="20" viewBox="0 0 18 21" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -217,7 +219,7 @@ export function MBburger ( {id}: Props ) {
 		{game &&
 			<div>
 				<GameMode hide={() => Setgame(!game)}/>
-				<MbGameMode/>
+				<MbGameMode hide={() => Setgame(!game)}/>
 			</div> 
 		}
 		</>

@@ -1,9 +1,7 @@
 import Authentication from "../components/Enbording/Authentication";
-import Google from "../components/Enbording/Google";
-import DiscoverMore from "../components/Enbording/DiscoverMore"
-import { Cards } from "../components/Enbording/Cards"
 import Logo from "../assets/mainLogo.svg"
 import background from "/src/assets/onboarding.png"
+import React from "react";
 
 export function SignIn() {
     return (
@@ -12,12 +10,9 @@ export function SignIn() {
                 <div>
                     <img src={background} className="hidden sm:block absolute bg-fixed bg-no-repeat bg-cover bg-center h-full w-full blur-lg"></img>
                 </div> 
-                <div className="bba flex h-full w-screen justify-around items-center">
+                <div className="flex h-full w-screen items-center justify-center">
                 <div className="hidden sm:hidden md:hidden lg:block">
-                <div>
-
-                </div>
-                <div className="flex h-full justify-center items-center">
+                {/* <div className="flex h-full justify-center items-center">
                     <div className="flex flex-col h-screen gap-05 justify-center items-center">
 
                         <div className="zz">
@@ -44,10 +39,14 @@ export function SignIn() {
                             <DiscoverMore/>
                         </div>
                     </div>
-                    </div>
+                    </div> */}
                 </div>
-                <div className="h-full flex justify-center items-center">
-                <div className="border hidden sm:block drop-shadow-sm bg-gray-100 border-white-800 shadow-lg rounded-[40px] w-96 h-[350px]">
+                <div className="flex justify-center items-center">
+				<div className="flex flex-col justify-center items-center gap-10 pb-10">
+				<div className="zz">
+					<img src={Logo} width="120px" height="120px"></img>
+				</div>
+                <div className="border hidden sm:block drop-shadow-sm bg-gray-100 border-white-800 shadow-lg rounded-[40px] w-96 h-[290px]">
                     <div className="pt-11 pl-10 text-4xl font-semibold">
                         Sign In
                     </div>
@@ -63,11 +62,8 @@ export function SignIn() {
                         <div className="pl-10 pt-16 font-semibold text-sm drop-shadow-lg">
                             <Authentication/>
                         </div>
-                    </div>  
+				</div>
                     <div>
-                        <div className="pl-10 pt-4 font-semibol text-sm drop-shadow-sm">
-                            <Google/>
-                        </div>
                     </div>
                 </div>
                 <div className="mobile-show sm:hidden zz">
@@ -78,10 +74,8 @@ export function SignIn() {
                     </div>
                     <div className="pl-10 pt-16 font-semibold text-sm drop-shadow-lg">
                             <Authentication/>
+				</div>
                         </div>
-                    </div>
-                     <div className="pl-10 pt-4 font-semibol text-sm drop-shadow-sm">
-                            <Google/>
                     </div>
                 </div>
                 </div>

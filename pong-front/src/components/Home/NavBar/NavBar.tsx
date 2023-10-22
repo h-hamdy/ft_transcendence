@@ -4,7 +4,6 @@ import { Notification } from "./Notification/Notification";
 import { Avatar } from "./Avatar";
 import { Notif } from "./Notification/notif";
 import { Brb } from "./Burger/Brb";
-// import { Home } from "../../../pages/Home";
 import { MBburger } from "./Burger/MBburger";
 
 interface Props {

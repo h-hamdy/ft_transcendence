@@ -1,3 +1,5 @@
+import React from "react"
+
 interface Props {
     profile: string,
     name: string,
@@ -8,6 +10,7 @@ export function BrFriends ( {profile, name, status}: Props ) {
 
     return (
         <>
+		<a href={`/profile/${name}`}>
             <button className="flex items-center pt-5">
                 <div className="w-[24px] h-[24px]">
                     <img src={profile} className="rounded-full"></img>
@@ -19,6 +22,7 @@ export function BrFriends ( {profile, name, status}: Props ) {
                     <img src={status} className="pr-16"></img>
                 </div>
             </button>
+		</a>
         </>
     )
 }

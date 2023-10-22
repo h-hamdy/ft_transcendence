@@ -10,6 +10,7 @@ import { Add } from "../../Home/NavBar/Notification/add"
 import axios from "axios"
 import { useEffect } from "react"
 import React from "react"
+import { MbGameMode } from "../MbGameMode"
 
 interface Props {
 	profile: string,
@@ -120,7 +121,12 @@ export function HeadProfile ( {profile, name, friendNum, me}: Props ) {
 				</div>
 			</div>
 		</div>
-		{ gameMode && <GameMode hide={()=> setGameMode(!gameMode)}/>}
+		{ gameMode && 
+			<div>
+				<GameMode hide={()=> setGameMode(!gameMode)}/>
+				<MbGameMode hide={()=> setGameMode(!gameMode)}/>
+			</div>
+		}
 		</>
 	)
 }

@@ -27,8 +27,8 @@ export function BrSettings ( {buttonColors, strokeColor, handleClick}: Props ) {
                 <div className={`pl-4 text-[${strokeColor.img6}] font-semibold text-base`}>Settings</div>
             </button>
 		</div>
-		{ settings && <DkSettings/> }
-		{ settings && <MbSettings/>}
+		{ settings && <DkSettings hide={() => SetSettings(false)}/> }
+		{ settings && <MbSettings hide={() => SetSettings(false)}/>}
         </>
     )
 }

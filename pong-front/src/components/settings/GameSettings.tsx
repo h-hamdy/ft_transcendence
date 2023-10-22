@@ -3,7 +3,6 @@ import rmv from "/src/assets/remove.svg"
 import GameBack1 from "/src/assets/black.png"
 import GameBack2 from "/src/assets/GameBack.png"
 import GameBack3 from "/src/assets/Blue.png"
-// import GameBack4 from "/src/assets/GameBack4.png"
 import { Deblock } from "./Deblock";
 import { TwoFa } from "./TwoFA";
 import { DkSettings } from "./DkSettings";
@@ -141,8 +140,6 @@ export function GameSetting  ( {hide}:Props ) {
 		
 		fetchData();
 	}, []);
-
-	// console.log(userData.blocks[0].username);
 	
 	return (
 		<>
@@ -238,13 +235,13 @@ export function GameSetting  ( {hide}:Props ) {
 			{ twoFA &&
 				<div>
 					<TwoFa hide={hide}/>
-					<MbTwoFA/>
+					<MbTwoFA hide={hide}/>
 				</div>
 			}
 			{ profile &&
 				<div>
 					<DkSettings hide={hide}/>
-					<MbSettings/>
+					<MbSettings hide={hide}/>
 				</div>
 			}
 		</>

@@ -180,13 +180,13 @@ export function DkSettings ( {hide}: Props ) {
 		{ twoFA &&
 			<div>
 				<TwoFa  hide={hide}/>
-				<MbTwoFA/>
+				<MbTwoFA hide={hide}/>
 			</div>
 		}
 		{ gameSetting &&
 			<div>
 				<GameSetting  hide={hide}/>
-				<MbGameSettings/>
+				<MbGameSettings hide={hide}/>
 			</div>
 		}
 		</>

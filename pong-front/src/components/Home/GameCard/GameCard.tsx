@@ -12,7 +12,6 @@ interface Props {
     TableType: string,
     GameType: string,
     imgPath: string,
-    username: string,
     user_id: number,
 }
 
@@ -25,7 +24,6 @@ interface customParam
 
 const  Param : customParam = 
 {
-
   gameDuration: '1',
 }
 

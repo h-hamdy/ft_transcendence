@@ -1,3 +1,4 @@
+import React from "react"
 import notif from "/src/assets/bell.png"
 
 interface Props {

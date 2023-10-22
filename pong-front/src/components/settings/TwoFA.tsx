@@ -274,13 +274,13 @@ export function TwoFa ( {hide}:Props ) {
 		{ profile &&
 			<div>
 				<DkSettings  hide={hide}/>
-				<MbSettings/>
+				<MbSettings hide={hide}/>
 			</div>
 		}
 		{ gameSetting &&
 			<div>
 				<GameSetting  hide={hide}/>
-				<MbGameSettings/>
+				<MbGameSettings hide={hide}/>
 			</div>
 		}
 		</>

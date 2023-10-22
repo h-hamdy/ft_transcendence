@@ -1,4 +1,5 @@
 import burger from "/src/assets/burger.png"
+import React from "react";
 
 interface Props {
     clicked: () => void;

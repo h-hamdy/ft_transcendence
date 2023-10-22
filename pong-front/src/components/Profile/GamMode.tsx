@@ -46,9 +46,9 @@ export function GameMode ( {hide}: Props ) {
 		<>
 			{
 				remove ? null : (
-					<div className="blur-background z mobile-nav-bar lg:block">
+					<div className="blur-background z mobile-nav-bar sm:hidden lg:block">
 						<div className="centered-component pt-32">
-							<div className="flex flex-col lg:w-[800px] lg:h-[320px] bg-white shadow-lg pt-10 rounded-custom pb-5 lg:px-10">
+							<div className="flex flex-col w-[750px] lg:h-[320px] bg-white shadow-lg pt-10 rounded-custom pb-5 lg:px-10">
 								<div className="flex items-center justify-between px-10 pt-5 lg:pt-0">
 									<div className="flex items-center justify-center text-xl p-5 pt-5 text-[#11142D] font-bold">Game Mode</div>
 									<button

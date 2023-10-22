@@ -48,7 +48,7 @@ export function DkChatConv ({room }: DkChatConvProps) {
 					  <Msg
 					  // key={index}
                     profile="/src/assets/hkhalil.jpg"
-                    name={}
+                    name="hassan"
                     // time="2m ago"
                     msg={message.message}
 					/>
