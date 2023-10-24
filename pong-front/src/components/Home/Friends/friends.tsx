@@ -15,61 +15,61 @@ export function Friends ( ) {
 	const [remove, Setremove] = React.useState(false);
 	const navigate = useNavigate();
 
-	interface UserData {
-		id: number;
-		username: string;
-		avatar: string;
-		rating: number;
-		me: boolean;
-		is_two_factor_auth_enabled: boolean;
-	  }
+	// interface UserData {
+	// 	id: number;
+	// 	username: string;
+	// 	avatar: string;
+	// 	rating: number;
+	// 	me: boolean;
+	// 	is_two_factor_auth_enabled: boolean;
+	//   }
 	  
-	  interface Friend {
-		id: number;
-		username: string;
-		avatar: string;
-	  }
+	//   interface Friend {
+	// 	id: number;
+	// 	username: string;
+	// 	avatar: string;
+	//   }
 	  
-	  interface UserState {
-		user_data: UserData;
-		friends: Friend[];
-		match_history: any[];
-		achievements: any[];
-		wins: number;
-		loses: number;
-		draws: number;
-	  }
+	//   interface UserState {
+	// 	user_data: UserData;
+	// 	friends: Friend[];
+	// 	match_history: any[];
+	// 	achievements: any[];
+	// 	wins: number;
+	// 	loses: number;
+	// 	draws: number;
+	//   }
 	  
-	  const [userData, setUserData] = useState<UserState>({
-		user_data: {
-		  id: 0,
-		  username: "",
-		  avatar: "",
-		  rating: 0,
-		  me: false,
-		  is_two_factor_auth_enabled: false,
-		},
-		friends: [],
-		match_history: [],
-		achievements: [],
-		wins: 0,
-		loses: 0,
-		draws: 0,
-	  });
+	//   const [userData, setUserData] = useState<UserState>({
+	// 	user_data: {
+	// 	  id: 0,
+	// 	  username: "",
+	// 	  avatar: "",
+	// 	  rating: 0,
+	// 	  me: false,
+	// 	  is_two_factor_auth_enabled: false,
+	// 	},
+	// 	friends: [],
+	// 	match_history: [],
+	// 	achievements: [],
+	// 	wins: 0,
+	// 	loses: 0,
+	// 	draws: 0,
+	//   });
 
 	  useEffect(() => {
-		const fetchData = async () => {
 		  try {
-			const response = await axios.get(`http://localhost:3000/profile/me`, { withCredentials: true });
-			setUserData(response.data);
+			const response =  axios.get(`http://localhost:3000/profile/me`, { withCredentials: true })
+			.then ((response) => {
+				console.log("h2");
+
+			})
+			// setUserData(response.data);
 
 		} catch (error) {
 			console.error("Error fetching user data:");
-			navigate("/error");
+			// navigate("/error");
 		}
-		};
-	
-		fetchData();
 	  }, []);
 
     return (

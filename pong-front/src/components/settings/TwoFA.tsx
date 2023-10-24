@@ -31,6 +31,9 @@ export function TwoFa ( {hide}:Props ) {
 	const [sent, Setsent] = useState(false);
 	const navigate = useNavigate();
 
+	const [change, Setchange] = useState(true);
+ 
+
 
 
 	const handle2faOn = async () => {
@@ -38,6 +41,7 @@ export function TwoFa ( {hide}:Props ) {
 			const response = await axios.post(`http://localhost:3000/2fa/turn-on`, code, { withCredentials: true })
 			.then (function (response) {
 				Setsent(true);
+				console.log(change);
 			});
 		} catch (error) {
 			Seterror(true);
@@ -51,6 +55,7 @@ export function TwoFa ( {hide}:Props ) {
 				const response = await axios.post(`http://localhost:3000/2fa/turn-off`, code, { withCredentials: true })
 				.then (function (response) {
 					Setsent(true);
+					console.log(change);
 				});
 			} catch (error) {
 				Seterror(true);
@@ -72,7 +77,7 @@ export function TwoFa ( {hide}:Props ) {
 			setData(`data:image/png;base64,${base64}`);
 		} catch (error) {
 			console.error('Error fetching data:', error);
-			navigate("/error");
+			// navigate("/error");
 		}
 		};
 
@@ -115,7 +120,7 @@ export function TwoFa ( {hide}:Props ) {
 		  setUserData(response.data);
 		} catch (error) {
 		  console.error("Error fetching user data:");
-			navigate("/error");
+			// navigate("/error");
 		}
 	  };
 	
@@ -126,11 +131,13 @@ export function TwoFa ( {hide}:Props ) {
 			setUserData(response.data);
 		  } catch (error) {
 			console.error("Error fetching user data:");
-			navigate("/error");
+			// navigate("/error");
 		  }
 		};
-	
-		fetchData();
+		// if (change) {
+			fetchData();
+		// 	Setchange(false);
+		// }
 	  }, []);
 
 	return (

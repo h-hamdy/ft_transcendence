@@ -33,7 +33,7 @@ export function Chat () {
 			setUserData(response.data);
 		  } catch (error) {
 			console.error("Error fetching user data:");
-			navigate("/error");
+			// navigate("/error");
 		  }
 		};
 	

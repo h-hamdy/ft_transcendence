@@ -30,16 +30,15 @@ export function GameMode ( {hide}: Props ) {
 	});
 
 	useEffect(() => {
-	const fetchData = async () => {
 		try {
-		const response = await axios.get('http://localhost:3000/profile/me', {withCredentials: true})
-		setUserData(response.data);
+		const response =  axios.get('http://localhost:3000/profile/me', {withCredentials: true})
+		.then ((response) => {
+			setUserData(response.data);
+		})
 		} catch (error) {
 		console.error("Error fetching user data:");
 		}
-	};
 
-	fetchData();
 	}, []);
 
 	return (

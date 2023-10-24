@@ -38,6 +38,7 @@ export function MbTwoFA ( {hide}: Props) {
 			const response = await axios.post(`http://localhost:3000/2fa/turn-on`, code, { withCredentials: true })
 			.then (function (response) {
 				Setsent(true);
+				userData.user_data.is_two_factor_auth_enabled = true;
 			});
 		} catch (error) {
 			Seterror(true);
@@ -51,6 +52,8 @@ export function MbTwoFA ( {hide}: Props) {
 				const response = await axios.post(`http://localhost:3000/2fa/turn-off`, code, { withCredentials: true })
 				.then (function (response) {
 					Setsent(true);
+					userData.user_data.is_two_factor_auth_enabled = false;
+
 				});
 			} catch (error) {
 				Seterror(true);
@@ -72,7 +75,7 @@ export function MbTwoFA ( {hide}: Props) {
 			setData(`data:image/png;base64,${base64}`);
 		} catch (error) {
 			console.error('Error fetching data:', error);
-			navigate("/error");
+			// navigate("/error");
 		}
 		};
 
@@ -83,12 +86,12 @@ export function MbTwoFA ( {hide}: Props) {
 	}
 	
 	const handleOn = () => {
-		fetchagain();
+		// fetchagain();c
 		handle2faOn();
 	}
 
 	const handleOff = () => {
-		fetchagain();
+		// fetchagain();
 		handle2faOff();
 	}
 
@@ -109,24 +112,25 @@ export function MbTwoFA ( {hide}: Props) {
 		draws: 0,
 	  });
 
-	  const fetchagain = async () => {
-		try {
-		  const response = await axios.get(`http://localhost:3000/profile/me`, { withCredentials: true });
-		  setUserData(response.data);
-		} catch (error) {
-		  console.error("Error fetching user data:");
-			navigate("/error");
-		}
-	  };
+	//   const fetchagain = async () => {
+	// 	try {
+	// 	  const response = await axios.get(`http://localhost:3000/profile/me`, { withCredentials: true });
+	// 	  setUserData(response.data);
+	// 	} catch (error) {
+	// 	  console.error("Error fetching user data:");
+	// 		// navigate("/error");
+	// 	}
+	//   };
 	
 	  useEffect(() => {
 		const fetchData = async () => {
 		  try {
-			const response = await axios.get(`http://localhost:3000/profile/me`, { withCredentials: true });
-			setUserData(response.data);
+			const response = await axios.get(`http://localhost:3000/profile/me`, { withCredentials: true })
+			.then((response) => {
+				setUserData(response.data);
+			})
 		  } catch (error) {
 			console.error("Error fetching user data:");
-			navigate("/error");
 		  }
 		};
 	

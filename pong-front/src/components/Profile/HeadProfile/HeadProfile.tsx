@@ -8,7 +8,7 @@ import Friendadded from "/src/assets/Friends.svg"
 import block from "/src/assets/block.svg"
 import { Add } from "../../Home/NavBar/Notification/add"
 import axios from "axios"
-import { useEffect } from "react"
+import { useEffect, useContext } from "react"
 import React from "react"
 import { MbGameMode } from "../MbGameMode"
 
@@ -19,9 +19,12 @@ interface Props {
 	me: boolean,
 }
 
+import { UserContext } from "../../../pages/Profile"
+import { Link, useNavigate } from "react-router-dom"
 
 export function HeadProfile ( {profile, name, friendNum, me}: Props ) {
 	
+	const data = useContext(UserContext);
 	const [gameMode, setGameMode] = useState(false);
 	const [clicked, setClick] = useState(false);
 	const [search, Setsearch] = useState(false);
@@ -34,7 +37,7 @@ export function HeadProfile ( {profile, name, friendNum, me}: Props ) {
 		try {
 			const response = await axios.post(`http://localhost:3000/add-friend/${name}`, null, { withCredentials: true })
 			.then (function (response) {
-				setClick(true);	
+				setClick(true);
 			});
 		} catch (error) {
 			console.error('POST friend failed:', error);
@@ -45,9 +48,12 @@ export function HeadProfile ( {profile, name, friendNum, me}: Props ) {
 		Setsearch(!search);
 	}
 
+	const navigate = useNavigate();
+	
 	const blockFriend = async () => {
 		try {
-			const response = await axios.post(`http://localhost:3000/block-friend/${name}`, null, {withCredentials: true}).then (function(response) {console.log(response)})
+			const response = await axios.post(`http://localhost:3000/block-friend/${name}`, null, {withCredentials: true});
+			console.log("out");
 		}
 		catch (error) {
 			console.log(error);
@@ -113,9 +119,11 @@ export function HeadProfile ( {profile, name, friendNum, me}: Props ) {
 						</button>
 						{
 							me ? null :
-							<button className={`flex items-center justify-center border w-[50px] border-[#6C5DD3] bg-[#6C5DD3] h-[45px] shadow rounded-xl`} onClick={blockFriend}>
-								<img src={block} className="w-[24px] h-[24px]"></img>
-							</button>
+							<a href="/profile/me">
+								<button className={`flex items-center justify-center border w-[50px] border-[#6C5DD3] bg-[#6C5DD3] h-[45px] shadow rounded-xl`} onClick={blockFriend}>
+									<img src={block} className="w-[24px] h-[24px]"></img>
+								</button>
+							</a>
 						}
 					</div>
 				</div>

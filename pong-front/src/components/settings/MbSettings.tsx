@@ -15,6 +15,7 @@ interface Props {
 export function MbSettings ( {hide}: Props ) {
 
     const navigate = useNavigate();
+	const [change, Setchange] = useState(true);
 
 	const [userData, setUserData] = useState({
 		user_data: {
@@ -37,15 +38,22 @@ export function MbSettings ( {hide}: Props ) {
 	  useEffect(() => {
 		const fetchData = async () => {
 		  try {
-			const response = await axios.get(`http://localhost:3000/profile/me`, { withCredentials: true });
-			setUserData(response.data);
+			const response = await axios.get(`http://localhost:3000/profile/me`, { withCredentials: true })
+			.then ((response) => {
+				setUserData(response.data);
+				console.log("h2");
+
+			})
 		  } catch (error) {
 			console.error("Error fetching user data:");
-			navigate("/error");
+			// navigate("/error");
 		  }
 		};
 	
-		fetchData();
+		// if (change) {
+			fetchData();	
+			// Setchange(false);
+		// }
 	  }, []);
 
     const [remove, SetRemove] = React.useState(false);
@@ -58,13 +66,10 @@ export function MbSettings ( {hide}: Props ) {
 	  var BASE_URL;
 	  const url = userData.user_data.avatar.substring(0, 30);
 	
-	  console.log(userData.user_data.avatar);
 	  if (url === "https://cdn.intra.42.fr/users/")
-		  BASE_URL = userData.user_data.avatar;	
+		  BASE_URL = userData?.user_data?.avatar;	
 	  else
-		  BASE_URL = `http://localhost:3000/avatars/${userData.user_data.avatar}`;
-	
-		console.log(BASE_URL);
+		  BASE_URL = `http://localhost:3000/avatars/${userData?.user_data?.avatar}`;
 	
 
 	const handleFileUpload = async (event: any) => {
@@ -82,6 +87,7 @@ export function MbSettings ( {hide}: Props ) {
 			}
 			)
 			.then((response) => {
+				Setchange(true);
 				console.log(response);
 			  })
 		}
@@ -92,7 +98,9 @@ export function MbSettings ( {hide}: Props ) {
 
 	const handleName = async () => {
 		try {
-			const response = await axios.post('http://localhost:3000/set-username', formData, {withCredentials: true}).then (function (response) {console.log(response)});
+			const response = await axios.post('http://localhost:3000/set-username', formData, {withCredentials: true}).then (function (response) {
+				Setchange(true);
+			});
 		}
 		catch(error) {
 			console.log("Post profile faild", error);

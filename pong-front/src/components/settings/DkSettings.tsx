@@ -6,66 +6,53 @@ import axios from "axios";
 import { GameSetting } from "./GameSettings";
 import { MbTwoFA } from "./MbTwoFA";
 import { MbGameSettings } from "./MbGameSetting";
-import { json, useNavigate } from "react-router-dom";
+import { json, unstable_Blocker, useNavigate } from "react-router-dom";
+import { useContext } from "react";
+
+import { UserContext } from "../../pages/Profile";
+
 
 interface Props {
-	hide: () => void;
+	hide: () => void,
 }
 
 export function DkSettings ( {hide}: Props ) {
-	const navigate = useNavigate();
+	// const navigate = useNavigate();
+	// const [change, Setchange] = useState(true);
 
-	const [userData, setUserData] = useState({
-		user_data: {
-		  id: 0,
-		  username: "",
-		  avatar: "",
-		  rating: 0,
-		  me: false,
-		  is_two_factor_auth_enabled: false,
-		},
-		friends: [],
-		blocks: [],
-		match_history: [],
-		achievements: [],
-		wins: 0,
-		loses: 0,
-		draws: 0,
-	  });
+	const data = useContext(UserContext);
 	
 	  useEffect(() => {
-		const fetchData = async () => {
+		
 		  try {
-			const response = await axios.get(`http://localhost:3000/profile/me`, { withCredentials: true });
-			setUserData(response.data);
+			const response =  axios.get(`http://localhost:3000/profile/me`, { withCredentials: true }).then ( function(response) {
+
+				console.log("h2");
+
+				console.log(response.data);
+
+			} )
 		  } catch (error) {
 			console.error("Error fetching user data:");
-			navigate("/error");
 		  }
-		};
-	
-		fetchData();
-	  }, []);
 
+
+	}, []);
+	
     const [remove, SetRemove] = React.useState(false);
 	const [twoFA, setTwoFa] = useState(false);
     const [gameSetting, setgameSetting] = React.useState(false);
 	const [formData, setFormData] = useState<{username: string}>({
-        username: '',
-      });
+		username: '',
+	});
 
-	  var BASE_URL;
-	  const url = userData.user_data.avatar.substring(0, 30);
-	
-	  console.log(userData.user_data.avatar);
-	  if (url === "https://cdn.intra.42.fr/users/")
-		  BASE_URL = userData.user_data.avatar;	
-	  else
-		  BASE_URL = `http://localhost:3000/avatars/${userData.user_data.avatar}`;
-	
-		console.log(BASE_URL);
-	
+	let defualt : string | undefined = data?.userData?.user_data?.avatar;
 
+	const [BASE_URL, setBase] = useState(defualt);
+
+
+	  
+	  
 	const handleFileUpload = async (event: any) => {
 		try {
 
@@ -81,17 +68,39 @@ export function DkSettings ( {hide}: Props ) {
 			}
 			)
 			.then((response) => {
-				console.log(response);
+				data?.setUserData((prevUserData) => ({
+					...prevUserData,
+					user_data: {
+					  ...prevUserData.user_data,
+					  avatar: response.data,
+					},
+				  }));
+
+
+
+				setBase(`http://localhost:3000/avatars/${response.data}`);
+
 			  })
+			}
+			catch(error) {
+				console.log("Post profile faild", error);
+			}
 		}
-		  catch(error) {
-			console.log("Post profile faild", error);
-		  }
-	}
+
 
 	const handleName = async () => {
 		try {
-			const response = await axios.post('http://localhost:3000/set-username', formData, {withCredentials: true}).then (function (response) {console.log(response)});
+			console.log(formData.username);
+			const response = await axios.post('http://localhost:3000/set-username', formData, {withCredentials: true}).then (function (response) {
+				console.log(response.data);
+				data?.setUserData((prevUserData) => ({
+					...prevUserData,
+					user_data: {
+					  ...prevUserData.user_data,
+					  username: response.data,
+					},
+				  }));
+			});
 		}
 		catch(error) {
 			console.log("Post profile faild", error);

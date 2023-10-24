@@ -102,11 +102,12 @@ export function Brb() {
 	const fetchData = async () => {
 	  try {
 		const response = await axios.get(`http://localhost:3000/profile/me`, { withCredentials: true });
+		console.log("h2");
 		setUserData(response.data);
 
 	} catch (error) {
 		console.error("Error fetching user data:");
-		navigate("/error");
+		// navigate("/error");
 	}
 	};
 

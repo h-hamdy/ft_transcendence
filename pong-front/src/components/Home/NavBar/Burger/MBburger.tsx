@@ -10,12 +10,14 @@ import axios from "axios"
 import { Navigate } from "react-router-dom"
 import { useEffect } from "react"
 import { MbGameMode } from "../../../Profile/MbGameMode"
+import { UserContext } from "../../../../pages/Profile"
+import { useContext } from "react";
 
-interface Props {
-	id: number
-}
+export function  MBburger (  ) {
 
-export function MBburger ( {id}: Props ) {
+	const data = useContext(UserContext);
+
+
 	const initialColors: { [key: string]: string } = {
 		button1: 'initial',
 		button2: 'initial',
@@ -52,78 +54,9 @@ export function MBburger ( {id}: Props ) {
 			setButtonColors(newColors);
 			setstrokeColor(newImgs);
 		};
-	const navigate = useNavigate();
-
-	const handleLogout = async () => {
-		try {
-		const response = await axios.get(`http://localhost:3000/logout`, { withCredentials: true });
-		if (response) {
-			navigate('/');
-		}
-		} catch (error) {
-		console.error("Error logout:");
-		}
-	}
-
-	interface UserData {
-		id: number;
-		username: string;
-		avatar: string;
-		rating: number;
-		me: boolean;
-		is_two_factor_auth_enabled: boolean;
-	  }
-	  
-	  interface Friend {
-		id: number;
-		username: string;
-		avatar: string;
-	  }
-	  
-	  interface UserState {
-		user_data: UserData;
-		friends: Friend[];
-		match_history: any[];
-		achievements: any[];
-		wins: number;
-		loses: number;
-		draws: number;
-	  }
-	  
-	  const [userData, setUserData] = useState<UserState>({
-		user_data: {
-		  id: 0,
-		  username: "",
-		  avatar: "",
-		  rating: 0,
-		  me: false,
-		  is_two_factor_auth_enabled: false,
-		},
-		friends: [],
-		match_history: [],
-		achievements: [],
-		wins: 0,
-		loses: 0,
-		draws: 0,
-	  });
-
-	  useEffect(() => {
-		const fetchData = async () => {
-		  try {
-			const response = await axios.get(`http://localhost:3000/profile/me`, { withCredentials: true });
-			setUserData(response.data);
-
-		} catch (error) {
-			console.error("Error fetching user data:");
-			navigate("/error");
-		}
-		};
 	
-		fetchData();
-	  }, []);
 
 	
-	console.log(userData.friends);
 	return (
 		<>
 		<div className="h-screen border w-[112px] flex justify-center">
@@ -149,7 +82,7 @@ export function MBburger ( {id}: Props ) {
 					<g id="Chat">
 					<path id="Path" fill-rule="evenodd" clip-rule="evenodd" d="M11.0568 1.00008C7.54687 0.985898 4.28557 2.80704 2.4605 5.80035C0.635434 8.79366 0.512919 12.5223 2.13757 15.6286L2.33789 16.0191C2.50209 16.3264 2.53644 16.6864 2.43329 17.0191C2.14742 17.7784 1.90849 18.5544 1.71784 19.3429C1.71784 19.7429 1.83231 19.9715 2.26158 19.962C3.0219 19.7941 3.77068 19.5777 4.50332 19.3143C4.81886 19.2274 5.15437 19.2475 5.45725 19.3715C5.73389 19.5048 6.2967 19.8477 6.31578 19.8477C9.99154 21.7804 14.4808 21.2472 17.5998 18.5074C20.7187 15.7676 21.8199 11.39 20.3676 7.50403C18.9153 3.61809 15.2111 1.03053 11.0568 1.00008V1.00008Z" stroke={strokeColor.img3} stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
 					<ellipse id="Oval" cx="6.28751" cy="11.0001" rx="0.476965" ry="0.47619" stroke={strokeColor.img3} stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-					<ellipse id="Oval_2" cx="11.057" cy="11.0001" rx="0.476965" ry="0.47619" stroke={strokeColor.img3} stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+					<ellipse id="Oval_2" cx="11.057" cyerror="11.0001" rx="0.476965" ry="0.47619" stroke={strokeColor.img3} stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
 					<ellipse id="Oval_3" cx="15.8266" cy="11.0001" rx="0.476965" ry="0.47619" stroke={strokeColor.img3} stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
 					</g>
 					</svg>
@@ -174,7 +107,7 @@ export function MBburger ( {id}: Props ) {
                 <div className="flex items-center justify-center text-[#808191] text-sm lg:text-md pt-16">Friends</div>
 				<div className="flex flex-col pl-1 pt-5 gap-3 scrollable-div-ver6">
 					<div>
-						{userData.friends.map((friend, index: number) => (
+						{data?.userData?.friends?.map((friend: { avatar: string; username: string }, index: number) => (
 							<div key={index}>
 								<Avatar avatar={friend.avatar} name={friend.username}/>
 							</div>
@@ -195,7 +128,8 @@ export function MBburger ( {id}: Props ) {
 					</g>
 				</svg>
 				</button>
-				<button onClick={() => {handleClick('button5', 'img5'); Setlogout(!logout); handleLogout()}} style={{ backgroundColor: buttonColors.button5 }} className={`p-3 border shadow-md border-white w-[50px] h-[50px] flex items-center justify-center rounded-2xl `}>
+				<a href="http://localhost:3000/logout">
+				<button onClick={() => {handleClick('button5', 'img5'); Setlogout(!logout)}} style={{ backgroundColor: buttonColors.button5 }} className={`p-3 border shadow-md border-white w-[50px] h-[50px] flex items-center justify-center rounded-2xl `}>
 				<svg fill="#808191" height="20" width="20" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg"
 						viewBox="0 0 489.9 489.9">
 						<g><g><g>
@@ -213,9 +147,11 @@ export function MBburger ( {id}: Props ) {
 						</g></g></g>
 					</svg>
 				</button>
+				</a>
 			</div>
 		</div>
 		{settings && <DkSettings hide={() => SetSettings(false)}/>}
+
 		{game &&
 			<div>
 				<GameMode hide={() => Setgame(!game)}/>

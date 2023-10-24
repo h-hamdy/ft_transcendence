@@ -130,10 +130,12 @@ export function MbGameSettings ( {hide}:Props ) {
 			try {
 				const response = await axios.get(`http://localhost:3000/profile/me`, { withCredentials: true });
 				setUserData(response.data);
+				console.log("h2");
+
 				
 			} catch (error) {
 				console.error("Error fetching user data:");
-				navigate("/error");
+				// navigate("/error");
 			}
 		};
 		

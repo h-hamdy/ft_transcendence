@@ -48,7 +48,6 @@ export function DirectMsg() {
 		  setRooms(roomsWithClickState);
 			response = await axios.get('http://localhost:3000/profile/me', {withCredentials: true})
 			setUserData(response.data);
-			// console.log("user data" + userData.user_data);
 		} catch (error) {
 			console.error("Error fetching user data:", error);
 		}

@@ -3,18 +3,37 @@ import { HeadProfile } from "../components/Profile/HeadProfile/HeadProfile";
 import { LastMatch } from "../components/Profile/LastMatch/LastMatch";
 import { ProfileCard } from "../components/Profile/ProfileCard/ProfileCard";
 import { States } from "../components/Profile/States/States";
-import { StartEnjoying } from "../components/Home/Start/StartEnjoying";
-// import { MyFriends } from "../components/Profile/MyFriends/MyFriends";
 import { Achivement } from "../components/Profile/Achivement/Achivement";
 import { LatestMatches } from "../components/Home/LTSMatches/LatestMatches";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, createContext } from "react";
 import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
+// import isEqual from 'lodash/isEqual';
 
+interface MyUserData {
+	user_data: {
+		id: 0,
+		username: '',
+		me: false,
+		is_two_factor_auth_enabled: false,
+	  },
+	  friends: [],
+	  blocks: [],
+	  match_history: [],
+	  achievements: [],
+	  wins: 0,
+	  loses: 0,
+	  draws: 0,
+}
+
+
+export const UserContext = createContext<{
+	userData: MyUserData;
+	setUserData: React.Dispatch<React.SetStateAction<MyUserData>>;
+  } | undefined>(undefined);
+  
 export function Profile() {
 	const { username } = useParams();
-	const navigate = useNavigate();
-
 
 	React.useEffect(() => {
 		var timer = sessionStorage.getItem("Timer");
@@ -28,16 +47,18 @@ export function Profile() {
 		sessionStorage.setItem("Table", table);
 	  }, []);
 
-  const [userData, setUserData] = useState({
+	  let name: string = username ? username : "";
+  const [userData, setUserData] = useState<MyUserData>({
     user_data: {
       id: 0,
-      username: "",
+      username: name,
       avatar: "",
       rating: 0,
 	  me: false,
       is_two_factor_auth_enabled: false,
     },
     friends: [],
+	blocks: [],
     match_history: [],
     achievements: [],
     wins: 0,
@@ -45,65 +66,63 @@ export function Profile() {
     draws: 0,
   });
 
+function isEqual(objA: {}, objB: {}) {
+	return JSON.stringify(objA) === JSON.stringify(objB);
+  }
+
+
   useEffect(() => {
-    const fetchData = async () => {
       try {
-        const response = await axios.get(`http://localhost:3000/profile/${username}`, { withCredentials: true });
-        setUserData(response.data);
+        const response =  axios.get(`http://localhost:3000/profile/${userData?.user_data?.username}`, { withCredentials: true })
+		.then ((response) => {
+			const newData = response.data;
+			if (!isEqual(newData, userData)) {
+				console.log("here");
+				setUserData(newData);
+			}
+			console.log(response.data);
+		})
       } catch (error) {
         console.error("Error fetching user data:");
-		navigate("/error");
       }
-    };
 
-    fetchData();
-  }, []);
 
-  var BASE_URL;
-  const url = userData.user_data.avatar.substring(0, 30);
-
-  console.log(userData.user_data.avatar);
-  if (url === "https://cdn.intra.42.fr/users/")
-  	BASE_URL = userData.user_data.avatar;	
-  else
-  	BASE_URL = `http://localhost:3000/avatars/${userData.user_data.avatar}`;
-
-	console.log(BASE_URL);
-
+  }, [userData]);
 
   return (
-    <>
+    <UserContext.Provider value={{ userData,setUserData}}>
+
       <div>
-        <NavBar avatar={BASE_URL} username={userData.user_data.username} id={userData.user_data.id}/>
+        <NavBar avatar={userData?.user_data?.avatar} username={userData?.user_data?.username}/>
         <HeadProfile
-          profile={BASE_URL}
-          name={userData.user_data.username}
-          friendNum={userData.friends.length.toString()}
-		  me={userData.user_data.me}
+          profile={userData?.user_data?.avatar}
+          name={userData?.user_data?.username}
+          friendNum={userData?.friends?.length.toString()}
+		  me={userData?.user_data?.me}
         />
         <div className="md:flex md:flex-row md:justify-center md:justify-around  md:w-full lg:pl-28">
           <div>
             <LastMatch
               date="18 January 2023"
-              name1={userData.user_data.username}
-              profile1={BASE_URL}
+              name1={userData?.user_data?.username}
+              profile1={userData?.user_data?.avatar}
               name2="hassan d3if"
               profile2="/src/assets/hkhalil.jpg"
             />
             <div className="mobile-nav-bar sm:hidden xl:block scrollable-div-hor1">
-              <States res1={userData.wins.toString()} res2={userData.loses.toString()} res3={userData.draws.toString()} res4={(userData.wins + userData.loses + userData.draws).toString()} />
+              <States res1={userData?.wins?.toString()} res2={userData?.loses?.toString()} res3={userData?.draws?.toString()} res4={(userData?.wins + userData?.loses + userData?.draws).toString()} />
             </div>
           </div>
           <ProfileCard
-            profile={BASE_URL}
-            name={userData.user_data.username}
-            winNum={userData.wins.toString()}
-            LoseNum={userData.loses.toString()}
-            achivNum={userData.achievements.length.toString()}
+            profile={userData?.user_data?.avatar}
+            name={userData?.user_data?.username}
+            winNum={userData?.wins?.toString()}
+            LoseNum={userData?.loses?.toString()}
+            achivNum={userData?.achievements?.length.toString()}
           />
         </div>
         <div className="xl:hidden">
-          <States res1={userData.wins.toString()} res2={userData.loses.toString()} res3={userData.draws.toString()} res4={(userData.wins + userData.loses + userData.draws).toString()} />
+          <States res1={userData?.wins?.toString()} res2={userData?.loses?.toString()} res3={userData?.draws?.toString()} res4={(userData?.wins + userData?.loses + userData?.draws).toString()} />
         </div>
         <div className="md:flex md:flex-row md:justify-around md:pt-10 md:w-full lg:pl-28 pt-10">
 		<div className="md:w-6/12">
@@ -114,6 +133,7 @@ export function Profile() {
           </div>
         </div>
       </div>
-    </>
+    </UserContext.Provider>
   );
 }
+

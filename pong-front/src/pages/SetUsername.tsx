@@ -1,13 +1,15 @@
 
 import rec from "/src/assets/rectangle.svg"
 import imgPath from "/src/assets/onboarding.png"
-import React from "react";
+import React, { useContext } from "react";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import { UserError } from "./Error/UserError";
+// import { UserError } from "./Error/UserError";
 
 export const SetUsername = () => {
+	
+	// const data = useContext
 
     const [formData, setFormData] = useState<{username: string}>({
         username: '',
@@ -19,6 +21,7 @@ export const SetUsername = () => {
           try {
          	const response = await axios.post('http://localhost:3000/set-username', formData, { withCredentials: true });
 			if (response) {
+				console.log(response.data);
 				navigate("/profile/me");
 			}
         } catch (error) {
