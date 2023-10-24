@@ -2,7 +2,7 @@
 
 import arrow from "/src/assets/small-down.svg";
 // import start from "/src/assets/Start.png";
-import React, { useEffect } from "react";
+import React, { useContext, useEffect } from "react";
 
 import { BrHome } from "./BrHome";
 import { BrGame } from "./BrGame";
@@ -21,6 +21,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { Avatar } from "../Avatar";
 import { Friends } from "../../Friends/friends";
+import { UserContext } from "../../../../pages/Profile";
 
 export function Brb() {
   const initialColors: { [key: string]: string } = {
@@ -43,76 +44,16 @@ export function Brb() {
 
   const [buttonColors, setButtonColors] = useState(initialColors);
   const [strokeColor, setstrokeColor] = useState(strokeColors);
-  const navigate = useNavigate();
-
-
   const handleClick = (buttonName: string, imgNum: string) => {
     const newColors = { ...initialColors };
     const newImgs = { ...strokeColors };
-
     newColors[buttonName] = "#6C5DD3";
     newImgs[imgNum] = "#FFF";
     setButtonColors(newColors);
     setstrokeColor(newImgs);
   };
 
-  interface UserData {
-	id: number;
-	username: string;
-	avatar: string;
-	rating: number;
-	me: boolean;
-	is_two_factor_auth_enabled: boolean;
-  }
-  
-  interface Friend {
-	id: number;
-	username: string;
-	avatar: string;
-  }
-  
-  interface UserState {
-	user_data: UserData;
-	friends: Friend[];
-	match_history: any[];
-	achievements: any[];
-	wins: number;
-	loses: number;
-	draws: number;
-  }
-  
-  const [userData, setUserData] = useState<UserState>({
-	user_data: {
-	  id: 0,
-	  username: "",
-	  avatar: "",
-	  rating: 0,
-	  me: false,
-	  is_two_factor_auth_enabled: false,
-	},
-	friends: [],
-	match_history: [],
-	achievements: [],
-	wins: 0,
-	loses: 0,
-	draws: 0,
-  });
-
-  useEffect(() => {
-	const fetchData = async () => {
-	  try {
-		const response = await axios.get(`http://localhost:3000/profile/me`, { withCredentials: true });
-		console.log("h2");
-		setUserData(response.data);
-
-	} catch (error) {
-		console.error("Error fetching user data:");
-		// navigate("/error");
-	}
-	};
-
-	fetchData();
-  }, []);
+	const data = useContext(UserContext);
 
   return (
     <>
@@ -146,7 +87,7 @@ export function Brb() {
 
           <div className="scrollable-div-ver6">
             <div>
-				{userData.friends.map((friend, index: number) => (
+				{data?.userData?.friends?.map((friend: {avatar: string; username: string} , index: number) => (
 					<div key={index}>
 						<BrFriends profile={friend.avatar} name={friend.username} status="/src/assets/live.svg"/>
 					</div>

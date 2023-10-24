@@ -1,12 +1,13 @@
 import rmv from "/src/assets/remove.svg"
 import avatar from "/src/assets/ahamdy.jpg"
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { MbTwoFA } from "./MbTwoFA";
 import { GameSetting } from "./GameSettings";
 import { MbGameSettings } from "./MbGameSetting";
 import { TwoFa } from "./TwoFA";
 import axios from "axios";	
 import { useNavigate } from "react-router-dom";
+import { UserContext } from "../../pages/Profile";
 
 interface Props {
 	hide: () => void;
@@ -14,98 +15,86 @@ interface Props {
 
 export function MbSettings ( {hide}: Props ) {
 
-    const navigate = useNavigate();
-	const [change, Setchange] = useState(true);
 
-	const [userData, setUserData] = useState({
-		user_data: {
-		  id: 0,
-		  username: "",
-		  avatar: "",
-		  rating: 0,
-		  me: false,
-		  is_two_factor_auth_enabled: false,
-		},
-		friends: [],
-		blocks: [],
-		match_history: [],
-		achievements: [],
-		wins: 0,
-		loses: 0,
-		draws: 0,
-	  });
+	const data = useContext(UserContext);
 	
-	  useEffect(() => {
-		const fetchData = async () => {
-		  try {
-			const response = await axios.get(`http://localhost:3000/profile/me`, { withCredentials: true })
-			.then ((response) => {
-				setUserData(response.data);
-				console.log("h2");
+	useEffect(() => {
+	  
+		try {
+		  const response =  axios.get(`http://localhost:3000/profile/me`, { withCredentials: true }).then ( function(response) {
+			  console.log(response.data);
+		  } )
+		} catch (error) {
+		  console.error("Error fetching user data:");
+		}
+
+
+  }, []);
+  
+  const [remove, SetRemove] = React.useState(false);
+  const [twoFA, setTwoFa] = useState(false);
+  const [gameSetting, setgameSetting] = React.useState(false);
+  const [formData, setFormData] = useState<{username: string}>({
+	  username: '',
+  });
+  let defualt : string | undefined = data?.userData?.user_data?.avatar;
+  const [BASE_URL, setBase] = useState(defualt);
+
+
+	
+  const handleFileUpload = async (event: any) => {
+	  try {
+
+		  const file = event.target.files[0];
+		  const formData = new FormData();
+		  formData.append("avatar", file);
+
+		  axios.post('http://localhost:3000/upload-avatar', formData,  {
+			  withCredentials: true,
+			  headers: {
+				  "Content-Type": "multipart/form-data",
+			  } 
+		  }
+		  )
+		  .then((response) => {
+			  data?.setUserData((prevUserData) => ({
+				  ...prevUserData,
+				  user_data: {
+					...prevUserData.user_data,
+					avatar: response.data,
+				  },
+				}));
+
+
+
+			  setBase(`http://localhost:3000/avatars/${response.data}`);
 
 			})
-		  } catch (error) {
-			console.error("Error fetching user data:");
-			// navigate("/error");
 		  }
-		};
-	
-		// if (change) {
-			fetchData();	
-			// Setchange(false);
-		// }
-	  }, []);
-
-    const [remove, SetRemove] = React.useState(false);
-	const [twoFA, setTwoFa] = useState(false);
-    const [gameSetting, setgameSetting] = React.useState(false);
-	const [formData, setFormData] = useState<{username: string}>({
-        username: '',
-      });
-
-	  var BASE_URL;
-	  const url = userData.user_data.avatar.substring(0, 30);
-	
-	  if (url === "https://cdn.intra.42.fr/users/")
-		  BASE_URL = userData?.user_data?.avatar;	
-	  else
-		  BASE_URL = `http://localhost:3000/avatars/${userData?.user_data?.avatar}`;
-	
-
-	const handleFileUpload = async (event: any) => {
-		try {
-
-			const file = event.target.files[0];
-			const formData = new FormData();
-			formData.append("avatar", file);
-
-			axios.post('http://localhost:3000/upload-avatar', formData,  {
-				withCredentials: true,
-				headers: {
-					"Content-Type": "multipart/form-data",
-				} 
-			}
-			)
-			.then((response) => {
-				Setchange(true);
-				console.log(response);
-			  })
-		}
 		  catch(error) {
-			console.log("Post profile faild", error);
+			  console.log("Post profile faild", error);
 		  }
-	}
+	  }
 
-	const handleName = async () => {
-		try {
-			const response = await axios.post('http://localhost:3000/set-username', formData, {withCredentials: true}).then (function (response) {
-				Setchange(true);
-			});
-		}
-		catch(error) {
-			console.log("Post profile faild", error);
-		}
-	}
+
+  const handleName = async () => {
+	  try {
+		  console.log(formData.username);
+		  const response = await axios.post('http://localhost:3000/set-username', formData, {withCredentials: true}).then (function (response) {
+			  console.log(response.data);
+			  data?.setUserData((prevUserData) => ({
+				  ...prevUserData,
+				  user_data: {
+					...prevUserData.user_data,
+					username: response.data,
+				  },
+				}));
+		  });
+	  }
+	  catch(error) {
+		  console.log("Post profile faild", error);
+	  }
+  }
 	
 
 	return (

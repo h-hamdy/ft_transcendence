@@ -17,8 +17,6 @@ interface Props {
 }
 
 export function DkSettings ( {hide}: Props ) {
-	// const navigate = useNavigate();
-	// const [change, Setchange] = useState(true);
 
 	const data = useContext(UserContext);
 	
@@ -26,11 +24,7 @@ export function DkSettings ( {hide}: Props ) {
 		
 		  try {
 			const response =  axios.get(`http://localhost:3000/profile/me`, { withCredentials: true }).then ( function(response) {
-
-				console.log("h2");
-
 				console.log(response.data);
-
 			} )
 		  } catch (error) {
 			console.error("Error fetching user data:");
@@ -45,13 +39,10 @@ export function DkSettings ( {hide}: Props ) {
 	const [formData, setFormData] = useState<{username: string}>({
 		username: '',
 	});
-
 	let defualt : string | undefined = data?.userData?.user_data?.avatar;
-
 	const [BASE_URL, setBase] = useState(defualt);
 
 
-	  
 	  
 	const handleFileUpload = async (event: any) => {
 		try {

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import rmv from "/src/assets/remove.svg"
 import { useState } from "react";
 import group from "/src/assets/Group.svg"
@@ -13,6 +13,7 @@ import { MbGameSettings } from "./MbGameSetting";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useEffect } from "react";
+import { UserContext } from "../../pages/Profile";
 
 
 interface Props {
@@ -30,15 +31,13 @@ export function MbTwoFA ( {hide}: Props) {
 	});
 	const [error, Seterror] = useState(false);
 	const [sent, Setsent] = useState(false);
-	const navigate = useNavigate();
-
+	const Data = useContext(UserContext);
 
 	const handle2faOn = async () => {
 		try {
 			const response = await axios.post(`http://localhost:3000/2fa/turn-on`, code, { withCredentials: true })
 			.then (function (response) {
 				Setsent(true);
-				userData.user_data.is_two_factor_auth_enabled = true;
 			});
 		} catch (error) {
 			Seterror(true);
@@ -52,7 +51,6 @@ export function MbTwoFA ( {hide}: Props) {
 				const response = await axios.post(`http://localhost:3000/2fa/turn-off`, code, { withCredentials: true })
 				.then (function (response) {
 					Setsent(true);
-					userData.user_data.is_two_factor_auth_enabled = false;
 
 				});
 			} catch (error) {
@@ -75,66 +73,48 @@ export function MbTwoFA ( {hide}: Props) {
 			setData(`data:image/png;base64,${base64}`);
 		} catch (error) {
 			console.error('Error fetching data:', error);
-			// navigate("/error");
 		}
 		};
 
 	
 	const handleqr = () => {
 		setGenerate(!generate);
-		fetchData();
 	}
 	
 	const handleOn = () => {
-		// fetchagain();c
+		Data?.setUserData((prevUserData) => ({
+			...prevUserData,
+			user_data: {
+			  ...prevUserData.user_data,
+			  is_two_factor_auth_enabled: true as any,
+			},
+		  }));
+
 		handle2faOn();
 	}
 
 	const handleOff = () => {
-		// fetchagain();
+		Data?.setUserData((prevUserData) => ({
+			...prevUserData,
+			user_data: {
+			  ...prevUserData.user_data,
+			  is_two_factor_auth_enabled: false as any,
+			},
+		  }));
+
 		handle2faOff();
 	}
 
-	const [userData, setUserData] = useState({
-		user_data: {
-		  id: 0,
-		  username: "",
-		  avatar: "",
-		  rating: 0,
-		  me: false,
-		  is_two_factor_auth_enabled: false,
-		},
-		friends: [],
-		match_history: [],
-		achievements: [],
-		wins: 0,
-		loses: 0,
-		draws: 0,
-	  });
 
-	//   const fetchagain = async () => {
-	// 	try {
-	// 	  const response = await axios.get(`http://localhost:3000/profile/me`, { withCredentials: true });
-	// 	  setUserData(response.data);
-	// 	} catch (error) {
-	// 	  console.error("Error fetching user data:");
-	// 		// navigate("/error");
-	// 	}
-	//   };
 	
 	  useEffect(() => {
-		const fetchData = async () => {
 		  try {
-			const response = await axios.get(`http://localhost:3000/profile/me`, { withCredentials: true })
-			.then((response) => {
-				setUserData(response.data);
+			const response =  axios.get(`http://localhost:3000/profile/me`, { withCredentials: true })
+			.then((respnse) => {
 			})
 		  } catch (error) {
 			console.error("Error fetching user data:");
 		  }
-		};
-	
-		fetchData();
 	  }, []);
 
 
@@ -248,14 +228,14 @@ export function MbTwoFA ( {hide}: Props) {
 											<div className="pt-5">
 											
 											{
-												userData.user_data.is_two_factor_auth_enabled ?
+												Data?.userData?.user_data?.is_two_factor_auth_enabled ?
 													<button className={`flex justify-center items-center border rounded-xl bg-gray-100 border-gray-100 h-[45px] w-[130px]`} onClick={handleOff}>
 														<div className="text-[#11142D]  font-semibold lg:text-sm">Disable 2FA</div>
 													</button>
 												: null
 											}
 											{
-												userData.user_data.is_two_factor_auth_enabled ? null :
+												Data?.userData?.user_data?.is_two_factor_auth_enabled ? null :
 													<button className="flex justify-center items-center border rounded-xl bg-[#6C5DD3] border-[#6C5DD3] h-[45px] w-[130px]" onClick={handleOn}>
 															<div className="text-white font-semibold lg:text-sm">Enable 2FA</div>
 													</button>

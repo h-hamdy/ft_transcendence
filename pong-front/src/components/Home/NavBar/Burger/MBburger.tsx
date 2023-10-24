@@ -12,6 +12,7 @@ import { useEffect } from "react"
 import { MbGameMode } from "../../../Profile/MbGameMode"
 import { UserContext } from "../../../../pages/Profile"
 import { useContext } from "react";
+import { MbSettings } from "../../../settings/MbSettings"
 
 export function  MBburger (  ) {
 
@@ -150,8 +151,12 @@ export function  MBburger (  ) {
 				</a>
 			</div>
 		</div>
-		{settings && <DkSettings hide={() => SetSettings(false)}/>}
-
+		{settings &&
+			<div>
+				<DkSettings hide={() => SetSettings(false)}/>
+				<MbSettings hide={() => SetSettings(false)}/>
+			</div>
+		}
 		{game &&
 			<div>
 				<GameMode hide={() => Setgame(!game)}/>

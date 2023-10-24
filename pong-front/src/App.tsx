@@ -44,6 +44,7 @@ function App() {
 			  <Route path="/set_username" element={<SetUsername />} />
 			  <Route path={`/Profile/:username`} element={<Profile />} />
 			  <Route path="/Game" element={<GameSetup />} />
+			  <Route path="/2fa" element={<TwofaAuth/>}/>
 			  <Route path="/Chat" element={<Chat />} />
 			  <Route path="/error" element={<ForOFor />} />
 			  <Route path="/" element={<SignIn />} />
