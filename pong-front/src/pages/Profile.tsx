@@ -14,12 +14,15 @@ interface MyUserData {
 	user_data: {
 		id: 0,
 		username: '',
+		avatar: ''
 		me: false,
 		is_two_factor_auth_enabled: false,
+		state: ''
 	  },
 	  friends: [],
 	  blocks: [],
 	  match_history: [],
+	pending_requests: [],
 	  achievements: [],
 	  wins: 0,
 	  loses: 0,
@@ -30,6 +33,12 @@ interface MyUserData {
 export const UserContext = createContext<{
 	userData: MyUserData;
 	setUserData: React.Dispatch<React.SetStateAction<MyUserData>>;
+  } | undefined>(undefined);
+
+
+  export const MyContext = createContext<{
+	MyuserData: MyUserData;
+	setMyUserData: React.Dispatch<React.SetStateAction<MyUserData>>;
   } | undefined>(undefined);
   
 export function Profile() {
@@ -47,7 +56,7 @@ export function Profile() {
 		sessionStorage.setItem("Table", table);
 	  }, []);
 
-	  let name: string = username ? username : "";
+	let name: string = username ? username : "";
   const [userData, setUserData] = useState<MyUserData>({
     user_data: {
       id: 0,
@@ -60,6 +69,7 @@ export function Profile() {
     friends: [],
 	blocks: [],
     match_history: [],
+	pending_requests: [],
     achievements: [],
     wins: 0,
     loses: 0,
@@ -89,11 +99,51 @@ function isEqual(objA: {}, objB: {}) {
 
   }, [userData]);
 
+
+  const [MyuserData, setMyUserData] = useState<MyUserData>({
+    user_data: {
+      id: 0,
+      username: 'me',
+      avatar: "",
+      rating: 0,
+	  me: false,
+      is_two_factor_auth_enabled: false,
+	  state: ''
+    },
+    friends: [],
+	blocks: [],
+    match_history: [],
+	pending_requests: [],
+    achievements: [],
+    wins: 0,
+    loses: 0,
+    draws: 0,
+  });
+
+  useEffect(() => {
+	try {
+	  const response =  axios.get(`http://localhost:3000/profile/me`, { withCredentials: true })
+	  .then ((response) => {
+		const newData = response.data;
+			if (!isEqual(newData, MyuserData)) {
+				setMyUserData(newData);
+			}
+			console.log(response.data);
+		})
+	} catch (error) {
+		console.error("Error fetching user data:");
+	}
+	
+}, [MyuserData]);
+
+
   return (
     <UserContext.Provider value={{ userData,setUserData}}>
+    <MyContext.Provider value={{ MyuserData,setMyUserData}}>
+
 
       <div>
-        <NavBar avatar={userData?.user_data?.avatar} username={userData?.user_data?.username}/>
+        <NavBar avatar={MyuserData?.user_data?.avatar} username={MyuserData?.user_data?.username}/>
         <HeadProfile
           profile={userData?.user_data?.avatar}
           name={userData?.user_data?.username}
@@ -133,6 +183,7 @@ function isEqual(objA: {}, objB: {}) {
           </div>
         </div>
       </div>
+    </MyContext.Provider>
     </UserContext.Provider>
   );
 }

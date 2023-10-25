@@ -9,7 +9,7 @@ import { MbGameSettings } from "./MbGameSetting";
 import { json, unstable_Blocker, useNavigate } from "react-router-dom";
 import { useContext } from "react";
 
-import { UserContext } from "../../pages/Profile";
+import { MyContext } from "../../pages/Profile";
 
 
 interface Props {
@@ -18,7 +18,7 @@ interface Props {
 
 export function DkSettings ( {hide}: Props ) {
 
-	const data = useContext(UserContext);
+	const data = useContext(MyContext);
 	
 	  useEffect(() => {
 		
@@ -39,7 +39,7 @@ export function DkSettings ( {hide}: Props ) {
 	const [formData, setFormData] = useState<{username: string}>({
 		username: '',
 	});
-	let defualt : string | undefined = data?.userData?.user_data?.avatar;
+	let defualt : string | undefined = data?.MyuserData?.user_data?.avatar;
 	const [BASE_URL, setBase] = useState(defualt);
 
 
@@ -59,7 +59,7 @@ export function DkSettings ( {hide}: Props ) {
 			}
 			)
 			.then((response) => {
-				data?.setUserData((prevUserData) => ({
+				data?.setMyUserData((prevUserData) => ({
 					...prevUserData,
 					user_data: {
 					  ...prevUserData.user_data,
@@ -84,7 +84,7 @@ export function DkSettings ( {hide}: Props ) {
 			console.log(formData.username);
 			const response = await axios.post('http://localhost:3000/set-username', formData, {withCredentials: true}).then (function (response) {
 				console.log(response.data);
-				data?.setUserData((prevUserData) => ({
+				data?.setMyUserData((prevUserData) => ({
 					...prevUserData,
 					user_data: {
 					  ...prevUserData.user_data,

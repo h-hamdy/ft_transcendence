@@ -3,20 +3,20 @@ import down from "/src/assets/small-down.svg"
 import logo from "/src/assets/mainLogo.svg"
 import { useState } from "react"
 import React from "react"
-import { Link, useNavigate } from "react-router-dom"
+import { Link, NavLink, useNavigate } from "react-router-dom"
 import { DkSettings } from "../../../settings/DkSettings"
 import { GameMode } from "../../../Profile/GamMode"
 import axios from "axios"
 import { Navigate } from "react-router-dom"
 import { useEffect } from "react"
 import { MbGameMode } from "../../../Profile/MbGameMode"
-import { UserContext } from "../../../../pages/Profile"
+import { MyContext, UserContext } from "../../../../pages/Profile"
 import { useContext } from "react";
 import { MbSettings } from "../../../settings/MbSettings"
 
 export function  MBburger (  ) {
 
-	const data = useContext(UserContext);
+	const data = useContext(MyContext);
 
 
 	const initialColors: { [key: string]: string } = {
@@ -65,7 +65,7 @@ export function  MBburger (  ) {
 			<a href="/profile/me">
 				<img src={logo} className="w-[90px] h-[90px] pb-8"></img>
 			</a>
-			<a href="/profile/me">
+			<NavLink to="/profile/me">
 				<button onClick={() => {handleClick('button2', 'img2')}} style={{ backgroundColor: buttonColors.button2 }} className={`p-3 border shadow-md border-white w-[50px] h-[50px]  flex items-center justify-center rounded-2xl `}>
 				<svg width="20" height="20" viewBox="0 0 18 21" fill="none" xmlns="http://www.w3.org/2000/svg">
 				
@@ -75,9 +75,9 @@ export function  MBburger (  ) {
 					</g>
 				</svg>
                 </button>
-			</a>
+			</NavLink>
 		
-			<Link to="/Chat">
+			<NavLink to="/Chat">
 				<button onClick={() => handleClick('button3', 'img3')} style={{ backgroundColor: buttonColors.button3 }} className={`p-3 border shadow-md border-white w-[50px] h-[50px] flex items-center justify-center rounded-2xl `}>
 				<svg width="20" height="20" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
 					<g id="Chat">
@@ -88,7 +88,7 @@ export function  MBburger (  ) {
 					</g>
 					</svg>
 				</button>
-				</Link>
+				</NavLink>
 				<button onClick={() => {handleClick('button4', 'img4'), Setgame(!game)}} style={{ backgroundColor: buttonColors.button4 }} className={`p-3 border shadow-md border-white w-[50px] h-[50px] flex items-center justify-center rounded-2xl `}>
 				<svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
 					<g id="Iconly/Two-tone/Game">
@@ -108,7 +108,7 @@ export function  MBburger (  ) {
                 <div className="flex items-center justify-center text-[#808191] text-sm lg:text-md pt-16">Friends</div>
 				<div className="flex flex-col pl-1 pt-5 gap-3 scrollable-div-ver6">
 					<div>
-						{data?.userData?.friends?.map((friend: { avatar: string; username: string }, index: number) => (
+						{data?.MyuserData?.friends?.map((friend: { avatar: string; username: string }, index: number) => (
 							<div key={index}>
 								<Avatar avatar={friend.avatar} name={friend.username}/>
 							</div>

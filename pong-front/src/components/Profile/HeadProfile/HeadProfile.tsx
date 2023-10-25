@@ -19,12 +19,13 @@ interface Props {
 	me: boolean,
 }
 
-import { UserContext } from "../../../pages/Profile"
+import { MyContext, UserContext } from "../../../pages/Profile"
 import { Link, useNavigate } from "react-router-dom"
 
 export function HeadProfile ( {profile, name, friendNum, me}: Props ) {
 	
 	const data = useContext(UserContext);
+	const Mydata = useContext(MyContext);
 	const [gameMode, setGameMode] = useState(false);
 	const [clicked, setClick] = useState(false);
 	const [search, Setsearch] = useState(false);
@@ -35,6 +36,7 @@ export function HeadProfile ( {profile, name, friendNum, me}: Props ) {
 
 	const handleFriend = async () => {
 		try {
+			console.log(name);
 			const response = await axios.post(`http://localhost:3000/add-friend/${name}`, null, { withCredentials: true })
 			.then (function (response) {
 				setClick(true);
@@ -48,18 +50,44 @@ export function HeadProfile ( {profile, name, friendNum, me}: Props ) {
 		Setsearch(!search);
 	}
 
-	const navigate = useNavigate();
 	
 	const blockFriend = async () => {
 		try {
 			const response = await axios.post(`http://localhost:3000/block-friend/${name}`, null, {withCredentials: true});
-			console.log("out");
 		}
 		catch (error) {
 			console.log(error);
 		}
 	}
-	
+
+	const [isFriend, setFriend] = useState(false);
+
+	useEffect(() => {
+		Mydata?.MyuserData.friends.some(
+			(friend: {username: string}) => {
+				friend.username === name && setFriend(true);
+			}
+		);
+		});
+
+		const handleUnFriend = async () => {
+			try {
+				console.log(name);
+				const response = await axios.delete(`http://localhost:3000/delete-friend/${name}`, { withCredentials: true })
+				.then (function (response) {
+					setClick(true);
+				});
+			} catch (error) {
+				console.error('POST friend failed:', error);
+				}
+			};
+
+		const handleFriendreq = () => {
+			console.log(isFriend)
+			{ isFriend ? handleUnFriend() :
+				handleFriend()
+			}
+		}
 	return (
 		<>
 		<div className="pt-32 pl-10 pr-10 lg:pl-36 lg:pr-10">
@@ -90,7 +118,8 @@ export function HeadProfile ( {profile, name, friendNum, me}: Props ) {
 						</button>
 					}
 					{
-							clicked ? <button className={`flex items-center justify-center border border-gray-100 bg-gray-100 w-[50px] h-[45px] shadow rounded-xl`} onClick={handleFriend}>
+							isFriend ?
+							<button className={`flex items-center justify-center border border-gray-100 bg-gray-100 w-[50px] h-[45px] shadow rounded-xl`} onClick={handleFriendreq}>
 								<img src={Friendadded} className="w-[24px] h-[24px]"></img>
 							</button>
 						:
@@ -108,7 +137,7 @@ export function HeadProfile ( {profile, name, friendNum, me}: Props ) {
 							<img src={plusFriend} className="w-[24px] h-[24px]"></img>
 							</button>
 						) :
-							<button className={`flex items-center justify-center border border-[#6C5DD3] bg-[#6C5DD3] w-[50px] h-[45px] shadow rounded-xl`} onClick={handleFriend}>
+							<button className={`flex items-center justify-center border border-[#6C5DD3] bg-[#6C5DD3] w-[50px] h-[45px] shadow rounded-xl`} onClick={handleFriendreq}>
 							<img src={plusFriend} className="w-[24px] h-[24px]"></img>
 							</button>
 						  

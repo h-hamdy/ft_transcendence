@@ -1,4 +1,5 @@
 import ftLogo from "../../assets/42.svg"
+import React from "react";
 
 export default function Authentication() {
 

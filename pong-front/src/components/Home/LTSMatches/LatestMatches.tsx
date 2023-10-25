@@ -1,6 +1,12 @@
+import React, { useContext } from "react"
+
 import { GameRes } from "./GameRes"
+import { UserContext } from "../../../pages/Profile"
 
 export function LatestMatches () {
+
+	const data = useContext(UserContext)
+
     return (
         <>
             <div className="flex flex-col justify-center items-center px-10 pb-10">
@@ -17,6 +23,15 @@ export function LatestMatches () {
                         <GameRes/>
                         <GameRes/>
                         <GameRes/>
+						{/* {
+							data?.userData?.match_history.length === 0 ? null
+							:
+							data?.userData?.match_history.map((match: {avatar: string, username: string}, index: number) => (
+							<div key={index}>
+								<GameRes/>
+							</div>
+							))
+						} */}
                     </div>
                 </div>
             </div>

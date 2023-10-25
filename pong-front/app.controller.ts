@@ -298,8 +298,8 @@ async deactivateTwoFactorAuth(@Req() req: Request, @Body() body: TfaCodeDto) {
     this.authService.addToBlacklist(token);
     //clear the cookie
     response.clearCookie('jwt');
-    // return 'Logged out seccussfully';
-	response.redirect("http://localhost:5173/");
+    return 'Logged out seccussfully';
+	// response.redirect("http://localhost:5173/");
   }
 
   //chat

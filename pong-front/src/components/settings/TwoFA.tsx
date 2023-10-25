@@ -12,7 +12,7 @@ import axios from "axios";
 import { useEffect } from "react";
 import rec from "/src/assets/rectangle.svg"
 import { useNavigate } from "react-router-dom";
-import { UserContext } from "../../pages/Profile";
+import { MyContext, UserContext } from "../../pages/Profile";
 
 
 interface Props {
@@ -30,7 +30,7 @@ export function TwoFa ( {hide}:Props ) {
 	});
 	const [error, Seterror] = useState(false);
 	const [sent, Setsent] = useState(false);
-	const Data = useContext(UserContext);
+	const Data = useContext(MyContext);
  
 
 
@@ -84,7 +84,7 @@ export function TwoFa ( {hide}:Props ) {
 	}
 	
 	const handleOn = () => {
-		Data?.setUserData((prevUserData) => ({
+		Data?.setMyUserData((prevUserData) => ({
 		  ...prevUserData,
 		  user_data: {
 			...prevUserData.user_data,
@@ -96,7 +96,7 @@ export function TwoFa ( {hide}:Props ) {
 	  };
 
 	const handleOff = () => {
-		Data?.setUserData((prevUserData) => ({
+		Data?.setMyUserData((prevUserData) => ({
 			...prevUserData,
 			user_data: {
 			  ...prevUserData.user_data,
@@ -230,14 +230,14 @@ export function TwoFa ( {hide}:Props ) {
 											<div className="pt-5">
 											
 											{
-												Data?.userData?.user_data?.is_two_factor_auth_enabled ?
+												Data?.MyuserData?.user_data?.is_two_factor_auth_enabled ?
 													<button className={`flex justify-center items-center border rounded-xl bg-gray-100 border-gray-100 h-[45px] w-[130px]`} onClick={handleOff}>
 														<div className="text-[#11142D]  font-semibold lg:text-sm">Disable 2FA</div>
 													</button>
 												: null
 											}
 											{
-												Data?.userData.user_data.is_two_factor_auth_enabled ? null :
+												Data?.MyuserData.user_data.is_two_factor_auth_enabled ? null :
 													<button className="flex justify-center items-center border rounded-xl bg-[#6C5DD3] border-[#6C5DD3] h-[45px] w-[130px]" onClick={handleOn}>
 															<div className="text-white font-semibold lg:text-sm">Enable 2FA</div>
 													</button>
