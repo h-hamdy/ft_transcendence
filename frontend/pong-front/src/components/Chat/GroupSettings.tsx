@@ -59,13 +59,17 @@ export function GroupSettings( {hide}: Props ) {
 		}
 	}, []);
 	const [Isprivate, setIsPrivate] = useState(false);
+	const [type, setType] = useState('');
+	const [name, setname] = useState('')
 	useEffect(() => {
 		try {
 			const response =  axios.get(`http://localhost:3000/get-room/${id}`,
 			{ withCredentials: true }
 			).then ((response) => {
 				if (response.data.type === "private")
-				setIsPrivate(true);
+					setIsPrivate(true);
+				setType(response.data.type);
+				setname(response.data.name);
 			})
 			
 		} catch (error) {
@@ -96,7 +100,7 @@ export function GroupSettings( {hide}: Props ) {
 							<div className="w-full h-2/6 overflow-y-auto">
 								{member.map((mem, index: number) => (
 									<div key={index}>
-										<GroupRestriction avatar={mem.avatar} username={mem.username}/>
+										<GroupRestriction avatar={mem.avatar} username={mem.username} RoomName={name} type={type}/>
 									</div>
 								))
 								}
@@ -111,7 +115,7 @@ export function GroupSettings( {hide}: Props ) {
 								Isprivate ? (
 									users.map((user, index: number) => (
 									<div key={index}>
-										<AddMember avatar={user.avatar} name={user.username} />
+										<AddMember avatar={user.avatar} name={user.username} roomName={name}/>
 									</div>
 									))
 								) : null

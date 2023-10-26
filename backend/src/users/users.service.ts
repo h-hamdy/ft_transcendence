@@ -777,6 +777,9 @@ export class UsersService {
     try{
       const user = await this.findByUsername(userName);
       const room = await this.findRoomByName(body.name);
+      const isUserInRoom = await this.checkIfUserExistsInRoom(user.id, body.name);
+      if (isUserInRoom)
+        return false;
       const isAdded = await this.prisma.managements.create({
         data: {
           user_id: user.id,
@@ -988,6 +991,7 @@ export class UsersService {
             id: memebersWithoutavatar[j].user_id,
             username: user.username,
             avatar: user.avatar,
+            state: user.state,
             role: memebersWithoutavatar[j].role,
             is_banned: memebersWithoutavatar[j].is_banned,
             is_muted: memebersWithoutavatar[j].is_muted,
@@ -1072,7 +1076,7 @@ export class UsersService {
       } 
       //filter
       //debug
-      console.log(myrooms);
+      // console.log(myrooms);
       //end debug
       return myrooms;
     }
@@ -1193,7 +1197,6 @@ export class UsersService {
         },
       });
       if (!isMember[0])
-	  {}
         return false;
       return true;
     }
@@ -1329,7 +1332,7 @@ export class UsersService {
     catch(error) {
       return false;
     }
-  }
+  }  
 
   async getMyRole(userId: number, roomId: number){
     try{
@@ -1383,4 +1386,30 @@ export class UsersService {
       return null;
     }
   }
+
+  async checkIfUserIsBlocked(userId: number, friendId: number){
+    try{
+        const isUserSenderBlocked = await this.prisma.friendships.findMany({
+          where: {
+            sender_id: friendId,
+            acceptor_id: userId,
+            is_sender_blocked: true,
+          },
+        });
+        const isUserAcceptorBlocked = await this.prisma.friendships.findMany({
+          where: {
+            sender_id: userId,
+            acceptor_id: friendId,
+            is_acceptor_blocked: true,
+          },
+        });
+        if (isUserAcceptorBlocked[0] || isUserSenderBlocked[0])
+          return true;
+        return false;
+    }
+    catch(error){
+      return null;
+    }
+  }
+
 }

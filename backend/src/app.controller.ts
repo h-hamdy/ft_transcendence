@@ -47,18 +47,18 @@ export const multerConfig = {
 
 
 @Controller()
-@UseFilters(CustomExceptionsFilter)
 export class AppController {
   constructor(private readonly authService: AuthService,
-              private readonly usersService: UsersService,
-              private readonly notifications: NotificationsService,
-              ) {}
-
-  @Get('/auth')
-  @UseGuards(AuthGuard('42'))
-  async fortyTwoAuth(){}
-
-  @Get('/auth/callback')
+    private readonly usersService: UsersService,
+    private readonly notifications: NotificationsService,
+    ) {}
+    
+    @Get('/auth')
+    @UseGuards(AuthGuard('42'))
+    async fortyTwoAuth(){}
+    
+    @Get('/auth/callback')
+    @UseFilters(CustomExceptionsFilter)
   @UseGuards(AuthGuard('42'))
   async fortyTwoAuthcallback(@Req() req: Request, @Res({ passthrough: true }) res: Response){
 
@@ -557,7 +557,15 @@ async deactivateTwoFactorAuth(@Req() req: Request, @Body() body: TfaCodeDto) {
     const messages = await this.usersService.getRoomMessages(+roomId);
     if (!messages)
       throw new HttpException('Failed to get messages', HttpStatus.BAD_REQUEST);
-    return messages;
+    //filter out messages of blocked users
+    let filteredMessages = [];
+    for (let i = 0; i < messages.length; i++){
+      const isBlocked = await this.usersService.checkIfUserIsBlocked(user.id, messages[i].user_id);
+      if (!isBlocked){
+        filteredMessages.push(messages[i]);
+      }
+    }
+    return filteredMessages;
   }
 
   @Get('get-other-rooms')
@@ -654,5 +662,17 @@ async deactivateTwoFactorAuth(@Req() req: Request, @Body() body: TfaCodeDto) {
       throw new HttpException('Failed to get room', HttpStatus.BAD_REQUEST);
     return room;
   }
+
+  @Post('get-member-role/:username')
+  @UseGuards(Jwt2faAuthGuard)
+  async getMemberRole(@Req() req: Request, @Param('username') username: string, @Body() body: RoomSettingsDto){
+    const user = await this.usersService.findByUsername(username);
+    const room = await this.usersService.findRoomByName(body.name);
+    const role = await this.usersService.getMyRole(user.id, room.id);
+    if (!role)
+      throw new HttpException('Failed to get role', HttpStatus.BAD_REQUEST);
+    return role;
+  }
+
 
 }

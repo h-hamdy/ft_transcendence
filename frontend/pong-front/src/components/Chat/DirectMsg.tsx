@@ -7,9 +7,7 @@ import { ChatConv } from "./Chatconv";
 import { CreateRoom } from "./CreateRoom";
 import { JoinRoom } from "./JoinRoom";
 import { GroupSettings } from "./GroupSettings";
-// import { UserContext } from "../../pages/Profile";
-// import { UserContext } from "../../pages/Chat";
-// import { ChatSocketContext } from "./contexts/chatContext";
+
 interface Friend {
   id: number;
   username: string;
@@ -107,10 +105,12 @@ fetchData();
 
   return (
     <>
-	<div className="flex flex-col h-[70vh] fixed w-[40%]">
+	<div>
+
+	<div className="flex flex-col overflow-y-auto h-[70vh] fixed w-[40%]">
 		{
 			rooms ? 
-			<div className=" h-full bg-black">
+			<div className="">
 				{OtherRooms.map((otheRroom: {id:number, type: string, name: string, avatar: string}, index: number) => (
 					<JoinRoom
 						avatar={otheRroom.avatar}
@@ -131,9 +131,9 @@ fetchData();
 				))}
 			</div>
 		}
-	  <div className="flex items-center justify-center">
+	</div>
 
-	  <div className="flex absolute top-[100%] pt-10 items-center gap-2 lg:pl-18 pl-14 justify-center">
+	  <div className="flex fixed top-[85%] w-full right-[19%] items-center pt-10 items-center gap-2 justify-center">
 			<button onClick={() => setremove(!remove)} className="border border-[#6C5DD3] shadow-md bg-[#6C5DD3] lg:w-[200px] w-[140px] h-[50px] rounded-2xl">
 				<div className="text-white font-semibold lg:text-sm text-xs">Create New Room Chat</div>
 			</button>
@@ -145,9 +145,8 @@ fetchData();
 				</button>
 			}
 		</div>
-	  </div>
-	</div>
-      <div className="w-[50%] absolute left-[49%] h-[87vh]">
+		  </div>
+      <div className="w-[50%] fixed left-[49%] h-[85vh]">
         {(id && Rooms.find((room: room) => room.id.toString() === id?.toString())) && <ChatConv room={Rooms.find((room: room) => room.id.toString() === id?.toString())} profile={profile} />}
       </div>
 	  <div>

@@ -1,13 +1,33 @@
 import React from "react"
 import hhamdy from "/src/assets/hhamdy.jpg"
+import axios from "axios";
+import { json } from "react-router-dom";
 
 interface Props {
+	roomName: string,
 	name: string,
 	avatar: string,
 }
 
-export function AddMember ( {name, avatar}: Props ) {
-	
+const Addmember = async ( name: string, roomName: string ) => {
+	const jsonData = {
+		name: roomName,
+		type: 'private',
+	};
+	console.log(jsonData.name + " " + jsonData.type);
+	try {
+		const response = await axios.post(`http://localhost:3000/add-member/${name}`, jsonData,
+		{ withCredentials: true }
+		).then (() => {
+			console.log("add me to room");
+		})
+		
+	} catch (error) {
+		console.error("Error fetching data:", error);
+	}
+}
+
+export function AddMember ( {name, avatar, roomName}: Props ) {
 	return (
 		<>
 		<div className="py-1">
@@ -16,7 +36,7 @@ export function AddMember ( {name, avatar}: Props ) {
 					<img src={avatar} className="w-[30px] h-[30px] rounded-full"></img>
 					<div className="text-sm text-[#353E6C]">{name}</div>
 				</div>
-				<button className="flex items-center justify-center bg-[#6C5DD3] h-[30px] shadow-lg rounded-custom w-[100px]">
+				<button className="flex items-center justify-center bg-[#6C5DD3] h-[30px] shadow-lg rounded-custom w-[100px]" onClick={() => Addmember(name, roomName)}>
 					<div className="text-white text-xs font-semibold pt-[2px]">Add member</div>
 				</button>
 			</div>
