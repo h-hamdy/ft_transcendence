@@ -6,6 +6,10 @@ import { useEffect } from "react";
 import { MsgMe } from "./MsgMe";
 import { useContext } from "react";
 import { ChatSocketContext } from "./contexts/chatContext";
+import Leave from "/src/assets/Leave.svg"
+import axios from "axios";
+import send from "/src/assets/Send.svg"
+
 
 interface DkChatConvProps {
 	prop_room: any;
@@ -24,6 +28,18 @@ interface ChatDto {
 	roomId: string
 	userId: string
 	message: string
+}
+
+const LeaveRoom = (id: number) => {
+	try {
+	  let response =  axios.delete(
+		`http://${import.meta.env.VITE_API_URL}/leave-room/${id}`,
+		{ withCredentials: true }
+	  )
+	  .then ((response) => {console.log("leave room")})
+  } catch (error) {
+	  console.error("Error Leaving room data:", error);
+  }
 }
 
 export function DkChatConv({ prop_room, members, profile, messages, setMessages }: DkChatConvProps) {
@@ -120,20 +136,24 @@ export function DkChatConv({ prop_room, members, profile, messages, setMessages 
 		<>
 
 			{!remove && (
-				<div className="w-full  bg-white mobile-nav-bar sm:hidden lg:block" >
+				<div className="w-full sm:w-[100%]" >
 
-					<div className="pl-16 z px-8 h-[90vh] sm:hidden mobile-nav-bar lg:block">
-						<div className="w-full h-full flex flex-col justify-around">
+					<div className="pl-16 z px-8 h-[90vh]">
+						<div className="w-full h-full sm:w-[80%] flex flex-col justify-around">
 
 							<div className="text-white text-xl">
 								<div className="flex items-center justify-between lg:pr-10 lg:pb-10">
-									<div className="text-[#1B1D21] md:text-2xl">{room.name || members.find(member => member.username !== profile.user_data.username).username}</div>
-									<button
-										onClick={() => SetRemove(!remove)}
-										className="flex items-center justify-center border border-white rounded-full w-12 h-12 shadow-xl lg:hidden"
-									>
-										<img src={rmv} alt="Remove" />
-									</button>
+									<div className="text-[#1B1D21]  md:text-2xl">{room.name || members.find(member => member.username !== profile.user_data.username).username}</div>
+									{
+										room?.type !== "direct" ? 
+										<button className="flex gap-[4px]" onClick={() => LeaveRoom(room.id)}>
+										<div>
+										<img className="w-[24px] h-[24px]" src={Leave}>
+										</img>
+										</div>
+										<div className="text-sm text-[#808191]">Leave Room</div>
+										</button> : null
+									}
 								</div>
 							</div>
 							<div className="overflow-y-auto">
@@ -160,12 +180,11 @@ export function DkChatConv({ prop_room, members, profile, messages, setMessages 
 							</div>
 							<div className="flex items-center justify-center">
 
-								<div className="flex flex-row justify-center w-[50%]">
+								<div className="flex flex-row justify-center w-[100%] lg:w-[60%]">
 									<form onSubmit={handleSubmit} className="w-[100%] h-[100px]">
 										<input
-											className="w-full px-4 bg-gray-100 h-[50px] focus:outline-none rounded-custom focus:border-[#6C5DD3] text-[#808191]"
+											className="w-full px-4 bg-gray-100 h-[50px] focus:outline-none rounded-tl-xl rounded-bl-xl focus:border-[#6C5DD3] text-[#808191]"
 											placeholder="Write Something"
-											//   onChange={(e) => setMessage( ...message, message: e.target.value)}
 											onChange={(e) => setMessage(e.target.value)}
 											value={message}
 											name="message"
@@ -173,8 +192,9 @@ export function DkChatConv({ prop_room, members, profile, messages, setMessages 
 									</form>
 
 									<button onClick={handleSubmit}
-										className="flex justify-center items-center border rounded-xl bg-[#6C5DD3] border-[#6C5DD3] h-[45px] w-[100px]">
-										<div className="text-white font-semibold lg:text-sm">send</div>
+										className="flex justify-center items-center border rounded-br-xl rounded-tr-xl bg-[#6C5DD3] border-[#6C5DD3] h-[50px] w-[100px]">
+										{/* <div className="text-white font-semibold lg:text-sm">send</div> */}
+										<img src={send} className="w-[30px] h-[30px]"></img>
 									</button>
 								</div>
 							</div>

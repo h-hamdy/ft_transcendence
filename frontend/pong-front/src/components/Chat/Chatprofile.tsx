@@ -5,6 +5,7 @@ import axios from "axios";
 import { Link, NavLink, useParams } from "react-router-dom";
 import { GroupSettings } from "./GroupSettings";
 import settings from "/src/assets/GroupSetting.svg"
+import Leave from "/src/assets/Leave.svg"
 
 interface Props {
   room: any;
@@ -29,7 +30,7 @@ export function Chatprofile({ room, hide }: Props) {
 
   return (
     <>
-      < NavLink to={`/Chat/${room.id}`} className={({ isActive }) => isActive ? "flex items-center justify-between w-full  border border-white rounded-2xl h-[80px] pl-5 bg-[#6C5DD3]" : "w-full  flex items-center justify-between border border-white rounded-2xl h-[80px] pl-5"}>
+      < NavLink to={`/Chat/${room.id}`} className={({ isActive }) => isActive ? "flex items-center justify-between w-full  border border-white rounded-2xl h-[80px] pl-5 bg-[#6C5DD3]" : " w-full  flex items-center justify-between border border-white rounded-2xl h-[80px] pl-5"}>
         {
           ({ isActive }) => (
             <>
@@ -41,18 +42,20 @@ export function Chatprofile({ room, hide }: Props) {
                 </div>
               </div>
               <div>
-                <div className={`pl-3 lg:text-lg ${isActive ? 'text-white' : 'text-[#11142D]'}`}>
-                  {room.name}</div>
-                <div className={`pl-3 Inter text-sm lg:text-sm font-meduim ${isActive ? 'text-white' : 'text-[#808191CC]'}`}>online</div>
+                <div className={`pl-3 lg:text-lg mobile-nav-bar sm:hidden md:block ${isActive ? 'text-white' : 'text-[#11142D]'}`}>
+                  {room.name}
+				  </div>
+                <div className={`pl-3 Inter mobile-nav-bar sm:hidden md:block text-sm lg:text-sm font-meduim ${isActive ? 'text-white' : 'text-[#808191CC]'}`}>online</div>
               </div>
 			</div>
 			{
-				role === "owner" || role === "admin" ? (
+				role === "owner" || role === "admin" ? (	
 					<button className="absolute right-0 pr-10" onClick={hide}>
 						<img src={settings} alt="Settings" />
 					</button>
 				) : null
-}
+			}
+		
             </>	
           )
         }

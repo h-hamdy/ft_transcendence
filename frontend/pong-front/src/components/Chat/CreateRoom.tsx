@@ -19,9 +19,7 @@ const handleCreateRoom = async ( {roomName, RoomType, pass}: Data ) => {
 		type: RoomType,
 		password: pass,
 	};
-
-	console.log(jsonData);
-
+	
 	try {
 		const response = await axios.post("http://localhost:3000/create-room", jsonData, {withCredentials: true})
 		.then((response) => {
@@ -56,7 +54,7 @@ export function CreateRoom( {hide}: Props ) {
 	
 	const [buttoms, Setbuttoms] = React.useState(defalutColor);
 	const [textColor, SetTextColor] = React.useState(defaultTextColor);
-
+	
 	const handleClick = (num: string) => {
 		const newColor = {...defalutColor};
 		const newTextColor = {...defaultTextColor};
@@ -65,10 +63,12 @@ export function CreateRoom( {hide}: Props ) {
 		Setbuttoms(newColor);
 		SetTextColor(newTextColor);
 	}
-  
+	
+	const [clicked, setClick] = React.useState(true);
 	return (
 	  <>
-			<div className="absolute left-[40%] top-[30%] z">
+		<div className="centred-component">
+			<div className="absolute left-[30%] xl:left-[40%] top-[30%] z">
 			  <div className="h-[500px] bg-white shadow-2xl rounded-custom">
 				<div className="flex items-center justify-between p-8">
 				  <div className="text-lg text-[#11142D] font-semibold">Create new room chat</div>
@@ -87,9 +87,9 @@ export function CreateRoom( {hide}: Props ) {
 						value={data.roomName}
 						onChange={(e) => {
 							e.preventDefault();
-								setData({ ...data, roomName: e.target.value });
+							setData({ ...data, roomName: e.target.value });
 						}}
-					/>
+						/>
 					</div>
 					<div className="flex flex-col gap-[10px]">
 
@@ -115,6 +115,8 @@ export function CreateRoom( {hide}: Props ) {
 				</div>
 			  </div>
 			 </div>
+		</div>
+
 	  </>
 	);
   }
