@@ -61,12 +61,11 @@ export function HeadProfile ( {profile, name, friendNum, me}: Props ) {
 	}
 
 	const [isFriend, setFriend] = useState(false);
-	
 
 	useEffect(() => {
 		Mydata?.MyuserData.friends.some(
 			(friend: {username: string}) => {
-				friend.username === name ? setFriend(true) : null
+				friend.username === name && setFriend(true);
 			}
 		);
 		});
@@ -84,8 +83,8 @@ export function HeadProfile ( {profile, name, friendNum, me}: Props ) {
 			};
 
 		const handleFriendreq = () => {
-			// console.log(isFriend)
-			{ isFriend ? (handleUnFriend(), setFriend(true)) :
+			console.log(isFriend)
+			{ isFriend ? handleUnFriend() :
 				handleFriend()
 			}
 		}
@@ -112,6 +111,12 @@ export function HeadProfile ( {profile, name, friendNum, me}: Props ) {
 					</div>
 					</div>
 					<div className="flex gap-7 items-center justify-around">
+					{
+						me ? null :
+						<button className="flex justify-center items-center border rounded-xl bg-[#6C5DD3] border-[#6C5DD3] h-[45px] w-[100px] pr-">
+								<div className="text-white font-semibold lg:text-sm">Message</div>
+						</button>
+					}
 					{
 							isFriend ?
 							<button className={`flex items-center justify-center border border-gray-100 bg-gray-100 w-[50px] h-[45px] shadow rounded-xl`} onClick={handleFriendreq}>

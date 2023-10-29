@@ -4,6 +4,8 @@ import { GroupRestriction } from "./GroupRestriction";
 import rmv from "/src/assets/remove.svg"
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import { Add } from "../Home/NavBar/Notification/add";
+import { UpdatePass } from "./UpdatePass";
 
 
 interface Props {
@@ -29,14 +31,13 @@ export function GroupSettings( {hide}: Props ) {
 
 	const [member, setMember] = useState<typeof initialUsers[]>([]);
 	const { id } = useParams();
+	const [updatePass, setUpdatepass] = useState(false);
 	useEffect(() => {
 		try {
 			const response =  axios.get(`http://localhost:3000/get-room-members/${id}`,
 			{ withCredentials: true }
 			).then ((response) => {
 				setMember(response.data);
-				console.log("l7waaaaaaaaaaaaaaa")
-
 			})
 			
 		} catch (error) {
@@ -59,6 +60,7 @@ export function GroupSettings( {hide}: Props ) {
 		}
 	}, []);
 	const [Isprivate, setIsPrivate] = useState(false);
+	const [IsProtected, SetProtected] = useState(false);
 	const [type, setType] = useState('');
 	const [name, setname] = useState('')
 	useEffect(() => {
@@ -68,6 +70,8 @@ export function GroupSettings( {hide}: Props ) {
 			).then ((response) => {
 				if (response.data.type === "private")
 					setIsPrivate(true);
+				if (response.data.type === "protected")
+					SetProtected(true)
 				setType(response.data.type);
 				setname(response.data.name);
 			})
@@ -79,12 +83,13 @@ export function GroupSettings( {hide}: Props ) {
 
 
 	const [remove, setRemove] = React.useState(false);
+	// console.log(name)
 	return (
 	  <>
 		{remove ? null : (
 			
 			<div className="blur-background lg:centred-component">
-			<div className="bg-white px-8 shadow-xl rounded-custom lg:w-[50%] w-full xl:w-[40%] lg:h-[70%] h-full pt-32  lg:pt-10 overflow-hidden centered-component">
+			<div className="bg-white px-8 shadow-xl rounded-custom lg:w-[50%] w-full xl:w-[40%] lg:h-[75%] h-full pt-32  lg:pt-10 overflow-hidden centered-component">
 					<div className="flex items-center justify-between">
 						<div className="text-[#1B1D21] font-semibold text-xl">Room Setting</div>
 						<button
@@ -100,7 +105,7 @@ export function GroupSettings( {hide}: Props ) {
 							<div className="w-full h-2/6 overflow-y-auto">
 								{member.map((mem, index: number) => (
 									<div key={index}>
-										<GroupRestriction avatar={mem.avatar} username={mem.username} RoomName={name} type={type}/>
+										<GroupRestriction avatar={mem.avatar} is_banned={mem.is_banned} username={mem.username} RoomName={name} type={type}/>
 									</div>
 								))
 								}
@@ -110,16 +115,29 @@ export function GroupSettings( {hide}: Props ) {
 								<div className="flex items-center justify-center text-2xl font-semibold font-sans text-[#11142D] pt-5">Add Players to Your room</div>
 								: null
 							}
-							<div className="w-full pt-3 h-3/6 overflow-y-auto pb-10">
+							<div className="flex-col items-center justify-center">
+
+							<div className="w-full pt-3 h-3/6 overflow-y-auto pb-5">
 							{
 								Isprivate ? (
 									users.map((user, index: number) => (
-									<div key={index}>
+										<div key={index}>
 										<AddMember avatar={user.avatar} name={user.username} roomName={name}/>
 									</div>
 									))
-								) : null
+									) : null
 								}
+							</div>
+							<div className="flex items-center justify-center">
+
+								{
+									IsProtected ?
+									<button className="text-xs font-semibold font-sans text-gray-500" onClick={() => setUpdatepass(!updatePass)}>
+										Update Password
+									</button>
+									: null
+								}
+								</div>
 							</div>
 
 					</div>
@@ -128,6 +146,12 @@ export function GroupSettings( {hide}: Props ) {
 		</div>
 
 		)}
+		{
+			updatePass ? <UpdatePass roomName={name} RoomType={type} hide={() => {}}/> : null
+		}
 	  </>
 	);
   }
+
+
+//   HassanCharef#?3

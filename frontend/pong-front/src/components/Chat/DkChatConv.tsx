@@ -76,12 +76,13 @@ export function DkChatConv({ prop_room, members, profile, messages, setMessages 
 					message: data.message,
 					date: new Date(),
 				};
+				console.log('data dyalek', data);
 				// if (room.id === prop_room.id)
-				setMessages((old) => [...old, _data])
+				setMessages((old) => [...old, _data]) 	
 				// memoizedRef.current = [...memoizedRef.current, _data];
 				// console.log('  : ', memoizedRef.current);
 				// setrerender(Math.random());
-				console.log('prop_room');
+				console.log('prop_room');	
 			// }
 			// }
 		});
@@ -104,11 +105,11 @@ export function DkChatConv({ prop_room, members, profile, messages, setMessages 
 	const handleSubmit = (e) => {
 		e.preventDefault();
 		// }
-		let Data = {
-			userId: profile.user_data.id,
-			message: message,
-			date: new Date(),
-		};
+		// let Data = {
+		// 	userId: profile.user_data.id,
+		// 	message: message,
+		// 	date: new Date(),
+		// };
 		let chat: ChatDto = {
 			roomId: room.id.toString(),
 			userId: profile.user_data.id,
@@ -158,7 +159,6 @@ export function DkChatConv({ prop_room, members, profile, messages, setMessages 
 							</div>
 							<div className="overflow-y-auto">
 								{messages.map((message) => {
-									// console.log(message.user_id);
 									const friend = profile.friends.find(f => f.id === message.user_id);
 									if (friend) {
 										// console.log('Found friend:', friend);
@@ -166,9 +166,10 @@ export function DkChatConv({ prop_room, members, profile, messages, setMessages 
 											profile={friend.avatar}
 											name={friend.username}
 											msg={message.message}
-										/>);
+											/>);
 									} else if (message.message) {
 										// console.log("me");
+										// console.log('msg ra tle3', message);
 										return (<MsgMe
 											profile={profile.user_data.avatar}
 											name={profile.user_data.username}

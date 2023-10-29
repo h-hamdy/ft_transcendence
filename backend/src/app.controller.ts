@@ -281,11 +281,13 @@ async deactivateTwoFactorAuth(@Req() req: Request, @Body() body: TfaCodeDto) {
   @Get('/check-user/:username')
   @UseGuards(Jwt2faAuthGuard)
   async loadUser(@Param('username') username: string) {
-      const user = await this.usersService.findByUsername(username);
-      if (!user){
-        return false;
-      }
-      return true;
+    if (username === 'me')
+    return {boolean:true};
+    const user = await this.usersService.findByUsername(username);
+    if (!user){
+      return {boolean:false};
+    }
+    return {boolean:true};
   }
 
   @Get('/logout')
@@ -333,7 +335,13 @@ async deactivateTwoFactorAuth(@Req() req: Request, @Body() body: TfaCodeDto) {
     }
     //create rooms for private chat here
     const isCreated = await this.usersService.createDirectRoom(us.id, username);
-    return 'Friend accepted seccussfully';
+    // return 'Friend accepted seccussfully';
+    const friend= await this.usersService.findByUsername(username);
+    return {
+       id: friend.id,
+       username: friend.username,
+       avatar:   friend.avatar
+     };
   }
 
   @Post('/block-friend/:username')
@@ -472,7 +480,7 @@ async deactivateTwoFactorAuth(@Req() req: Request, @Body() body: TfaCodeDto) {
         const isAdmin = await this.usersService.checkIfUserIsAdmin(user.id, body);
         if (!isAdmin)
           throw new HttpException('You are not an admin of this room', HttpStatus.FORBIDDEN);
-        const isKicked = await this.usersService.kickUser(username, body);
+        const isKicked = await this.usersService.kickUser(username, body, user.id);
         if (!isKicked)
           throw new HttpException('Failed to kick member', HttpStatus.BAD_REQUEST);
         return 'Member kicked successfully';
@@ -487,7 +495,7 @@ async deactivateTwoFactorAuth(@Req() req: Request, @Body() body: TfaCodeDto) {
         const isAdmin = await this.usersService.checkIfUserIsAdmin(user.id, body);
         if (!isAdmin)
           throw new HttpException('You are not an admin of this room', HttpStatus.FORBIDDEN);
-        const isMuted = await this.usersService.muteMemeber(username, body);
+        const isMuted = await this.usersService.muteMemeber(username, body, user.id);
         if (!isMuted)
           throw new HttpException('Failed to mute member', HttpStatus.BAD_REQUEST);
         return 'Member muted seccussfully';
@@ -497,12 +505,16 @@ async deactivateTwoFactorAuth(@Req() req: Request, @Body() body: TfaCodeDto) {
   @Post('/ban-member/:username')
   @UseGuards(Jwt2faAuthGuard)
   async banMember(@Req() req: Request, @Param('username') username: string, @Body() body: RoomSettingsDto){
-        // check if the user is admin
+        //
+        // check if the user is owner --he can ban everybody except the himself
+        // check if the user is admin --he can ban everybody except the owner and other admins
+        //if the user is just member he cant do shit
+
         const user = await this.usersService.findOne(this.authService.extractIdFromPayload(req.user));
         const isAmdin = await this.usersService.checkIfUserIsAdmin(user.id, body);
         if (!isAmdin)
           throw new HttpException('You are not an admin of this room', HttpStatus.FORBIDDEN);
-        const isBanned = await this.usersService.updateBan(username, body, true);
+        const isBanned = await this.usersService.updateBan(username, body, true, user.id);
         if (!isBanned)
           throw new HttpException('Failed to ban member', HttpStatus.BAD_REQUEST);
         return 'Member banned seccussfully';
@@ -518,7 +530,7 @@ async deactivateTwoFactorAuth(@Req() req: Request, @Body() body: TfaCodeDto) {
     const isAmdin = await this.usersService.checkIfUserIsAdmin(user.id, body);
     if (!isAmdin)
       throw new HttpException('You are not an admin of this room', HttpStatus.FORBIDDEN);
-    const isAllowed = await this.usersService.updateBan(username, body, false);
+    const isAllowed = await this.usersService.updateBan(username, body, false, user.id);
     if (!isAllowed)
       throw new HttpException('Failed to unban member', HttpStatus.BAD_REQUEST);
     return 'Member unbanned seccussfully';
@@ -583,6 +595,8 @@ async deactivateTwoFactorAuth(@Req() req: Request, @Body() body: TfaCodeDto) {
   async deleteFriend(@Req() req: Request, @Param('username') username: string){
     const user = await this.usersService.findOne(this.authService.extractIdFromPayload(req.user));
     const friend= await this.usersService.findByUsername(username);
+    if (!friend)
+      throw new HttpException('Failed to delete friend', HttpStatus.BAD_REQUEST);
     const isDeleted = await this.usersService.deleteFriend(user.id, friend.id);
     if (!isDeleted)
       throw new HttpException('Failed to delete friend', HttpStatus.BAD_REQUEST);

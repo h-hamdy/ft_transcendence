@@ -15,6 +15,8 @@ import { JwtService } from "@nestjs/jwt";
 import { WsException } from "@nestjs/websockets";
 import { joinRoomDto } from "./dto/joinRoom.dto";
 import { ChatDto } from "./dto/chat.dto";
+import { StateDto } from "./dto/state.dto";
+
 import { OnEvent } from "@nestjs/event-emitter";
 import { NotificationsService } from "./event.notifications";
 import { CustomWsExceptionsFilter } from "./custom-ws-exception.filter";
@@ -58,7 +60,21 @@ export class ChatGateway implements OnGatewayConnection, OnGatewayDisconnect {
                     // console.log("isSaved = ",isSaved);
                     //send the message to the room
                     if (isSaved){
-                        this.server.to(payload.roomId).emit('chat', payload); //broadcast messages
+                        //exclude the blocked users
+                        const roomClients = this.server.sockets.adapter.rooms.get(payload.roomId);
+                        if (roomClients){
+                            const ClientSocketIds = Array.from(roomClients);
+
+                            for (let i=0; i< ClientSocketIds.length; i++){
+                                // if his not blocked send the message
+                                const userId = this.clients.get(ClientSocketIds[i]);
+                                const isblocked = await this.usersService.isFriendBlocked(userId, this.clients.get(client.id));
+                                if (!isblocked)
+                                    this.server.to(ClientSocketIds[i]).emit('chat', payload); //send message
+                            }
+                        }
+                        // this.server.to(payload.roomId).except(payload.blockedUsers).emit('chat', payload); //broadcast messages
+                        // this.server.to(payload.roomId).emit('chat', payload); //broadcast messages
                     }
                 }
                 // else{
@@ -100,6 +116,7 @@ export class ChatGateway implements OnGatewayConnection, OnGatewayDisconnect {
     }
 
     async handleConnection(@ConnectedSocket() client: Socket): Promise<void> {
+        // this.logger.log(`Client connected: ${client.id}`)
         try {
             const Cookie = client.handshake.headers.cookie.split("=")[1];
             // console.log("Cookie = ",Cookie);
@@ -110,12 +127,25 @@ export class ChatGateway implements OnGatewayConnection, OnGatewayDisconnect {
             const user = await this.usersService.findOne(payload.sub);
             if (user){
                 // console.log("user = ",user);
-                this.clients.set(client.id, user.id);
                 // console.log("clients after connect = ",this.clients);  
                 //save the user state in the database
-                const isSaved = await this.notifications.saveUserState(user.id, "online");
-                //broadcast the user state change to all connected the users
-                this.server.emit('State', {id: user.id, username: user.username, avatar: user.avatar, state: "online"});
+                const test = await  this.usersService.findById(user.id);
+                console.log('initial state-------------------------------------------------- = ', test)
+                const values = [...this.clients.values()];
+                if (values.includes(user.id) ===false)
+                {
+                    console.log('new user')
+                    const isSaved = await this.notifications.saveUserState(user.id, "online");
+                    //broadcast the user state change to all connected the users
+                     this.server.emit('State', {id: user.id, username: user.username, avatar: user.avatar, state: "online"});
+                }                
+                else (test.state !== "ingame")
+                {
+                    const isSaved = await this.notifications.saveUserState(user.id, "online");
+                    //broadcast the user state change to all connected the users
+                    this.server.emit('State', {id: user.id, username: user.username, avatar: user.avatar, state: "online"});
+                }
+                this.clients.set(client.id, user.id);
             }
         }catch(error){
             // console.log(error);
@@ -132,16 +162,21 @@ export class ChatGateway implements OnGatewayConnection, OnGatewayDisconnect {
         //remove the client form the map
         // console.log("clients after disconnect = ",this.clients);
         // this.logger.log(`Socket disconnected ${socket}`);
+        // this.logger.log(`Cliend id:${client.id} disconnected`);
         try{
             const userId = this.clients.get(client.id);
             const user = await this.usersService.findById(userId);
             //save the user state in the database
             if (user){
-                const isSaved = await this.notifications.saveUserState(userId, "offline");
-                //broadcast the user state change to all connected the users
-                this.server.emit('State', {id: userId, username: user.username, avatar: user.avatar, state: "offline"});
-                //remove client from map
                 this.clients.delete(client.id);
+                const values = [...this.clients.values()];
+                if (values.includes(userId) === false){
+                    const isSaved = await this.notifications.saveUserState(userId, "offline");
+                    //broadcast the user state change to all connected the users
+                    this.server.emit('State', {id: userId, username: user.username, avatar: user.avatar, state: "offline"});
+                    //remove client from map
+                }
+
             }
         }
         catch(error){
@@ -181,6 +216,21 @@ export class ChatGateway implements OnGatewayConnection, OnGatewayDisconnect {
             this.server.to(friendSocketId).emit('gameRequest', sender); //broadcast messages
         }
 
+    }
+
+    @OnEvent('gameState')
+    async handleGameStartEvent(state: string, uId: number) {
+            //get friend socket
+        try{
+            const user = await this.usersService.findById(uId);
+            const isSaved = await this.notifications.saveUserState(uId, state);
+            if (isSaved)
+                this.server.emit('State', {id: uId, username: user.username, avatar: user.avatar, state: state});
+        }
+        catch(error){
+            // console.log(error);
+            throw new WsException('Error occured while saving the state');
+        }        
     }
 
 }

@@ -16,7 +16,6 @@ interface Props {
 export function MbSettings ( {hide}: Props ) {
 
 	const data = useContext(MyContext);
-	const _data = useContext(UserContext)
 	
 	useEffect(() => {
 	  
@@ -65,14 +64,6 @@ export function MbSettings ( {hide}: Props ) {
 				  },
 				}));
 
-				_data?.setUserData((prevUserData) => ({
-					...prevUserData,
-					user_data: {
-					  ...prevUserData.user_data,
-					  avatar: response.data,
-					},
-				  }));
-
 
 
 			  setBase(`http://${import.meta.env.VITE_API_URL}/avatars/${response.data}`);
@@ -97,14 +88,6 @@ export function MbSettings ( {hide}: Props ) {
 					username: response.data,
 				  },
 				}));
-
-				_data?.setUserData((prevUserData) => ({
-					...prevUserData,
-					user_data: {
-					  ...prevUserData.user_data,
-					  avatar: response.data,
-					},
-				  }));
 		  });
 	  }
 	  catch(error) {

@@ -7,6 +7,7 @@ interface Props {
 }
 
 export function MsgMe({ profile, name, msg }: Props) {
+	console.log('moshkil endk', msg)
 	return (
 	  <>
 		<div className="flex  justify-end  gap-[10px] pb-5">

@@ -11,6 +11,7 @@ interface Props {
 	username: string,
 	RoomName: string,
 	type: string,
+	is_banned: string,
 }
 
 const handleban = async (name: string, RoomName: string, type: string) => {
@@ -18,11 +19,31 @@ const handleban = async (name: string, RoomName: string, type: string) => {
 		name: RoomName,
 		type: type,
 	};
+
+	
 	try {
 		const response = await axios.post(`http://localhost:3000/ban-member/${name}`, jsonData,
 		{ withCredentials: true }
 		).then (() => {
-			// console.log("Bann me");
+			console.log(jsonData.name + " " + jsonData.type + " " + name + "ban btw") ;
+		})
+		
+	} catch (error) {
+		console.error("Error fetching data:", error);
+	}
+}
+
+const handleallow = async (name: string, RoomName: string, type: string) => {
+	const jsonData = {
+		name: RoomName,
+		type: type,
+	};
+	
+	try {
+		const response = await axios.post(`http://localhost:3000/allow-member/${name}`, jsonData,
+		{ withCredentials: true }
+		).then (() => {
+			console.log(jsonData.name + " " + jsonData.type + " " + name + " rak 3aref") ;
 		})
 		
 	} catch (error) {
@@ -37,7 +58,6 @@ const handlemute = async (name: string, RoomName: string, type: string, time: nu
 		duration: time
 	};
 
-	console.log(jsonData.name + " " + " " + jsonData.type + " " + jsonData.duration + " " + name) ;
 	try {
 		const response = await axios.post(`http://localhost:3000/mute-member/${name}`, jsonData,
 		{ withCredentials: true }
@@ -56,11 +76,15 @@ const handlekick = async (name: string, RoomName: string, type: string) => {
 		type: type,
 	};
 
+	console.log("9awed");
 	try {
 		const response = await axios.delete(`http://localhost:3000/kick-member/${name}`, {
 		  data: jsonData,
 		  withCredentials: true
-		});
+		})
+		.then ((response) => {
+			console.log("am kicked")
+		})
 	  
 		console.log("Mute me");
 	  } catch (error) {
@@ -84,7 +108,7 @@ const handleadmin =  async (name: string, RoomName: string, type: string) => {
 	  }
 }
 
-export function GroupRestriction ({avatar, username, RoomName, type}: Props) {
+export function GroupRestriction ({avatar, is_banned, username, RoomName, type}: Props) {
 
 	const Id = useParams();
 	const conf = {
@@ -110,10 +134,12 @@ export function GroupRestriction ({avatar, username, RoomName, type}: Props) {
 		}
 		
 	}, []);
+
 	
-	const [banuser, setbanuser] = useState(false);
+	const [banuser, setbanuser] = useState(is_banned);
 	const [muteuser, setmuteuser] = useState(false);
 	const [access, setaccess] = useState(false);
+
 	return (
 		<>
 		<div className="pb-5">
@@ -123,14 +149,13 @@ export function GroupRestriction ({avatar, username, RoomName, type}: Props) {
 					<div className="text-sm text-[#353E6C]">{conf.username}</div>
 				</button>
 				{
-					banuser ?
-					<button className="flex items-center" onClick={() => {handleban(conf.username, RoomName, type), setbanuser(!banuser)}}>
+					(banuser.toString() === "false") ?
+					<button className="flex items-center" onClick={() => {handleban(conf.username, RoomName, type), setbanuser("true")}}>
 					<img src={ban} className="pt-2"></img>
 					<div className="text-xs text-[#353E6C]">Ban</div>
 					</button>
-					:
-					<button className="flex items-center" onClick={() => {handleban(conf.username, RoomName, type), setbanuser(!banuser)}}>
-					<img src={ban} className="pt-2"></img>
+					: 
+					<button className="flex items-center" onClick={() => {handleallow(conf.username, RoomName, type), setbanuser("false")}}>
 						<div className="text-xs text-[#353E6C]">Unban</div>
 					</button>
 				}
@@ -152,16 +177,15 @@ export function GroupRestriction ({avatar, username, RoomName, type}: Props) {
 					}
 					</div>
 				</button>
-				<button className="flex items-center">
-					<img src={kick} onClick={() => handlekick(username, RoomName, type)}></img>
+				<button className="flex items-center" onClick={() => handlekick(username, RoomName, type)}>
+					<img src={kick}></img>
 					<div className="text-xs text-[#353E6C]">Kick out</div>
 				</button>
 				<button className="flex flex-col items-center" onClick={() => {setaccess(!access)}}>
-				<div className="flex gap-[6px]">
-					<img src={kick} className=""></img>
+				<div className="flex">
 					<div className="text-xs text-[#353E6C]">Change access</div>
 				</div>
-				<div className="absolute w-[100px]">
+				<div className="absolute w-[100px] pt-5">
 				{
 					access && acctype === "member" ? (
 						<div className="bg-gray-100 rounded-lg">

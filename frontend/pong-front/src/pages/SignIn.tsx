@@ -1,6 +1,5 @@
 import Authentication from "../components/Enbording/Authentication";
 import Logo from "../assets/mainLogo.svg"
-import background from "/src/assets/onboarding.png"
 import React from "react";
 
 export function SignIn() {

@@ -10,17 +10,33 @@ import { useEffect, useState } from "react";
 import { useContext , createContext} from "react";
 import { Scorecontext } from "../game/components/Sketch";
 import React from "react";
+import { ChatProfileContext } from "../components/Chat/contexts/chatProfileContext";
+import { ChatSocketContext } from "../components/Chat/contexts/chatContext";
 
 
-
-// interface customParam
-// {
-
-//   gameDuration: string;
-// }
 
 export function Game () {
 	const socket = useContext(SocketContext);
+
+	useEffect(() => {
+		// if (socket) {
+			// }
+			return () => {
+				// Component unmount cleanup logic here
+				// if (socket) {
+				//   if (chatContext) {
+				// 	console.log('Sending online status to chat');
+				// 	let state = 'online';
+				// 	chatContext.emit('online', { state });
+				//   }
+				console.log('khdaaaam');
+				if(socket)
+				{
+				  socket.disconnect();
+				}
+				// }
+			  };
+			}, []);
 
 	return (
 		<>
@@ -33,7 +49,7 @@ export function Game () {
 			</div>
 				<GameApp />
 			<div className="pt-32 lg:pl-28 pl-10 pb-10">
-				<GameTitle/>
+				{/* <GameTitle/> */}
 			</div>
 			</div>
 			</div>
