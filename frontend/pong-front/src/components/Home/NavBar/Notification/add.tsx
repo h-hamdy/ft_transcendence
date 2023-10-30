@@ -21,6 +21,7 @@ export function Add ( {hide}: Props ) {
 			.then (function (response) {
 				SetError(false);
 				Setsent(true);
+				hide();
 			});
         } catch (error) {
           console.error('POST Add friend failed:', error);

@@ -6,6 +6,7 @@ import { useEffect } from "react";
 import axios from "axios";
 import { Avatar } from "../NavBar/Avatar";
 import { Navigate, useNavigate } from "react-router-dom";
+import { useProfilecontext } from "../../../ProfileContext";
 
 interface Props {
 	ChooseFriend: () => void;
@@ -13,49 +14,7 @@ interface Props {
 
 export function Friends ( ) {
 	const [remove, Setremove] = React.useState(false);
-	const navigate = useNavigate();
-
-	// interface UserData {
-	// 	id: number;
-	// 	username: string;
-	// 	avatar: string;
-	// 	rating: number;
-	// 	me: boolean;
-	// 	is_two_factor_auth_enabled: boolean;
-	//   }
-	  
-	//   interface Friend {
-	// 	id: number;
-	// 	username: string;
-	// 	avatar: string;
-	//   }
-	  
-	//   interface UserState {
-	// 	user_data: UserData;
-	// 	friends: Friend[];
-	// 	match_history: any[];
-	// 	achievements: any[];
-	// 	wins: number;
-	// 	loses: number;
-	// 	draws: number;
-	//   }
-	  
-	//   const [userData, setUserData] = useState<UserState>({
-	// 	user_data: {
-	// 	  id: 0,
-	// 	  username: "",
-	// 	  avatar: "",
-	// 	  rating: 0,
-	// 	  me: false,
-	// 	  is_two_factor_auth_enabled: false,
-	// 	},
-	// 	friends: [],
-	// 	match_history: [],
-	// 	achievements: [],
-	// 	wins: 0,
-	// 	loses: 0,
-	// 	draws: 0,
-	//   });
+    const profile = useProfilecontext();
 
 	  useEffect(() => {
 		  try {
@@ -90,7 +49,7 @@ export function Friends ( ) {
 							</button>
 						</div>
 						<div className="flex flex-col lg:flex-row items-center justify-center lg:overflow-x-auto overflow-y-auto gap-[15px] lg:gap-0">
-							{userData.friends.map((friend, index: number) => (
+							{profile?.data.friends.map((friend, index: number) => (
 								<div key={index}>
 									<FriendStatus avatar={friend.avatar} name={friend.username} state="offline"/>
 								</div>

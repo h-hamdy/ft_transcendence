@@ -10,6 +10,7 @@ import { UpdatePass } from "./UpdatePass";
 
 interface Props {
 	hide: () => void,
+	role: boolean,
 }
 
 const initialUsers = {
@@ -27,11 +28,13 @@ const allUsers = {
 	avatar: '',
 }
 
-export function GroupSettings( {hide}: Props ) {
+export function GroupSettings( {hide, role}: Props ) {
 
 	const [member, setMember] = useState<typeof initialUsers[]>([]);
 	const { id } = useParams();
 	const [updatePass, setUpdatepass] = useState(false);
+
+	console.log("inside role = " + role);
 	useEffect(() => {
 		try {
 			const response =  axios.get(`http://localhost:3000/get-room-members/${id}`,
@@ -52,7 +55,6 @@ export function GroupSettings( {hide}: Props ) {
 			{ withCredentials: true }
 			).then ((response) => {
 				setUsers(response.data);
-
 			})
 			
 		} catch (error) {
@@ -81,9 +83,26 @@ export function GroupSettings( {hide}: Props ) {
 		}
 	}, []);
 
+	const removePass = async () => {
+		const jsonData = {
+            name: name,
+            type: type,
+        };
+		console.log(jsonData);
+		try {
+			const response = await axios.post(`http://${import.meta.env.VITE_API_URL}/remove-room-password`, jsonData, { withCredentials: true })
+			.then (function (response) {
+				console.log("Password removed and the room become public")
+				
+			});
+		}
+		catch (error) {
+			console.log(error);
+		}
+	}
 
+	console.log("role " + role);
 	const [remove, setRemove] = React.useState(false);
-	// console.log(name)
 	return (
 	  <>
 		{remove ? null : (
@@ -93,7 +112,7 @@ export function GroupSettings( {hide}: Props ) {
 					<div className="flex items-center justify-between">
 						<div className="text-[#1B1D21] font-semibold text-xl">Room Setting</div>
 						<button
-						onClick={() => {setRemove(!remove), hide}}
+						onClick={() => {setRemove(!remove); hide();}}
 						className="flex items-center justify-center border bg-white rounded-full w-12 h-12 shadow-xl"
 						>
 						<img src={rmv} alt="Remove" />
@@ -111,34 +130,56 @@ export function GroupSettings( {hide}: Props ) {
 								}
 							</div>
 							{
-								Isprivate ?
-								<div className="flex items-center justify-center text-2xl font-semibold font-sans text-[#11142D] pt-5">Add Players to Your room</div>
-								: null
-							}
-							<div className="flex-col items-center justify-center">
+								role ?
+								<>
+								<div className="flex gap-1 items-center justify-center h-[25px]">
+									<div className="bg-[#6C5DD3] flex items-center justify-center rounded-custom w-[150px] h-[25px]">
 
-							<div className="w-full pt-3 h-3/6 overflow-y-auto pb-5">
-							{
-								Isprivate ? (
-									users.map((user, index: number) => (
-										<div key={index}>
-										<AddMember avatar={user.avatar} name={user.username} roomName={name}/>
+										{
+											IsProtected ?
+											<button className="text-xs font-semibold font-sans text-white" onClick={() => setUpdatepass(!updatePass)}>
+												Update Password
+											</button>
+											: <button className="text-xs font-semibold font-sans text-white" onClick={() => setUpdatepass(!updatePass)}>
+												Set Password
+											</button>
+										}
 									</div>
-									))
-									) : null
-								}
-							</div>
-							<div className="flex items-center justify-center">
+									{
+										IsProtected ? 
+										<div className="bg-[#6C5DD3] flex items-center justify-center rounded-custom w-[150px] h-[25px]">
 
+											{
+												IsProtected ?
+												<button className="text-xs font-semibold font-sans text-white" onClick={() => removePass()}>
+													Remove Password
+												</button>
+												: null
+											}
+										</div> : null
+									}
+								</div>
 								{
-									IsProtected ?
-									<button className="text-xs font-semibold font-sans text-gray-500" onClick={() => setUpdatepass(!updatePass)}>
-										Update Password
-									</button>
+									Isprivate ?
+									<div className="flex items-center justify-center text-2xl font-semibold font-sans text-[#11142D] pt-5">Add Players to Your room</div>
 									: null
 								}
+								<div className="flex-col items-center justify-center">
+
+								<div className="w-full pt-3 h-3/6 overflow-y-auto">
+								{
+									Isprivate ? (
+										users.map((user, index: number) => (
+											<div key={index}>
+											<AddMember avatar={user.avatar} name={user.username} roomName={name}/>
+										</div>
+										))
+										) : null
+									}
 								</div>
-							</div>
+								</div>
+								</> : null
+							}
 
 					</div>
 					</div>
@@ -147,11 +188,8 @@ export function GroupSettings( {hide}: Props ) {
 
 		)}
 		{
-			updatePass ? <UpdatePass roomName={name} RoomType={type} hide={() => {}}/> : null
+			updatePass ? <UpdatePass roomName={name} RoomType={type} hide={() => setUpdatepass(false)}/> : null
 		}
 	  </>
 	);
   }
-
-
-//   HassanCharef#?3

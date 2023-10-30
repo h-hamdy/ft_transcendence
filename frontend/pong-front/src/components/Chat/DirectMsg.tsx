@@ -33,16 +33,20 @@ interface MyUserData {
 }
 
 interface MbChatProps {
-  profile: MyUserData | undefined;
+	profile: MyUserData | undefined;
 }
 
 interface room {
-  id: string,
-  name: string,
-  type: string,
+	id: string,
+	name: string,
+	type: string,
 }
 
 export function DirectMsg({ profile }: MbChatProps) {
+	const [remove, setremove] = useState(false);
+	const [rooms, setrooms] = React.useState(false);
+	const [setting, setSettings] = useState(false);
+	const [role, Setrole] = useState(false);
   // const {RoomId} = useParams();
 
   // const Data = useContext(UserContext);
@@ -103,9 +107,25 @@ export function DirectMsg({ profile }: MbChatProps) {
 fetchData();
 }, []);
 
-  const [remove, setremove] = useState(false);
-  const [rooms, setrooms] = React.useState(false);
-  const [setting, setSettings] = useState(false);
+useEffect(() => {
+    const fetchData = async () => {
+      try {
+        let response = await axios.get(
+          `http://${import.meta.env.VITE_API_URL}/get-my-role/${id}`,
+          { withCredentials: true }
+        )
+		.then ((response) => {
+			if (response.data === "owner")
+				Setrole(true);
+		})
+	} catch (error) {
+		console.error("Error fetching data:", error);
+	}
+};
+
+fetchData();
+}, []);
+
 
   return (
     <>
@@ -143,7 +163,7 @@ fetchData();
 			</button>
 			{
 
-				rooms ? <button className="text-sm text-[#6C5DD3]" onClick={() => setrooms(!rooms)}>Back To Direct Msg</button> :
+				rooms ? <button className="text-sm text-[#6C5DD3]" onClick={() => setrooms(!rooms)}>Back To Your Rooms</button> :
 				<button onClick={() => setrooms(!rooms)}>
 					<div className="text-sm text-[#6C5DD3]">Join New rooms</div>
 				</button>
@@ -163,7 +183,7 @@ fetchData();
 		{
 			setting ?
 			<div className="w-screen h-screen">
-			 	<GroupSettings hide={() => setSettings(!setting)}/>	
+			 	<GroupSettings hide={() => setSettings(!setting)} role={role}/>
 			</div> : null
 		}
 

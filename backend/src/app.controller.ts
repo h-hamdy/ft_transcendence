@@ -429,7 +429,7 @@ async deactivateTwoFactorAuth(@Req() req: Request, @Body() body: TfaCodeDto) {
   @Post('/set-admin/:username')
   @UseGuards(Jwt2faAuthGuard)
   async setAdmin(@Req() req: Request, @Param('username') username :string, @Body() body: RoomSettingsDto) {
-    //check if the user is the owner of the room
+    //check if the user is the owner of the roomf
     const user = await this.usersService.findOne(this.authService.extractIdFromPayload(req.user));
     const isUserAdmin = await this.usersService.checkIfUserIsOwner(user.id, body);
     if (!isUserAdmin)

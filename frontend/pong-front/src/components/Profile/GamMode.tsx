@@ -64,7 +64,7 @@ export function GameMode ( {hide}: Props ) {
 							<div className="flex lg:flex-row overflow-x-auto pt-3">
 								<GameCard TableType="AI Table" GameType="5" imgPath="/src/assets/Bot_Img.png" user_id={userData.user_data.id}/>
 								<GameCard TableType="world Table" GameType="2" imgPath="/src/assets/3_win_game.png" user_id={userData.user_data.id}/>
-								<GameCard TableType="friend Table" GameType="1" imgPath="/src/assets/7_win_game.png" user_id={userData.user_data.id}/>
+								<GameCard TableType="friend Table" GameType="0" imgPath="/src/assets/7_win_game.png" user_id={userData.user_data.id}/>
 							</div>
 							</div>
 						</div>

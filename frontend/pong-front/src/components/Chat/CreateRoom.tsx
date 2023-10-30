@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import rmv from "/src/assets/remove.svg"
 import axios from "axios";
+import rec from "/src/assets/rectangle.svg"
 
 
 interface Props {
@@ -11,24 +12,6 @@ interface Data {
 	roomName: string,
 	RoomType: string,
 	pass: string
-}
-
-const handleCreateRoom = async ( {roomName, RoomType, pass}: Data ) => {
-	const jsonData = {
-		name: roomName,
-		type: RoomType,
-		password: pass,
-	};
-	
-	try {
-		const response = await axios.post("http://localhost:3000/create-room", jsonData, {withCredentials: true})
-		.then((response) => {
-			console.log(response.data);
-		})
-	}
-	catch (error) {
-		console.log(error);
-	}
 }
 
 export function CreateRoom( {hide}: Props ) {
@@ -54,6 +37,7 @@ export function CreateRoom( {hide}: Props ) {
 	
 	const [buttoms, Setbuttoms] = React.useState(defalutColor);
 	const [textColor, SetTextColor] = React.useState(defaultTextColor);
+	const [error, SetError] = React.useState(false);
 	
 	const handleClick = (num: string) => {
 		const newColor = {...defalutColor};
@@ -64,11 +48,30 @@ export function CreateRoom( {hide}: Props ) {
 		SetTextColor(newTextColor);
 	}
 	
-	const [clicked, setClick] = React.useState(true);
+	const handleCreateRoom = async ( {roomName, RoomType, pass}: Data ) => {
+		const jsonData = {
+			name: roomName,
+			type: RoomType,
+			password: pass,
+		};
+		
+		try {
+			const response = await axios.post("http://localhost:3000/create-room", jsonData, {withCredentials: true})
+			.then((response) => {
+				console.log(response.data);
+				hide();
+			})
+		}
+		catch (error) {
+			console.log(error);
+			SetError(true);
+		}
+	}
+	
 	return (
 	  <>
 		<div className="centred-component">
-			<div className="absolute left-[30%] xl:left-[40%] top-[30%] z">
+			<div className="absolute left-[30%] xl:left-[38%] top-[25%] z">
 			  <div className="h-[500px] bg-white shadow-2xl rounded-custom">
 				<div className="flex items-center justify-between p-8">
 				  <div className="text-lg text-[#11142D] font-semibold">Create new room chat</div>
@@ -90,6 +93,22 @@ export function CreateRoom( {hide}: Props ) {
 							setData({ ...data, roomName: e.target.value });
 						}}
 						/>
+					{
+						error ?
+						<div className="absolute right-[50px] pt-[10px] lg:pt-[20px]">
+							<div className="border bg-[#E9DCE5] rounded-lg w-[170px] h-[25px]  flex gap-1 items-center justify-center">
+								<div className="text-xs font-semibold text-[#6C5DD3]">Invitation Not Valid</div>
+								<div>
+									<div  style={{ backgroundImage: `url(${rec})`}} className="w-[14px] h-[14px] bg-center bg-no-repeat bg-cover">
+										<div className="text-white flex items-center justify-center text-xs font-semibold">
+											!
+										</div>
+									</div>
+								</div>
+							</div>
+						</div> : null
+
+					}
 					</div>
 					<div className="flex flex-col gap-[10px]">
 
