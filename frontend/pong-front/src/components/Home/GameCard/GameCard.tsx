@@ -37,7 +37,6 @@ export function GameCard({ TableType , imgPath, OpponentId ,user_id, hide }: Pro
   // const [chooseFr, setChooseFr] = React.useState(false);
   let Type : string | null;
   // let Color : string | null;
-  console.log('table tyepe', TableType)
   if (TableType == "AI Table")
     Type = '5';
   else if (TableType === 'world Table')
@@ -45,10 +44,7 @@ export function GameCard({ TableType , imgPath, OpponentId ,user_id, hide }: Pro
   else 
     Type = '1'
 
-console.log('Type ==================== ', Type);
   const handleClick = () => {
-    
-    console.log(TableType);
     if (TableType === 'friend Table') {
       setShowFriends(true);
     } else {
@@ -60,7 +56,7 @@ console.log('Type ==================== ', Type);
 
   const handleFriendsClose = () => {
     
-    console.log("me = " + user_id);
+
     // return (<GameSetup gameDuration={Type}  user_id={user_id} OpponnentId={OpponnetId}/>)
     navigate('/game', { state: { gameDuration: Type, user_id: user_id, OpponentId : OpponentId} });
   };

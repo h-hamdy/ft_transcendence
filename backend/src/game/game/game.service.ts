@@ -158,7 +158,7 @@ createGame(@ConnectedSocket() socket: Socket , gameDuration: string | string[], 
         };
         let playerInstance = new botClass(metaData.windowWidth - 10,
             metaData.windowHeight);
-            playerInstance.user_id = 42;
+            playerInstance.user_id = -42;
             playerInstance.socketId = 'AI player';
             this.dashBoard.games[gameDuration].game[this.dashBoard.games[gameDuration].game.length - 1].players.push(playerInstance);
             this.dashBoard.games[gameDuration].game[this.dashBoard.games[gameDuration].game.length - 1].gameStatus = 'playing';

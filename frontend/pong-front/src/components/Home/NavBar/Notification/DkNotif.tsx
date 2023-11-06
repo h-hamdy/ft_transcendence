@@ -11,7 +11,6 @@ export function DkNotif () {
 	const [show, setshow] = useState(true);
 	useEffect(()=>
 	{
-		console.log(profile?.data?.pending_requests)
 
 	}, [profile?.data, profile?.setData])
 	return (

@@ -174,6 +174,7 @@ export class GameGateway implements OnGatewayDisconnect {
       this.gameService.botJoinGame(gameDuration - 1);
       const gameId = this.gameService.getGameId(Client)
       const users_ids = this.gameService.getUsersIds(Client)
+      // console.log(users_ids);
       this.io.to(gameId).emit('GameInfo', users_ids);
       this.io.to(gameId).emit("GameStarted")
       setTimeout(() => {

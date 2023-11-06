@@ -68,7 +68,7 @@ export const GameSetup  = ( ) =>
   return (
     <>
     <SocketProvider customParam={customParam}>
-      <Game />
+      <Game user_id={customParam.user_id}/>
     <GameRoute/>
     </SocketProvider>
     </>

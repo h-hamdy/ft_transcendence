@@ -78,7 +78,7 @@ export function GameSetting  ( {hide}:Props ) {
 	const [profile, setProfile] = useState(false);
 
 	const data = useProfilecontext();
-	console.log('blocks', data?.data?.blocks);
+
 	
 	return (
 		<>

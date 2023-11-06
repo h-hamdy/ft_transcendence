@@ -16,7 +16,7 @@ export function FriendStatus ( {avatar, name, id, hide}: Props ) {
     const navigate = useNavigate()
     const handlePlay = () => {
 
-        console.log('id = ', id);
+
         hide();
         navigate('/game', { state: { gameDuration: 6, user_id: profile?.data?.user_data?.id, OpponentId : id} });
     }
