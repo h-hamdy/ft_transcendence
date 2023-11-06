@@ -7,10 +7,9 @@ interface Props {
     profile: string,
     name: string,
     requestType: string,
-	hideNotif: () => void;
 }
 
-export function NotifMsg ( {hideNotif, profile, name, requestType}: Props ) {
+export function NotifMsg ( {profile, name, requestType}: Props ) {
 
 	const [hide, sethide] = useState(true);
 	// const data = useContext(MyContext);
@@ -29,8 +28,6 @@ export function NotifMsg ( {hideNotif, profile, name, requestType}: Props ) {
 					}));
 					console.log('data lli wslat', response.data);
 					sethide(false);
-					hideNotif();
-
 			  })
 		}	
 		catch (error) {
@@ -43,7 +40,6 @@ export function NotifMsg ( {hideNotif, profile, name, requestType}: Props ) {
 		try {
 			const response = await axios.delete(`http://${import.meta.env.VITE_API_URL}/delete-request/${name}`, {withCredentials: true})
 			sethide(false);
-			hideNotif();
 		}	
 		catch (error) {
 			console.log(error);

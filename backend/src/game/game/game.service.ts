@@ -106,7 +106,7 @@ export class gameService {
         let playerInstance = new playerClass(0 + 10,
             metaData.windowHeight);
             playerInstance.user_id = user_id;
-            console.log("me user_id" + playerInstance.user_id);
+            // console.log("me user_id" + playerInstance.user_id);
             let ballInstance = new ballClass(metaData.windowHeight, metaData.windowWidth);
             gameInstance.players.push(playerInstance);
             gameInstance.players[0].socketId = socket.id;
@@ -168,7 +168,7 @@ export class gameService {
             this.dashBoard.games[gameDuration].game[gp_index[0]].res[1] = PlayersID[1];
             else
             {
-                console.log('---------> Draw');
+                // console.log('---------> Draw');
                 this.dashBoard.games[gameDuration].game[gp_index[0]].res[1] = 'Draw';
             }
         this.dashBoard.games[gameDuration].game[gp_index[0]].res[0] = 'false';
@@ -202,12 +202,12 @@ export class gameService {
     socket.emit('Score', this.getScore(socket));
     // score[0] = 5;
 
-    if (score[0] === 5 || score[1] === 5)
+    if (score && score[1] && score[0] && score[0] === 5 || score[1] === 5)
     {
         if (score[0] > score[1])
         {
             this.dashBoard.games[gameDuration].game[gp_index[0]].res[1] = 'You Won';
-            console.log('me won');
+            // console.log('me won');
         }
     this.dashBoard.games[gameDuration].game[gp_index[0]].res[0] = 'false';
     socket.emit('delay', this.getGameResult(socket));
@@ -264,7 +264,7 @@ export class gameService {
 
 async giveAchievement(Name : string, id : number)
 {
-    console.log("give achievement");
+    // console.log("give achievement");
     await this.prisma.achievements.create(
         {
             data:
@@ -284,7 +284,7 @@ async  checkAchievements(socket : Socket, achieveName : string, userId : number)
     let current = await this.prisma.achievements.findMany({where: {user_id: userId}});
     // let i = 0;
     // console.log("achievement");
-    console.log('check');
+    // console.log('check');
     for (let i = 0; i <= current.length - 1; i++)
     {
         if (current[i].name === achieveName)
@@ -440,7 +440,7 @@ this.dashBoard.games[gameDuration].game[gp_index[0]].intervalId = setInterval(()
         this.dashBoard.playersNumber[gameDuration].Number += 1
         playerInstance.socketId = socket.id;
         playerInstance.user_id = user_id;
-        console.log("me user_id" + playerInstance.user_id);
+        // console.log("me user_id" + playerInstance.user_id);
         // //console( this.dashBoard.games[gameDuration].game[this.dashBoard.games[gameDuration].game.length - 1]);
         this.dashBoard.games[gameDuration].game[this.dashBoard.games[gameDuration].game.length - 1].players.push(playerInstance);
         socket.join(this.dashBoard.games[gameDuration].game[this.dashBoard.games[gameDuration].game.length - 1].gameId);
@@ -598,6 +598,19 @@ this.dashBoard.games[gameDuration].game[gp_index[0]].intervalId = setInterval(()
         ball_coordonation[1] = this.dashBoard.games[gameDuration].game[gp_index[0]].ball.y
 
         return (ball_coordonation);
+    }
+
+    getUsersIds(socket : Socket)
+    {
+        let gp_index = this.matchPlayerFromSocketId(socket)
+        let gameDuration = this.getGameDuration(socket);
+        // console.log("players number = " + this.dashBoard.playersNumber);
+        if (this.IsDataValid(gameDuration, gp_index[0]))
+            return ;
+        let users_ids : number[] = [];
+        users_ids[0] = this.dashBoard.games[gameDuration].game[gp_index[0]].players[0].user_id
+        users_ids[1] = this.dashBoard.games[gameDuration].game[gp_index[0]].players[1].user_id
+        return (users_ids);
     }
     getScore(socket: Socket) {
         let gameDuration = this.getGameDuration(socket);

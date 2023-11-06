@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import rmv from "/src/assets/remove.svg"
 import axios from "axios";
 import rec from "/src/assets/rectangle.svg"
+import { json } from "react-router-dom";
 
 
 interface Props {
@@ -49,11 +50,22 @@ export function CreateRoom( {hide}: Props ) {
 	}
 	
 	const handleCreateRoom = async ( {roomName, RoomType, pass}: Data ) => {
-		const jsonData = {
+
+		let jsonData;
+
+		if (RoomType === "protected") {
+			jsonData = {
 			name: roomName,
 			type: RoomType,
 			password: pass,
-		};
+			};
+		} else {
+			jsonData = {
+			name: roomName,
+			type: RoomType,
+			};
+		}
+
 		
 		try {
 			const response = await axios.post("http://localhost:3000/create-room", jsonData, {withCredentials: true})

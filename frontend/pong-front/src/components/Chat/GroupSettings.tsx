@@ -3,14 +3,13 @@ import { AddMember } from "./AddMember";
 import { GroupRestriction } from "./GroupRestriction";
 import rmv from "/src/assets/remove.svg"
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { json, useParams } from "react-router-dom";
 import { Add } from "../Home/NavBar/Notification/add";
 import { UpdatePass } from "./UpdatePass";
 
 
 interface Props {
 	hide: () => void,
-	role: boolean,
 }
 
 const initialUsers = {
@@ -28,11 +27,31 @@ const allUsers = {
 	avatar: '',
 }
 
-export function GroupSettings( {hide, role}: Props ) {
+export function GroupSettings( {hide}: Props ) {
 
 	const [member, setMember] = useState<typeof initialUsers[]>([]);
 	const { id } = useParams();
 	const [updatePass, setUpdatepass] = useState(false);
+	const [role, Setrole] = useState(false);
+
+	useEffect(() => {
+		const fetchData = async () => {
+		  try {
+			let response = await axios.get(
+			  `http://${import.meta.env.VITE_API_URL}/get-my-role/${id}`,
+			  { withCredentials: true }
+			)
+			.then ((response) => {
+				if (response.data === "owner")
+					Setrole(true);
+			})
+		} catch (error) {
+			console.error("Error fetching data:", error);
+		}
+	};
+	
+	fetchData();
+	}, []);
 
 	console.log("inside role = " + role);
 	useEffect(() => {
@@ -90,7 +109,10 @@ export function GroupSettings( {hide, role}: Props ) {
         };
 		console.log(jsonData);
 		try {
-			const response = await axios.post(`http://${import.meta.env.VITE_API_URL}/remove-room-password`, jsonData, { withCredentials: true })
+			const response = await axios.delete(`http://${import.meta.env.VITE_API_URL}/remove-room-password`, { 
+				withCredentials: true,
+				data: jsonData,
+			})
 			.then (function (response) {
 				console.log("Password removed and the room become public")
 				
