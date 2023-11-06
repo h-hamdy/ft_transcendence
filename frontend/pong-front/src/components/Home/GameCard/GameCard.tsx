@@ -25,20 +25,15 @@ interface customParam
   gameDuration: string;
 }
 
-const  Param : customParam = 
-{
-  gameDuration: '1',
-}
 
 
 
-export function GameCard({ TableType , imgPath, OpponnetId ,user_id, hide, remove }: Props) {
+
+export function GameCard({ TableType , imgPath, OpponnetId ,user_id, hide }: Props) {
   const navigate = useNavigate();
   const [showFriends, setShowFriends] = React.useState(false);
-  const [chooseFr, setChooseFr] = React.useState(false);
+  // const [chooseFr, setChooseFr] = React.useState(false);
   let Type : string | null;
-  // let Color : string | null;
-  console.log('table tyepe', TableType)
   if (TableType == "AI Table")
     Type = '5';
   else if (TableType === 'world Table')
@@ -46,27 +41,21 @@ export function GameCard({ TableType , imgPath, OpponnetId ,user_id, hide, remov
   else 
     Type = '6'
 
-console.log('Type ==================== ', Type);
   const handleClick = () => {
     
-    console.log(TableType);
+    (TableType);
     if (TableType === 'friend Table') {
       setShowFriends(true);
     } else {
 		hide();
        navigate('/game', { state: { gameDuration: Type, user_id: user_id, OpponnetId : OpponnetId} });
-      //  return (<GameSetup gameDuration={Type}  user_id={user_id} OpponnentId={OpponnetId}/>)
-x    }
+    }
   };
 
   const handleFriendsClose = () => {
     
-    console.log("me = " + user_id);
-    // return (<GameSetup gameDuration={Type}  user_id={user_id} OpponnentId={OpponnetId}/>)
     navigate('/game', { state: { gameDuration: Type, user_id: user_id, OpponnetId : OpponnetId} });
   };
-
-  console.log("remove is " + remove)
 
   return (
     <>

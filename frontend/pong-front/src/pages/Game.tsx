@@ -39,30 +39,13 @@ export function Game () {
 		})
 			const fetchData = async () => {
 				try {
-				  // Replace the URL with your API endpoint
 				  const response = await axios.get(`http://${import.meta.env.VITE_API_URL}/profile/me`, { withCredentials: true });
-				//   Myata : ;
 				setMydata({username : response.data.user_data.username, avatar : response.data.user_data.avatar, rating: response.data.user_data.rating})
-				console.log('data li getit', Mydata)
-				// console.log('data', Mydata)
-				//   setData+(Mydata);
 				} catch (error) {
-				  console.error('Error fetching data:', error);
 				}
-				// try {
-				// 	const response = await axios.get(`http://${import.meta.env.VITE_API_URL}/profile/me`, { withCredentials: true });
-				// 	// Myata : ;
-				// 	opponentData = response.data;
-				//   //   setData+(Mydata);
-				//   } catch (error) {
-				// 	console.error('Error fetching data:', error);
-				//   }
-		  // 
 			  };
-			// }, []);
 		
 			return () => {
-				console.log('khdaaaam');
 				if(socket)
 				{
 				  socket.disconnect();

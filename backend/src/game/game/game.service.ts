@@ -37,15 +37,13 @@ export class gameService {
         const gp_index = this.matchPlayerFromSocketId(socket);
         if (this.IsDataValid(gameDuration, gp_index[0]))
             return;
-        // //console("socket" + socket.id);
-        // //console("game_index" + gp_index[0]);
-        // //console("gamDuration" + gameDuration);
+        // //("socket" + socket.id);
+        // //("game_index" + gp_index[0]);
+        // //("gamDuration" + gameDuration);
         return (this.dashBoard.games[gameDuration].game[gp_index[0]].gameId);
     }
     isGameOpen(gameDuration: number) {
-        //console(gameDuration);
-        // //console("players module"  + this.dashBoard.playersNumber[gameDuration].Number % 2)
-        // //console("player number = " + this.dashBoard.playersNumber[gameDuration].Number);
+
         if (!this.dashBoard.playersNumber[gameDuration])
             return (0);
         return (this.dashBoard.playersNumber[gameDuration].Number % 2)
@@ -197,7 +195,7 @@ createGame(@ConnectedSocket() socket: Socket , gameDuration: string | string[], 
             this.dashBoard.games[gameDuration].game[gp_index[0]].res[1] = PlayersID[1];
             else
             {
-                // console.log('---------> Draw');
+                // ('---------> Draw');
                 this.dashBoard.games[gameDuration].game[gp_index[0]].res[1] = 'Draw';
             }
         this.dashBoard.games[gameDuration].game[gp_index[0]].res[0] = 'false';
@@ -230,7 +228,7 @@ userInGame(user_id : number)
         if (start)
         this.botstartInterval(socket);
     socket.emit('Score', this.getScore(socket));
-    // console.log('score', score);
+    // ('score', score);
     // score[0] = 5;
     if (score === undefined)
         return;
@@ -239,7 +237,7 @@ userInGame(user_id : number)
         if (score[0] > score[1])
         {
             this.dashBoard.games[gameDuration].game[gp_index[0]].res[1] = 'You Won';
-            // console.log('me won');
+            // ('me won');
         }
     this.dashBoard.games[gameDuration].game[gp_index[0]].res[0] = 'false';
     socket.emit('delay', this.getGameResult(socket));
@@ -296,7 +294,7 @@ userInGame(user_id : number)
 
 async giveAchievement(Name : string, id : number)
 {
-    // console.log("give achievement");
+    // ("give achievement");
     await this.prisma.achievements.create(
         {
             data:
@@ -314,9 +312,8 @@ async  checkAchievements(socket : Socket, achieveName : string, userId : number)
     let gameDuration = this.getGameDuration(socket);
 
     let current = await this.prisma.achievements.findMany({where: {user_id: userId}});
-    // let i = 0;
-    // console.log("achievement");
-    // console.log('check');
+
+
     for (let i = 0; i <= current.length - 1; i++)
     {
         if (current[i].name === achieveName)
@@ -440,8 +437,6 @@ this.dashBoard.games[gameDuration].game[gp_index[0]].intervalId = setInterval(()
     stopInterval(socket: Socket) {
         let gp_index = this.matchPlayerFromSocketId(socket);
         let gameDuration = this.getGameDuration(socket);
-
-        // //console(this.dashBoard.games[gameDuration].game[gp_index[0]])
         if (this.dashBoard.games[gameDuration].game[gp_index[0]].intervalId)
             clearInterval(this.dashBoard.games[gameDuration].game[gp_index[0]].intervalId);
     }
@@ -477,8 +472,8 @@ this.dashBoard.games[gameDuration].game[gp_index[0]].intervalId = setInterval(()
         this.dashBoard.playersNumber[gameDuration].Number += 1
         playerInstance.socketId = socket.id;
         playerInstance.user_id = user_id;
-        // console.log("me user_id" + playerInstance.user_id);
-        // //console( this.dashBoard.games[gameDuration].game[this.dashBoard.games[gameDuration].game.length - 1]);
+        // ("me user_id" + playerInstance.user_id);
+        // //( this.dashBoard.games[gameDuration].game[this.dashBoard.games[gameDuration].game.length - 1]);
         this.dashBoard.games[gameDuration].game[gameindex].players.push(playerInstance);
         socket.join(this.dashBoard.games[gameDuration].game[gameindex].gameId);
         this.dashBoard.games[gameDuration].game[gameindex].gameStatus = 'playing';
@@ -501,7 +496,7 @@ this.dashBoard.games[gameDuration].game[gp_index[0]].intervalId = setInterval(()
         let gameDuration = this.getGameDuration(socket);
 
         let coordonation = new coordonationDTO;
-        // //console(gp_index[0]);
+        // //(gp_index[0]);
         if (this.IsDataValid(gameDuration, gp_index[0]))
         return;
         coordonation.x = this.dashBoard.games[gameDuration].game[gp_index[0]].players[gp_index[1]].paddle.x
@@ -576,7 +571,7 @@ this.dashBoard.games[gameDuration].game[gp_index[0]].intervalId = setInterval(()
 
         if (this.IsDataValid(gameDuration, gp_index[0]))
         return;
-        // //console("game = " + this.dashBoard.games[gameDuration].game[gp_index[0]].ball.x)
+        // //("game = " + this.dashBoard.games[gameDuration].game[gp_index[0]].ball.x)
         leftPaddle = this.dashBoard.games[gameDuration].game[gp_index[0]].players[0].paddle;
         rightPaddle = this.dashBoard.games[gameDuration].game[gp_index[0]].players[1].paddle;
         this.dashBoard.games[gameDuration].game[gp_index[0]].ball.update();
@@ -589,7 +584,7 @@ this.dashBoard.games[gameDuration].game[gp_index[0]].intervalId = setInterval(()
             this.dashBoard.games[gameDuration].game[gp_index[0]].ball.edges(490, 1062, 1);
         else
             this.dashBoard.games[gameDuration].game[gp_index[0]].ball.edges(490, 1062);
-            // //console("game = " + this.dashBoard.games[gameDuration].game[gp_index[0]].ball.x);
+            // //("game = " + this.dashBoard.games[gameDuration].game[gp_index[0]].ball.x);
     }
 
     removeGame(socket: Socket) {
@@ -600,12 +595,12 @@ this.dashBoard.games[gameDuration].game[gp_index[0]].intervalId = setInterval(()
         if (!this.dashBoard.games[gameDuration] || !this.dashBoard.games[gameDuration].game[gp_index[0]] 
             || !this.dashBoard.games[gameDuration].game[gp_index[0]])
             return;
-        // console.log('game removed');
+        // ('game removed');
         if (this.dashBoard.games[gameDuration].game[gp_index[0]].players[1]) {
-            // console.log("before = " + this.dashBoard.allPlayersIDs)
+            // ("before = " + this.dashBoard.allPlayersIDs)
             this.dashBoard.allPlayersIDs[gameDuration].PlayersIDs = this.dashBoard.allPlayersIDs[gameDuration].PlayersIDs
                 .filter(playerId => playerId !== this.dashBoard.games[gameDuration].game[gp_index[0]].players[1].socketId);
-            // console.log("after" + this.dashBoard.allPlayersIDs)
+            // ("after" + this.dashBoard.allPlayersIDs)
             this.dashBoard.playersNumber[gameDuration].Number -= 1
         }
         if (this.dashBoard.games[gameDuration].game[gp_index[0]].players[0]) {
@@ -625,7 +620,7 @@ this.dashBoard.games[gameDuration].game[gp_index[0]].intervalId = setInterval(()
         let ball_coordonation: number[] = [];
         let gp_index = this.matchPlayerFromSocketId(socket);
         let gameDuration = this.getGameDuration(socket);
-        // console.log("players number = " + this.dashBoard.playersNumber);
+        // ("players number = " + this.dashBoard.playersNumber);
         if (this.IsDataValid(gameDuration, gp_index[0]))
         return;
         let leftPaddle = this.dashBoard.games[gameDuration].game[gp_index[0]].players[0].paddle;
@@ -641,7 +636,7 @@ this.dashBoard.games[gameDuration].game[gp_index[0]].intervalId = setInterval(()
     {
         let gp_index = this.matchPlayerFromSocketId(socket)
         let gameDuration = this.getGameDuration(socket);
-        // console.log("players number = " + this.dashBoard.playersNumber);
+        // ("players number = " + this.dashBoard.playersNumber);
         if (this.IsDataValid(gameDuration, gp_index[0]))
             return ;
         let users_ids : number[] = [];
@@ -653,11 +648,11 @@ this.dashBoard.games[gameDuration].game[gp_index[0]].intervalId = setInterval(()
         let gameDuration = this.getGameDuration(socket);
 
         let players_score: number[] = [];
-        // console.log(gameDuration);
+        // (gameDuration);
         let game_index = this.matchPlayerFromSocketId(socket)
         if (this.IsDataValid(gameDuration, game_index[0]))
         return;
-        // console.log("game duration = " + gameDuration);
+        // ("game duration = " + gameDuration);
         players_score.push(this.dashBoard.games[gameDuration].game[game_index[0]].ball.score[0]);
         players_score.push(this.dashBoard.games[gameDuration].game[game_index[0]].ball.score[1]);
         return (players_score);
@@ -665,7 +660,7 @@ this.dashBoard.games[gameDuration].game[gp_index[0]].intervalId = setInterval(()
 
     IsDataValid(gameDuration :number,  index : number)
     {
-        // console.log(this.dashBoard.games[gameDuration])
+        // (this.dashBoard.games[gameDuration])
         if (!this.dashBoard.games[gameDuration] ||
             ! this.dashBoard.games[gameDuration].game[index] ||
             !this.dashBoard.games[gameDuration].game[index].players[0] ||

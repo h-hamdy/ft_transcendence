@@ -20,19 +20,13 @@ export function Friends ( {hide}: Props ) {
 
 	const profile = useProfilecontext()
 
-	console.log('profile', profile?.data?.friends);
 	  useEffect(() => {
 		  try {
 			const response =  axios.get(`http://${import.meta.env.VITE_API_URL}/profile/me`, { withCredentials: true })
 			.then ((response) => {
-				console.log("h2");
 
 			})
-			// setUserData(response.data);
-
 		} catch (error) {
-			console.error("Error fetching user data:");
-			// navigate("/error");
 		}
 	  }, []);
 

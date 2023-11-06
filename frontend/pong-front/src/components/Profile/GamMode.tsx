@@ -37,15 +37,10 @@ export function GameMode ( {hide}: Props ) {
 			setUserData(response.data);
 		})
 		} catch (error) {
-		console.error("Error fetching user data:");
 		}
 
 	}, []);
 
-		// const state = useDataContext();
-		// let isCurrent : string  = 'ingame';
-		// if 
-		console.log("remove malo" + remove);
 	return (
 		<>
 			{

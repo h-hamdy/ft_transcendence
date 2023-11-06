@@ -14,10 +14,10 @@ export function NotifMsg ( {profile, name, requestType , id}: Props ) {
 
 	const [hide, sethide] = useState(true);
 	const navigate = useNavigate();
-	// const data = useContext(MyContext);
+
 	const Profile = useProfilecontext();
 	const handleAccept = async () => {
-		console.log(name);
+		(name);
 		if (requestType !== 'game')
 		{
 			try {
@@ -25,22 +25,19 @@ export function NotifMsg ( {profile, name, requestType , id}: Props ) {
 			.then((response) => {
 				Profile?.setData((prevUserData) => ({
 					...prevUserData,
-					// user_data: {
+
 						...prevUserData,
 						friends: [...prevUserData.friends, response.data],
-						// },
 					}));
-					console.log('data lli wslat', response.data);
 					sethide(false);
 			  })
 			}	
 			catch (error) {
-			console.log(error);
+			(error);
 			}
 		}
 		else
 		{
-			console.log('friend id in front', id);
 			sethide(false)
 			Profile?.setData((prevUserData) => {
 				const filteredRequests = prevUserData.pending_requests.filter(
@@ -57,16 +54,15 @@ export function NotifMsg ( {profile, name, requestType , id}: Props ) {
 	}
 
 	const handleRefuse = async () => {
-		console.log(name);
+		(name);
 		try {
 			const response = await axios.delete(`http://${import.meta.env.VITE_API_URL}/delete-request/${name}`, {withCredentials: true})
 			sethide(false);
 		}	
 		catch (error) {
-			console.log(error);
+			(error);
 		}
 	}
-		console.log('------------------------request type = ', requestType);
     return (
         <>
 		{

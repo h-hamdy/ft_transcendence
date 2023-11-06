@@ -29,7 +29,6 @@ export const SetUsername = ( {setLogin}: Props ) => {
 				navigate("/profile/me");
 			} )
         } catch (error) {
-          console.error('POST request failed:', error);
 		  Seterror(true);
         }
       };

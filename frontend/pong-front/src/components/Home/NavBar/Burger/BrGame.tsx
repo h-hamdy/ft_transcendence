@@ -19,46 +19,7 @@
 	export function BrGame ( {buttonColors, strokeColor, handleClick}: Props ) {
 
 		const [game, Setgame] = React.useState(false);
-		const state = useDataContext();
-		// let isOnline = 'online'
-		// console.log('before comparison-----------------------')
-		// console.log('comparison = ---------------',  (state?.data[state?.data.length - 1].state === isOnline));
-		// console.log(state.);
-		// let isCurrent = 'ingame';
-		
-		// const [userData, setUserData] = useState({
-		// 	user_data: {
-		// 		id: 0,
-		// 		username: "",
-		// 		avatar: "",
-		// 		rating: 0,
-		// 		state: "",
-		// 		me: false,
-		// 		is_two_factor_auth_enabled: false,
-		// 	},
-		// 	friends: [],
-		// 	blocks: [],
-		// 	match_history: [],
-		// 	achievements: [],
-		// 	wins: 0,
-		// 	loses: 0,
-		// 	draws: 0,
-		// 	});
-		
-		// 	useEffect(() => {
-		// 		try {
-		// 		const response =  axios.get(`http://${import.meta.env.VITE_API_URL}/profile/me`, {withCredentials: true})
-		// 		.then ((response) => {
-		// 			setUserData(response.data);
-		// 		})
-		// 		} catch (error) {
-		// 		console.error("Error fetching user data:");
-		// 		}
-		
-		// 	}, []);
-		// 	console.log('------------------------------------value', userData.user_data.state === 'ingame');
-		// const Mystate = state?.data[state?.data.length - 1] === 'online';
-		// console.log("state ===------------------------------" , Mystate);
+		// const state = useDataContext();
 
 		return (
 			<>

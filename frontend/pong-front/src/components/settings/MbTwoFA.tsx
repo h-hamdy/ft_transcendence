@@ -43,7 +43,6 @@ export function MbTwoFA ( {hide}: Props) {
 		} catch (error) {
 			Seterror(true);
 			Setsent(false);
-			console.error('two-fa on:', error);
 			}
 		};
 
@@ -57,7 +56,6 @@ export function MbTwoFA ( {hide}: Props) {
 			} catch (error) {
 				Seterror(true);
 				Setsent(false);
-				console.error('two-fa Off:', error);
 				}
 			};
 
@@ -73,7 +71,6 @@ export function MbTwoFA ( {hide}: Props) {
 			const base64 = btoa(new Uint8Array(response.data).reduce((data, byte) => data + String.fromCharCode(byte), ''));
 			setData(`data:image/png;base64,${base64}`);
 		} catch (error) {
-			console.error('Error fetching data:', error);
 		}
 		};
 
@@ -115,7 +112,6 @@ export function MbTwoFA ( {hide}: Props) {
 			.then((respnse) => {
 			})
 		  } catch (error) {
-			console.error("Error fetching user data:");
 		  }
 	  }, []);
 

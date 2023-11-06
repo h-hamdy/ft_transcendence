@@ -522,7 +522,7 @@ export class UsersService {
     }
     catch(error){
       //debug
-      // console.log(error);
+      // (error);
       //end debug
       return false;
     }
@@ -541,7 +541,7 @@ export class UsersService {
           },
         });
         //debug
-        // console.log(recordToUpdate);
+        // (recordToUpdate);
         //end debug
         if (recordToUpdate[0]){
                       
@@ -563,7 +563,7 @@ export class UsersService {
             },
           });
           //debug
-          // console.log(recordToUpdate);
+          // (recordToUpdate);
           //end debug
           const isSenderBlocked = await this.prisma.friendships.updateMany({
             where: {
@@ -1129,7 +1129,7 @@ export class UsersService {
       } 
       //filter
       //debug
-      // console.log(myrooms);
+      // (myrooms);
       //end debug
       return myrooms;
     }
@@ -1236,7 +1236,7 @@ export class UsersService {
         return true;
     }
     catch(error){
-      console.log(error);
+      (error);
       return false;
     }
   }

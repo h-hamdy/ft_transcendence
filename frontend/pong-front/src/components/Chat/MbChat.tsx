@@ -28,7 +28,7 @@ interface MyUserData {
 
 export function MbChat ({profile }: MbChatProps) {
 
-		console.log('MbChat');
+		('MbChat');
 	// const socket = useContext(SocketContext);
 	return (
 		<>

@@ -40,25 +40,22 @@ export class ChatGateway implements OnGatewayConnection, OnGatewayDisconnect {
     @SubscribeMessage('chat')
     async handleChatEvent(@MessageBody() payload: ChatDto, @ConnectedSocket() client: Socket){
         //debug
-        // console.log("payload in chat = ",payload);
+        // ("payload in chat = ",payload);
         //end debug
         let hasAccess = false;
         if (this.clients.has(client.id)){
             hasAccess = await this.usersService.hasAccessToRoom(this.clients.get(client.id), +payload.roomId);
             if (hasAccess){
                 //debug
-                // console.log("client has access to the room")
+                // ("client has access to the room")
                 //end debug
                 //if the user is muted check if the mute is over ---- if the mute is over ----->update the mute state the user can send messages again 
                 const isMuted = await this.usersService.isMuted(this.clients.get(client.id), +payload.roomId);
                 
                 if (!isMuted){
-                    // console.log("client is not muted")
-                    // console.log("this.client[sokcetId] = ",this.clients.get(client.id));
-                    //save the message to the database
+
                     const isSaved = await this.usersService.saveMessage(this.clients.get(client.id), +payload.roomId, payload.message);
-                    // console.log("isSaved = ",isSaved);
-                    //send the message to the room
+
                     if (isSaved){
                         //exclude the blocked users
                         const roomClients = this.server.sockets.adapter.rooms.get(payload.roomId);
@@ -78,7 +75,7 @@ export class ChatGateway implements OnGatewayConnection, OnGatewayDisconnect {
                     }
                 }
                 // else{
-                //     console.log("client is muted");
+                //     ("client is muted");
                 // }
             }
         }
@@ -88,19 +85,19 @@ export class ChatGateway implements OnGatewayConnection, OnGatewayDisconnect {
     @SubscribeMessage('join-room')
     // @UsePipes(CustomValidationPipe)
     async handleJoinRoomEvent(@MessageBody() payload: joinRoomDto, @ConnectedSocket() client: Socket) {
-        // console.log("payload in join room = ",payload);
+        // ("payload in join room = ",payload);
         let hasAccess = false;
         if (this.clients.has(client.id)){
             hasAccess = await this.usersService.hasAccessToRoom(this.clients.get(client.id), +payload.roomId);
         }
         if (hasAccess){
             //let the client join the room to recieve reel time updates
-            console.log("joined room");
+            ("joined room");
             // await this.server.in(payload.socketId).socketsJoin(payload.roomId);
             await client.join(payload.roomId);
         }
         else{
-            console.log("not joined room client does not have access to the room");
+            ("not joined room client does not have access to the room");
         }
     }
 
@@ -110,7 +107,7 @@ export class ChatGateway implements OnGatewayConnection, OnGatewayDisconnect {
             await client.leave(payload.roomId);
         }
         catch(error){
-            console.log(error);
+            (error);
             throw new WsException('Error occured while leaving the room');
         }
     }
@@ -119,22 +116,22 @@ export class ChatGateway implements OnGatewayConnection, OnGatewayDisconnect {
         // this.logger.log(`Client connected: ${client.id}`)
         try {
             const Cookie = client.handshake.headers.cookie.split("=")[1];
-            // console.log("Cookie = ",Cookie);
+            // ("Cookie = ",Cookie);
             const payload = await this.jwtService.verifyAsync(Cookie, { secret: process.env.JWT_CONST });
-            // console.log("Payload = ",Payload);
+            // ("Payload = ",Payload);
             //add the client to the map
-            // console.log('payload = ',payload)
+            // ('payload = ',payload)
             const user = await this.usersService.findOne(payload.sub);
             if (user){
-                // console.log("user = ",user);
-                // console.log("clients after connect = ",this.clients);  
+                // ("user = ",user);
+                // ("clients after connect = ",this.clients);  
                 //save the user state in the database
                 const test = await  this.usersService.findById(user.id);
-                // console.log('initial state-------------------------------------------------- = ', test)
+                // ('initial state-------------------------------------------------- = ', test)
                 const values = [...this.clients.values()];
                 if (values.includes(user.id) ===false)
                 {
-                    // console.log('new user')
+                    // ('new user')
                     const isSaved = await this.notifications.saveUserState(user.id, "online");
                     //broadcast the user state change to all connected the users
                      this.server.emit('State', {id: user.id, username: user.username, avatar: user.avatar, state: "online"});
@@ -148,7 +145,7 @@ export class ChatGateway implements OnGatewayConnection, OnGatewayDisconnect {
                 this.clients.set(client.id, user.id);
             }
         }catch(error){
-            // console.log(error);
+            // (error);
             // throw new WsException('unauthorized');
             client.disconnect();
             // throw new Error('unauthorized');
@@ -160,7 +157,7 @@ export class ChatGateway implements OnGatewayConnection, OnGatewayDisconnect {
     async handleDisconnect(@ConnectedSocket() client: Socket) {
         // triger the user state change to non active
         //remove the client form the map
-        // console.log("clients after disconnect = ",this.clients);
+        // ("clients after disconnect = ",this.clients);
         // this.logger.log(`Socket disconnected ${socket}`);
         // this.logger.log(`Cliend id:${client.id} disconnected`);
         try{
@@ -180,7 +177,7 @@ export class ChatGateway implements OnGatewayConnection, OnGatewayDisconnect {
             }
         }
         catch(error){
-            // console.log(error);
+            // (error);
             return ;
         }
     }
@@ -194,7 +191,7 @@ export class ChatGateway implements OnGatewayConnection, OnGatewayDisconnect {
               friendSocketId =  key;
         }
         const senderObject = await this.usersService.findById(userId);
-        // console.log("senderObject = ",senderObject);
+        // ("senderObject = ",senderObject);
         const sender = {id: userId, username: senderObject.username, avatar: senderObject.avatar, type: 'friendship'};
         if (friendSocketId){
             this.server.to(friendSocketId).emit('friendRequest', sender); //broadcast messages
@@ -210,8 +207,7 @@ export class ChatGateway implements OnGatewayConnection, OnGatewayDisconnect {
               friendSocketId =  key;
         }
         const senderObject = await this.usersService.findById(userId);
-        // console.log("senderObject = ",senderObject);
-        console.log('sender', userId)
+        // ("senderObject = ",senderObject);
         const sender = {id: userId, username: senderObject.username, avatar: senderObject.avatar, type: 'game'};
         if (friendSocketId){
             this.server.to(friendSocketId).emit('gameRequest', sender); //broadcast messages
@@ -229,7 +225,7 @@ export class ChatGateway implements OnGatewayConnection, OnGatewayDisconnect {
                 this.server.emit('State', {id: uId, username: user.username, avatar: user.avatar, state: state});
         }
         catch(error){
-            // console.log(error);
+            // (error);
             throw new WsException('Error occured while saving the state');
         }        
     }

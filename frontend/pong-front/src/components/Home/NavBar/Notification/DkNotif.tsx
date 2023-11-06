@@ -10,7 +10,6 @@ export function DkNotif () {
 	const profile = useProfilecontext();
 	useEffect(()=>
 	{
-		console.log(profile?.data?.pending_requests)
 
 	}, [profile?.data, profile?.setData])
 	return (

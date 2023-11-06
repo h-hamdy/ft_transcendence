@@ -29,7 +29,7 @@ export function Deblock ( { name }: Props ) {
 			  })
 		}
 		catch (error) {
-			console.log(error);
+			(error);
 		}
 	}
 	return (

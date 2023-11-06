@@ -40,33 +40,21 @@ interface MBburgerProps {
         try {
 
           const response = await axios.get(`http://${import.meta.env.VITE_API_URL}/profile/me`, { withCredentials: true });
-
-          console.log('data = ', response.data.friends);
          
           Mydata = {id: response.data.user_data.id, username: response.data.user_data.username, avatar: response.data.user_data.avatar, state : response.data.user_data.state}
           response.data.friends = [...response.data.friends, Mydata];
-		  console.log('initial friends data', response.data.friends);
           setState(response.data.friends);
-		//   setMyState({id: response.data.user_data.id, username: response.data.user_data.username, avatar: response.data.user_data.avatar, state : response.data.user_data.state})
         } catch (error) {
-          console.error('Error fetching data:', error);
         }
-
-		
-        console.log('initial data', state);
-		// console.log('my state -------', myState);
       };
     useEffect(() => {
 
       fetchData();
 	  chatContext?.on('State', (friendState : friendsList)=>
 	  {
-		  console.log('value', friendState)
-		  console.log('before update', state);
 		  if (state === null)
 			fetchData()
 		  setState((old) => (old.map((item : friendsList) => (item.id === friendState.id ? { ...item, ...friendState } : item))))
-		  console.log('updated state',state);
 	  
   		});
 	return (() =>
@@ -74,11 +62,8 @@ interface MBburgerProps {
 		(chatContext?.off('State'))
 	  })
     }, []);
-	let name = 'achraf';
 
 	const profile = useProfilecontext();
-
-	const isIngame = 'ingame';
 
 	const initialColors: { [key: string]: string } = {
 		button1: 'initial',
@@ -108,7 +93,6 @@ interface MBburgerProps {
 	
 
 		const handleClick = (buttonName: string, imgNum: string) => {
-			console.log(buttonName + " button name");
 			SetClick(!click)
 			const newColors = { ...initialColors };
 			const newImgs = { ...strokeColors };
@@ -136,7 +120,7 @@ interface MBburgerProps {
 			</svg>
 				</button>
 			<NavLink to="/profile/me">
-				<button onClick={() => {handleClick('button1', 'img1'); console.log("ana fl")}} style={{ backgroundColor: buttonColors.button1 }} className={`p-3 border shadow-md border-white w-[50px] h-[50px]  flex items-center justify-center rounded-2xl `}>
+				<button onClick={() => {handleClick('button1', 'img1'); ("ana fl")}} style={{ backgroundColor: buttonColors.button1 }} className={`p-3 border shadow-md border-white w-[50px] h-[50px]  flex items-center justify-center rounded-2xl `}>
 				<svg width="20" height="20" viewBox="0 0 18 21" fill="none" xmlns="http://www.w3.org/2000/svg">
 					<g id="Profile">
 					<circle id="Ellipse_736" cx="9.07881" cy="5.77803" r="4.77803" stroke={strokeColor.img1} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>

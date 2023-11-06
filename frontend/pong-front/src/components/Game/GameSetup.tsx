@@ -58,7 +58,6 @@ export const GameSetup  = ( ) =>
     navigate('/error');
     return null;
   }
-    console.log('userID = ', state);
         customParam =
         {
             gameDuration : state.gameDuration,

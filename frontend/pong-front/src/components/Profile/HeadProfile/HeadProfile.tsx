@@ -42,9 +42,7 @@ export function HeadProfile({ state, profile, name, friendNum, me }: Props) {
 			if (friendState.username == name && friendState.state)
 			{
 				setState(friendState.state);
-				console.log('state changed')
 			}
-			console.log('new state in profile', friendState.state);
 			return (() => {
 				(chatContext?.off('State'))
 			})
@@ -57,13 +55,11 @@ export function HeadProfile({ state, profile, name, friendNum, me }: Props) {
 
 	const handleFriend = async () => {
 		try {
-			console.log(name);
+			(name);
 			const response = await axios.post(`http://${import.meta.env.VITE_API_URL}/add-friend/${name}`, null, { withCredentials: true })
 				.then(function (response) {
-					// setClick(true);
 				});
 		} catch (error) {
-			console.error('POST friend failed:', error);
 		}
 	};
 
@@ -77,7 +73,7 @@ export function HeadProfile({ state, profile, name, friendNum, me }: Props) {
 			const response = await axios.post(`http://${import.meta.env.VITE_API_URL}/block-friend/${name}`, null, { withCredentials: true });
 		}
 		catch (error) {
-			console.log(error);
+			(error);
 		}
 	}
 
@@ -96,13 +92,12 @@ export function HeadProfile({ state, profile, name, friendNum, me }: Props) {
 
 	const handleUnFriend = async () => {
 		try {
-			// console.log(name);
+			// (name);
 			const response = await axios.delete(`http://${import.meta.env.VITE_API_URL}/delete-friend/${name}`, { withCredentials: true })
 			.then(function (response) {
 				setFriend(false);
 				});
 		} catch (error) {
-			console.error('POST friend failed:', error);
 		}
 	};
 
@@ -112,7 +107,6 @@ export function HeadProfile({ state, profile, name, friendNum, me }: Props) {
 				handleFriend()
 		}
 	}
-	console.log( "nadi " +  isFriend)
 
 	return (
 		<>

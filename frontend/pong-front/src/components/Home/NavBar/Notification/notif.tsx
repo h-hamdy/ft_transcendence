@@ -13,7 +13,6 @@ export function Notif () {
 	const profile = useProfilecontext();
 		useEffect(()=>
 		{
-			console.log(profile?.data?.pending_requests)
 
 		}, [profile?.data, profile?.setData])
 	// const MyData = useContext(MyContext);

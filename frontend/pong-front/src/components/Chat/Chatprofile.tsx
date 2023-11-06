@@ -23,7 +23,7 @@ export function Chatprofile({ room, hide }: Props) {
 				})
 			}
 			catch (error) {
-				console.log(error);
+				(error);
 			}
 	  }, []);
 

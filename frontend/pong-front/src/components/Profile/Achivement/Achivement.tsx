@@ -9,7 +9,6 @@ interface Props {
 
 export function Achivement ( {Achi} : Props ) {
 
-	// console.log(Achi.some((obj : any) => obj.name === "Played Your First Game"));
 
 	return (
 		<>

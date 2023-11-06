@@ -29,22 +29,20 @@ const GameCanvas = ( ) => {
   let color =  sessionStorage.getItem('Color')
   if (color === null)
     color = "#6C5DD3";
-  console.log('color--------------------------------------------', color)
   const socket = useContext(SocketContext);
   
   const Score : number[] = [];
-  let div : any;
+  // let div : any;
   let canvasTime : string[] = [];
   canvasTime[0] = 'false';
   canvasTime[1] = 'waiting'
   let time : number[] = [];
-  let leaveGame = 'online';
+  // let leaveGame = 'online';
 
   useEffect(() =>
   {
     socket.on('connect', ()=>
     {
-      // console.log('socket.id', socket.id);
       client_id = socket.id;
     })
     socket.on('delay',(state : string[])=>
@@ -71,7 +69,7 @@ const GameCanvas = ( ) => {
     let paddles: Paddles;
 
     p5.setup = () => { 
-      // console.log('socket idd ', socket.id)
+      // ('socket idd ', socket.id)
       const canvas = p5.createCanvas(p5.windowWidth / 2, p5.windowHeight / 2);
       canvas.id('myCanvas');
       p5.select('#myCanvas').style('border-color', color);
@@ -107,7 +105,7 @@ const GameCanvas = ( ) => {
           paddles.y_1 = p5.map(coordonation.y_1, 0, 331, 0, p5.windowHeight / 2);
           paddles.w_1 = p5.map(coordonation.w_1, 0, 683, 0, p5.windowWidth / 2);
           paddles.h_1 = p5.map(coordonation.h_1, 0, 331, 0, p5.windowHeight / 2);
-          // // // console.log(paddles.x);
+          // // // (paddles.x);
         })
         paddles.show(paddles.x, paddles.y, paddles.w, paddles.h);
         paddles.show(paddles.x_1, paddles.y_1, paddles.w_1, paddles.h_1);
@@ -120,16 +118,14 @@ const GameCanvas = ( ) => {
         if (time[1] !== undefined)
         p5.text(time[0] + "  :  " + time[1], p5.map(683 / 2, 0, 683, 0, (p5.windowWidth / 2)) ,
         p5.map(331 / 2, 0, 331, 0, (p5.windowHeight / 2)));
-        // // // console.log("working");
+        // // // ("working");
       }
       else
       {
-        // console.log('client id', canvasTime[1])
-        // console.log('socket id = ', client_id)
         p5.fill(color);
         p5.textSize(32);
         p5.textAlign(p5.CENTER, p5.CENTER);
-        // // // console.log(canvasTime[1] + " && " + client_id);
+        // // // (canvasTime[1] + " && " + client_id);
         if (canvasTime[1] === client_id || canvasTime[1] === 'You Won')
         {
           p5.text('You won', p5.map(683 / 2, 0, 683, 0, (p5.windowWidth / 2)) ,
@@ -156,7 +152,7 @@ const GameCanvas = ( ) => {
     }
 
     p5.keyPressed = () => {
-      // // console.log('key_pressed');
+      // // ('key_pressed');
       if (p5.keyCode == p5.UP_ARROW)
         socket.emit('playerMovePaddle', -15);
       else if (p5.keyCode == p5.DOWN_ARROW)

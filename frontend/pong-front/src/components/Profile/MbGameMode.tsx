@@ -47,17 +47,12 @@ export function MbGameMode ( {hide}: Props ) {
 		const response = await axios.get(`http://${import.meta.env.VITE_API_URL}/profile/me`, {withCredentials: true})
 		setUserData(response.data);
 		} catch (error) {
-		console.error("Error fetching user data:");
 		}
 	};
 
 	fetchData();
 	}, []);
 
-	// let Mystate: "" | undefined = ;
-	// console.log(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>.");
-	// let is_current = "ingame";
-	// let current = (state?.data[state?.data.length && state?.data.length - 1])?.state;
 	return (
 		<>
 			{
