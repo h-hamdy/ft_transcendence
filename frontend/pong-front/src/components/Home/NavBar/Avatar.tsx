@@ -16,7 +16,7 @@ export function Avatar ( {avatar, name, state}: Props ) {
 	const profile = useProfilecontext()
 	useEffect(()=>
 	{
-		('tbdlat');
+		
 	},[profile]);
 	useEffect(() =>
 	{

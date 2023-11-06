@@ -8,10 +8,9 @@ import { useProfilecontext } from "../../../../ProfileContext"
 // import useEffect from 'rea
 interface Props {
     clicked: () => void
-    msgnum: number,
 }
 
-export function Notification({ clicked, msgnum }: Props) {
+export function Notification({ clicked }: Props) {
 
     const chatContext = useContext(ChatSocketContext);
     const state = useDataContext();
@@ -43,7 +42,6 @@ export function Notification({ clicked, msgnum }: Props) {
           
     }, [chatContext, profile?.data?.user_data.avatar, state, profile?.setData])
 
-    console.log('value of msg', msgnum);
     return (
         <>
             <button onClick={clicked}>
@@ -57,7 +55,6 @@ export function Notification({ clicked, msgnum }: Props) {
 							</div>
 						}
                     </div>
-                    {/* </div> */}
                 </div>
             </button>
         </>

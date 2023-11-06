@@ -58,6 +58,7 @@ export function HeadProfile({ state, profile, name, friendNum, me }: Props) {
 			(name);
 			const response = await axios.post(`http://${import.meta.env.VITE_API_URL}/add-friend/${name}`, null, { withCredentials: true })
 				.then(function (response) {
+	
 				});
 		} catch (error) {
 		}
@@ -69,8 +70,44 @@ export function HeadProfile({ state, profile, name, friendNum, me }: Props) {
 
 
 	const blockFriend = async () => {
+		let removedFriends : any;
 		try {
-			const response = await axios.post(`http://${import.meta.env.VITE_API_URL}/block-friend/${name}`, null, { withCredentials: true });
+			const response = await axios.post(`http://${import.meta.env.VITE_API_URL}/block-friend/${name}`, null, { withCredentials: true })
+			.then ((response) => {
+				data?.setData((prevUserData) => {
+					removedFriends = prevUserData.friends.filter(
+						(request) => request.username === name
+					  );
+					
+					const filteredRequests = prevUserData.friends.filter(
+					  (request) => request.username !== name
+					);
+				  
+					return {
+					  ...prevUserData,
+					  friends: [...filteredRequests],
+					};
+
+				});
+				data?.setData((prevUserData) => ({
+					...prevUserData,
+					// user_data: {
+						...prevUserData,
+						blocks: [...prevUserData.blocks, removedFriends],
+						// },
+					}));
+				// data?.setData((prevUserData) => {
+				// 	const filteredRequests = prevUserData.blocks.filter(
+				// 	  (request) => request.username !== name
+				// 	);
+				  
+				// 	return {
+				// 	  ...prevUserData,
+				// 	  friends: [...filteredRequests],
+				// 	};
+
+				// });
+			})
 		}
 		catch (error) {
 			(error);
@@ -95,8 +132,19 @@ export function HeadProfile({ state, profile, name, friendNum, me }: Props) {
 			// (name);
 			const response = await axios.delete(`http://${import.meta.env.VITE_API_URL}/delete-friend/${name}`, { withCredentials: true })
 			.then(function (response) {
+				data?.setData((prevUserData) => {
+				const filteredfriends = prevUserData.friends.filter(
+				  (friend) => friend.username !== name 
+				);
+			  
+				return {
+				  ...prevUserData,
+				  friends: [...filteredfriends],
+				};
+			  });
 				setFriend(false);
-				});
+				
+			});
 		} catch (error) {
 		}
 	};

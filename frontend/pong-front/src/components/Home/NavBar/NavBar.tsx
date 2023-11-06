@@ -51,7 +51,6 @@
                   <div className="pr-20 pb-3">
                     <Notification
                       clicked={() => setShowNotif(!showNotif)}
-                      msgnum="5"
                     />
                   </div>
                   <div className="lg:pr-16">

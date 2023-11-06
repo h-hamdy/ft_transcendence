@@ -8,9 +8,10 @@ interface Props {
     name: string,
     requestType: string,
 	id : number,
+	show: () => void;
 }
 
-export function NotifMsg ( {profile, name, requestType , id}: Props ) {
+export function NotifMsg ( {profile, name, requestType , id, show}: Props ) {
 
 	const [hide, sethide] = useState(true);
 	const navigate = useNavigate();
@@ -23,6 +24,29 @@ export function NotifMsg ( {profile, name, requestType , id}: Props ) {
 			try {
 			const response = await axios.post(`http://${import.meta.env.VITE_API_URL}/accept-friend/${name}`, null, {withCredentials: true})
 			.then((response) => {
+				Profile?.setData((prevUserData) => {
+					const filteredRequests = prevUserData.pending_requests.filter(
+					  (request) => request.username !== name
+					);
+				  
+					return {
+					  ...prevUserData,
+					  pending_requests: [...filteredRequests],
+					};
+
+				});
+				Profile?.setData((prevUserData) => {
+					const filteredRequests = prevUserData.friends.filter(
+					  (request) => request.username !== name
+					);
+				  
+					return {
+					  ...prevUserData,
+					  friends: [...filteredRequests],
+					};
+
+				});
+				// console.log('after accept', Profile?.data?.pending_requests)
 				Profile?.setData((prevUserData) => ({
 					...prevUserData,
 					// user_data: {
@@ -30,12 +54,12 @@ export function NotifMsg ( {profile, name, requestType , id}: Props ) {
 						friends: [...prevUserData.friends, response.data],
 						// },
 					}));
-					console.log('data lli wslat', response.data);
+					// console.log('data lli wslat', response.data);
 					sethide(false);
+					show();
 			  })
 			}	
 			catch (error) {
-			console.log(error);
 			}
 		}
 		else
@@ -60,7 +84,18 @@ export function NotifMsg ( {profile, name, requestType , id}: Props ) {
 		console.log(name);
 		try {
 			const response = await axios.delete(`http://${import.meta.env.VITE_API_URL}/delete-request/${name}`, {withCredentials: true})
+			Profile?.setData((prevUserData) => {
+				const filteredRequests = prevUserData.pending_requests.filter(
+				  (request) => request.username !== name 
+				);
+			  
+				return {
+				  ...prevUserData,
+				  pending_requests: [...filteredRequests],
+				};
+			  });
 			sethide(false);
+			show();
 		}	
 		catch (error) {
 			console.log(error);

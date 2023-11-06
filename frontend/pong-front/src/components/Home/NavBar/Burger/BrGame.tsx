@@ -43,8 +43,8 @@
 					</div>
 				{game   && 
 					<div>
-						<GameMode hide={() => {}}/>
-						<MbGameMode  hide={() => {}}/>
+						<GameMode hide={() => Setgame(!game)}/>
+						<MbGameMode  hide={() => Setgame(!game)}/>
 					</div>
 
 				}
