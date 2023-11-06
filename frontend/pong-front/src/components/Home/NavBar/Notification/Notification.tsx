@@ -8,7 +8,7 @@ import { useProfilecontext } from "../../../../ProfileContext"
 // import useEffect from 'rea
 interface Props {
     clicked: () => void
-    msgnum: string,
+    msgnum: number,
 }
 
 export function Notification({ clicked, msgnum }: Props) {
@@ -18,9 +18,9 @@ export function Notification({ clicked, msgnum }: Props) {
     const profile = useProfilecontext();
     React.useEffect(() => {
 
-
-            chatContext?.on('gameRequest', (notif: {id: number, avatar: string; username: string}) => {
-
+            chatContext?.on('gameRequest', (notif: {id: number, avatar: string; username: string, type : string}) => {
+                console.log('on gameRequest --------------------------------------<>', notif.id);
+                // if (!profile?.data.pending_requests.find(newRequest))
                 profile?.setData((prevUserData) => ({
                     ...prevUserData,
                     pending_requests: [...prevUserData.pending_requests, notif],
@@ -28,20 +28,22 @@ export function Notification({ clicked, msgnum }: Props) {
             })
 
 
-            chatContext?.on('friendRequest', (notif: {id: number, avatar: string; username: string}) => {
+            chatContext?.on('friendRequest', (notif: {id: number, avatar: string; username: string, type : string}) => {
+                console.log('on friend request --------------------------------------<>')
+                // if (!profile?.data.pending_requests.find(newRequest))
                 profile?.setData((prevUserData) => ({
                     ...prevUserData,
                     pending_requests: [...prevUserData.pending_requests, notif],
                   }));
             })
           return () =>{
+        // chatContext?.off('State');
         chatContext?.off('friendRequest')
         chatContext?.off('gameRequest')}
           
     }, [chatContext, profile?.data?.user_data.avatar, state, profile?.setData])
 
-
-
+    console.log('value of msg', msgnum);
     return (
         <>
             <button onClick={clicked}>
@@ -55,6 +57,7 @@ export function Notification({ clicked, msgnum }: Props) {
 							</div>
 						}
                     </div>
+                    {/* </div> */}
                 </div>
             </button>
         </>

@@ -10,7 +10,7 @@ import { useDataContext } from "../../Profile/States/stateContext";
 import { useProfilecontext } from "../../../ProfileContext";
 
 interface Props {
-	ChooseFriend: () => void;
+	// ChooseFriend: () => void;
 	hide: () => void;
 }
 
