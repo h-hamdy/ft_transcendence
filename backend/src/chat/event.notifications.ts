@@ -17,6 +17,7 @@ export class NotificationsService {
 
     sendGameRequestNotification(userId: number, friendId: number) {
         //debug
+        console.log(userId, friendId);
         console.log("sendGameRequestNotification triggered");
         //end debug
 
@@ -42,7 +43,7 @@ export class NotificationsService {
     //save user state
     async saveUserState(userId: number, state: string):Promise<boolean> {
         //debug
-        console.log("saveUserState triggered");
+        // console.log("saveUserState triggered");
         //end debug
 
         const isSaved  = await this.usersService.saveUserState(userId, state);

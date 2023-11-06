@@ -2,7 +2,7 @@ import { useContext, useEffect } from "react";
 import Paddles from "./SketchClasses/Paddle"
 import { SocketContext, SocketProvider } from "../contexts/SocketContext";
 import { coordonation } from "./SketchInterfaces/coordonation";
-import { P5CanvasInstance, ReactP5Wrapper} from "react-p5-wrapper";
+import { P5CanvasInstance, ReactP5Wrapper} from  "@p5-wrapper/react";
 import { createContext } from "react";
 import { ChatSocketContext, ChatsocketProvider } from "../../components/Chat/contexts/chatContext";
 import { useDataContext } from "../../components/Profile/States/stateContext";
@@ -25,6 +25,7 @@ interface friendsList{
 	}
 
 const GameCanvas = ( ) => {
+  let client_id : string;
   let color =  sessionStorage.getItem('Color')
   if (color === null)
     color = "#6C5DD3";
@@ -38,17 +39,18 @@ const GameCanvas = ( ) => {
   canvasTime[1] = 'waiting'
   let time : number[] = [];
   let leaveGame = 'online';
-  // let backgroundImage : Image;
-  // let gamestate;
-  // // console.log("GameCanvas");
+
   useEffect(() =>
   {
+    socket.on('connect', ()=>
+    {
+      // console.log('socket.id', socket.id);
+      client_id = socket.id;
+    })
     socket.on('delay',(state : string[])=>
     {
       canvasTime[0] = state[0];
       canvasTime[1] = state[1];
-        // chatSocket?.emit('join-room'{roomId});
-      // // console.log(canvasTime);
     })
 
     socket.on('gameTimer', (currentTime : number[])=>
@@ -67,21 +69,16 @@ const GameCanvas = ( ) => {
   const sketch = (p5 : P5CanvasInstance) => {
     let ball_coordonation: number[] = [];
     let paddles: Paddles;
-    // let Score : number[] = [];
-    
-    let  client_id = socket.id;
+
     p5.setup = () => { 
+      // console.log('socket idd ', socket.id)
       const canvas = p5.createCanvas(p5.windowWidth / 2, p5.windowHeight / 2);
       canvas.id('myCanvas');
       p5.select('#myCanvas').style('border-color', color);
       paddles = new Paddles(p5);
-      // chatSocket.emit('State', 'inGame');
-      // // // console.log('in game data li jat', state?.data);
-      // chatSocket.emit('state');
     };
     
     p5.draw = () => {
-      // chatSocket.emit()
       p5.resizeCanvas(p5.windowWidth / 2, p5.windowHeight / 2);
       if  (canvasTime[0] === 'true')
       {
@@ -127,14 +124,8 @@ const GameCanvas = ( ) => {
       }
       else
       {
-        // if (leaveGame === 'ingame')
-        //   {
-        //     let state = 'online';
-        //     if (chatSocket?.connected)
-        //       chatSocket?.emit('State', {state});
-        //     leaveGame = 'online';
-        //   }
-        // // // console.log("text");
+        // console.log('client id', canvasTime[1])
+        // console.log('socket id = ', client_id)
         p5.fill(color);
         p5.textSize(32);
         p5.textAlign(p5.CENTER, p5.CENTER);
@@ -151,11 +142,8 @@ const GameCanvas = ( ) => {
         }
         else
         {
-          // // console.log(canvasTime[1]);
-          // // // console.log(canvasTime[1] + " && " + client_id);
           p5.text('Game Over', p5.map(683 / 2, 0, 683, 0, (p5.windowWidth / 2)) ,
           p5.map(331 / 2, 0, 331, 0, (p5.windowHeight / 2)));
-
         }
       }
     p5.fill(255);

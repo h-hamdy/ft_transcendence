@@ -6,16 +6,21 @@ import { useEffect } from "react";
 import axios from "axios";
 import { Avatar } from "../NavBar/Avatar";
 import { Navigate, useNavigate } from "react-router-dom";
+import { useDataContext } from "../../Profile/States/stateContext";
+import { useProfilecontext } from "../../../ProfileContext";
 
 interface Props {
 	ChooseFriend: () => void;
+	hide: () => void;
 }
 
-export function Friends ( ) {
+export function Friends ( {hide}: Props ) {
 	const [remove, Setremove] = React.useState(false);
-	const navigate = useNavigate();
+	// const navigate = useNavigate();
 
+	const profile = useProfilecontext()
 
+	console.log('profile', profile?.data?.friends);
 	  useEffect(() => {
 		  try {
 			const response =  axios.get(`http://${import.meta.env.VITE_API_URL}/profile/me`, { withCredentials: true })
@@ -49,9 +54,9 @@ export function Friends ( ) {
 							</button>
 						</div>
 						<div className="flex flex-col lg:flex-row items-center justify-center lg:overflow-x-auto overflow-y-auto gap-[15px] lg:gap-0">
-							{userData.friends.map((friend, index: number) => (
+							{profile?.data?.friends && profile?.data?.friends.map((friend, index: number) => (
 								<div key={index}>
-									<FriendStatus avatar={friend.avatar} name={friend.username} state="offline"/>
+									<FriendStatus avatar={friend.avatar} name={friend.username} id={friend.id} hide={hide}/>
 								</div>
 							))
 							}

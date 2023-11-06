@@ -7,9 +7,7 @@ export class UsernameStringToDtoPipe implements PipeTransform<string, Promise<st
     async transform(value: string, metadata: ArgumentMetadata): Promise<string> {
         const object = plainToClass(UsernameDto, { username: value });
         const error = await validate(object);
-        //debug
-        // console.log("UsernameStringToDtoPipe: value = ", value);
-        //end debug
+
         if (error.length > 0) {
             throw new BadRequestException('Validation failed: invalid username');
         }
