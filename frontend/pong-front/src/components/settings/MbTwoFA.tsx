@@ -4,8 +4,6 @@ import { useState } from "react";
 import group from "/src/assets/Group.svg"
 import mobile from "/src/assets/mobiledow.svg"
 import rec from "/src/assets/rectangle.svg"
-
-
 import { GameSetting } from "./GameSettings";
 import { MbSettings } from "./MbSettings";
 import { DkSettings } from "./DkSettings";

@@ -93,7 +93,7 @@ export function HeadProfile({ state, profile, name, friendNum, me }: Props) {
 					...prevUserData,
 					// user_data: {
 						...prevUserData,
-						blocks: [...prevUserData.blocks, removedFriends],
+						blocks: [...prevUserData.blocks, removedFriends[0]],
 						// },
 					}));
 				// data?.setData((prevUserData) => {

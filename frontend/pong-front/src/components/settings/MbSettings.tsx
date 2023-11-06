@@ -26,7 +26,7 @@ export function MbSettings ( {hide}: Props ) {
   const [formData, setFormData] = useState<{username: string}>({
 	  username: '',
   });
-  let defualt : string | undefined = profile.data.user_data?.avatar;
+  let defualt : string | undefined = profile?.data?.user_data?.avatar;
 	const [BASE_URL, setBase] = useState(defualt);
 
 //   const profile = useProfilecontext()
