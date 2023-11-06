@@ -84,14 +84,14 @@ export function HeadProfile({ state, profile, name, friendNum, me }: Props) {
 	const [isFriend, setFriend] = useState(false);
 
 	useEffect(() => {
-		data?.data.friends.some((friend: { username: string }) => {
+		data?.data?.friends?.some((friend: { username: string }) => {
 			friend.username === name && setFriend(true)
 		}
 		);
 	});
 
 	useEffect(() => {
-		data?.data?.user_data.username === name && setFriend(false)
+		data?.data?.user_data?.username === name && setFriend(false)
 	});
 
 	const handleUnFriend = async () => {

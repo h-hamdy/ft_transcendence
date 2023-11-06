@@ -80,9 +80,9 @@ export function Notification({ clicked, msgnum }: Props) {
                     <img src={notif} className="flex items-center justify-center absolute sm:w-[30px] sm:h-[30px]"></img>
                     <div>
 						{
-							(profile?.data.pending_requests.length === 0) ? null : 
+							(profile?.data?.pending_requests?.length === 0) ? null : 
 							<div className="relative left-[12px] bottom-[10px] pt-[3px] flex items-center justify-center border border-[#FF5F1F] bg-[#FF5F1F] rounded-full w-[20px] h-[20px]">
-								<div className="text-white text-sm sm:text-md">{profile?.data.pending_requests.length}</div>
+								<div className="text-white text-sm sm:text-md">{profile?.data?.pending_requests?.length}</div>
 							</div>
 						}
                     </div>
